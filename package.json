@@ -1,0 +1,39 @@
+{
+  "author": "Garth Braithwaite <garthdb@gmail.com> (http://www.garthdb.com)",
+  "name": "usagedoc",
+  "description": "Generate usage guides for css",
+  "version": "0.0.1",
+  "repository": "git@github.com:topcoat/usagedoc.git",
+  "keywords": [
+    "css",
+    "style",
+    "documentation",
+    "usage"
+  ],
+  "licenses": [
+    {
+      "type": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  ],
+  "main": "./lib/usagedoc",
+  "bin": {
+    "usagedoc": "./bin/usagedoc"
+  },
+  "preferGlobal": "true",
+  "scripts": {
+    "postinstall": "coffee -o lib/ src/",
+    "test": "make test"
+  },
+  "dependencies": {
+    "commander": "~1.2.0",
+    "css-parse": "~1.4.0",
+    "coffee-script": "~1.6.3"
+  },
+  "devDependencies": {
+    "mocha": "*"
+  },
+  "engines": {
+    "node": "*"
+  }
+}
