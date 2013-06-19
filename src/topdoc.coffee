@@ -11,10 +11,10 @@ program
         )
       ).version
     )
-  .parse(process.argv)
 
 class Topdoc
   parse: ->
     return 'Topdoc'
 
-module.exports = Topdoc
+root = exports ? window
+root.Topdoc = Topdoc

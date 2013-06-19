@@ -3,6 +3,9 @@
 
 var path = require('path');
 var fs   = require('fs');
+var program = require('commander');
 var lib  = path.join(path.dirname(fs.realpathSync(__filename)), '../lib');
+
+program.option('-s, --source <directory>', 'The css source directory').version(JSON.parse(fs.readFileSync(__dirname + '/../package.json', 'utf8')).version).parse(process.argv)
 
 require(lib + '/topdoc')
