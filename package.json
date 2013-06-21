@@ -31,7 +31,8 @@
   },
   "devDependencies": {
     "coffee-script": "~1.6.3",
-    "mocha": "*"
+    "mocha": "*",
+    "should": "~1.2.2"
   },
   "engines": {
     "node": "*"
