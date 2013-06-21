@@ -22,15 +22,15 @@
   },
   "preferGlobal": "true",
   "scripts": {
-    "postinstall": "coffee -o lib/ src/",
+    "prepublish": "coffee -o lib/ src/",
     "test": "make test"
   },
   "dependencies": {
     "commander": "~1.2.0",
-    "css-parse": "~1.4.0",
-    "coffee-script": "~1.6.3"
+    "css-parse": "~1.4.0"
   },
   "devDependencies": {
+    "coffee-script": "~1.6.3",
     "mocha": "*"
   },
   "engines": {

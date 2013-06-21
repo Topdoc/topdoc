@@ -6,6 +6,13 @@ var fs   = require('fs');
 var program = require('commander');
 var lib  = path.join(path.dirname(fs.realpathSync(__filename)), '../lib');
 
-program.option('-s, --source <directory>', 'The css source directory').version(JSON.parse(fs.readFileSync(__dirname + '/../package.json', 'utf8')).version).parse(process.argv)
+program
+	.option('-s, --source <directory>', 'The css source directory')
+	.option('-d, --destination <directory>', 'The destination directory where the usage guides will be written')
+	.version(JSON.parse(fs.readFileSync(__dirname + '/../package.json', 'utf8')).version)
+	.parse(process.argv);
 
-require(lib + '/topdoc')
+var source = program.source || 'src';
+var destination = program.destination || 'docs';
+
+require(lib + '/topdoc');

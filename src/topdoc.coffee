@@ -1,20 +1,16 @@
 fs = require('fs')
-program = require('commander')
 exec = require('child_process').exec
+cssParse= require('css-parse')
+path = require('path')
+read = fs.readFileSync
 
-program
-  .option('-s, --source <directory>', 'The css source directory')
-  .version(
-    JSON.parse(
-      fs.readFileSync(
-        __dirname + '/../package.json', 'utf8'
-        )
-      ).version
-    )
 
 class Topdoc
-  parse: ->
-    return 'Topdoc'
+  constructor: (source=null, destination=null) ->
+    @source = source ? 'src'
+    @destination = destination ? 'src'
+  cssToJson: (filePath) ->
+    @cssData = cssParse(read(filePath, 'utf8'), { position: true })
+    return @cssData
 
-root = exports ? window
-root.Topdoc = Topdoc
+module.exports = Topdoc
