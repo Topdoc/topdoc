@@ -3,14 +3,15 @@ path = require('path')
 read = fs.readFileSync
 Topdocument = require './topdocument'
 jade = require('jade')
+mkdirp = require('mkdirp')
 
 
 class Topdoc
-  constructor: (source=null, destination=null) ->
+  constructor: (source=null, destination=null, template=null) ->
     @source = source ? 'src'
     @destination = destination ? 'src'
     @files = @findCSSFiles(@source)
-    @template = path.join('src','template.jade')
+    @template = template ? path.join(__dirname,'template.jade')
   parseFiles: () ->
     results = []
     for file in @files
@@ -20,13 +21,16 @@ class Topdoc
   generate: () ->
     fn = jade.compile read(path.join(@template), 'utf8'), {pretty: true}
     nav = []
-    for result, i in @parseFiles()
+    results = @parseFiles()
+    if results.length > 0
+      mkdirp.sync(@destination)
+    for result, i in results
       filename = if(i >= 1) then @outputUrlify(result.filename) else 'index.html'
       navItem =
         title: result.title
         url: filename
       nav.push navItem
-    for result, i in @parseFiles()
+    for result, i in results
       htmloutput = fn({document: result, nav: nav})
       fs.writeFileSync(path.join(@destination, nav[i].url), htmloutput)
     return true

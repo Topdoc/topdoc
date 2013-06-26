@@ -29,7 +29,8 @@
     "commander": "~1.2.0",
     "css-parse": "~1.4.0",
     "PrettyCSS": "~0.3.7",
-    "jade": "~0.31.2"
+    "jade": "~0.31.2",
+    "mkdirp": "~0.3.5"
   },
   "devDependencies": {
     "coffee-script": "~1.6.3",
