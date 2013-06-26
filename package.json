@@ -2,8 +2,8 @@
   "author": "Garth Braithwaite <garthdb@gmail.com> (http://www.garthdb.com)",
   "name": "topdoc",
   "description": "Generate usage guides for css",
-  "version": "0.0.2",
-  "repository": "git@github.com:topcoat/usagedoc.git",
+  "version": "0.0.5",
+  "repository": "git@github.com:topcoat/Topdoc.git",
   "keywords": [
     "css",
     "style",
@@ -22,7 +22,6 @@
   },
   "preferGlobal": "true",
   "scripts": {
-    "prepublish": "coffee -o lib/ src/",
     "test": "make test"
   },
   "dependencies": {
