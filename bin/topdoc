@@ -10,11 +10,13 @@ var Topdoc = require(lib + '/topdoc');
 program
 	.option('-s, --source <directory>', 'The css source directory')
 	.option('-d, --destination <directory>', 'The destination directory where the usage guides will be written')
+	.option('-t --template <jade file>', 'The path to the jade template file')
 	.version(JSON.parse(fs.readFileSync(__dirname + '/../package.json', 'utf8')).version)
 	.parse(process.argv);
 
 var source = program.source || 'src';
 var destination = program.destination || 'docs';
+var template = program.template || path.resolve(__dirname, '..', 'lib', 'template.jade');
 
 var topdoc = new Topdoc(source, destination);
 topdoc.generate();
