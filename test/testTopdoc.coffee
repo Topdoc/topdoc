@@ -21,9 +21,8 @@ describe 'Topdoc', ->
     @outputDir = path.join('test', 'docs')
   
   after ->
-    # if(fs.existsSync(@outputDir))
-      # deleteFolderRecursive(@outputDir)
-    # fs.mkdirSync(@outputDir)
+    if(fs.existsSync(@outputDir))
+      deleteFolderRecursive(@outputDir)
 
 
   it 'exists', ->
