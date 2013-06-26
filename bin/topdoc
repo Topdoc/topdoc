@@ -5,6 +5,7 @@ var path = require('path');
 var fs   = require('fs');
 var program = require('commander');
 var lib  = path.join(path.dirname(fs.realpathSync(__filename)), '../lib');
+var Topdoc = require(lib + '/topdoc');
 
 program
 	.option('-s, --source <directory>', 'The css source directory')
@@ -15,4 +16,5 @@ program
 var source = program.source || 'src';
 var destination = program.destination || 'docs';
 
-require(lib + '/topdoc');
+var topdoc = new Topdoc(source, destination);
+topdoc.generate();

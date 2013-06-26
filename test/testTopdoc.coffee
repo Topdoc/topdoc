@@ -21,8 +21,9 @@ describe 'Topdoc', ->
     @outputDir = path.join('test', 'docs')
   
   after ->
-    if(fs.existsSync(@outputDir))
-      deleteFolderRecursive(@outputDir)
+    # if(fs.existsSync(@outputDir))
+      # deleteFolderRecursive(@outputDir)
+    # fs.mkdirSync(@outputDir)
 
 
   it 'exists', ->
@@ -35,10 +36,17 @@ describe 'Topdoc', ->
   it 'should accept a destination in the constructor', ->
     topdoc = new Topdoc @srcDir, @outputDir
     topdoc.destination.should.equal @outputDir
-  # it 'should be able to read a whole directory', ->
-  # 
-  it 'should use parse css', ->
-    topdoc = new Topdoc
-    parsedJson = JSON.stringify(topdoc.cssToJson(path.resolve('test/cases/comment.css')),null,2)
-    caseJson = read(path.join('test', 'cases', 'comment' + '.json'), 'utf8')
-    parsedJson.should.equal(caseJson)
+  it 'should find all the css files in a directory', ->
+    topdoc = new Topdoc @srcDir, @outputDir
+    topdoc.files[0].should.equal 'test/cases/button.css'
+  it 'should ignore .min.css files in directory', ->
+    topdoc = new Topdoc @srcDir, @outputDir
+    topdoc.files.length.should.equal 2
+  it 'should generate an index.html', ->
+    topdoc = new Topdoc @srcDir, @outputDir
+    topdoc.generate()
+    generatedDoc = read(path.join(@outputDir, 'index.html'), 'utf8')
+    generatedDoc.should.be.ok
+  it 'should find all the css documents', ->
+    topdoc = new Topdoc @srcDir, @outputDir
+    topdoc.files.should.be.ok
