@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Button</title>
+  </head>
+  <body>
+    <h1>Button</h1>
+    <nav>
+      <ul></ul>
+    </nav>
+    <li><a href="index.html">Button</a></li>
+    <li><a href="topcoat-desktop-dark.html">Topcoat Desktop Dark</a></li>
+    <div class="component">
+      <h2>Button</h2>
+      <div class="details">:active - Active state
+.is-active - Simulates an active state on mobile devices
+:disabled - Disabled state
+.is-disabled - Simulates a disabled state on mobile devices</div>
+      <pre class="html">&lt;a class=&quot;topcoat-button&quot;&gt;Button&lt;/a&gt;
+&lt;a class=&quot;topcoat-button is-active&quot;&gt;Button&lt;/a&gt;
+&lt;a class=&quot;topcoat-button is-disabled&quot;&gt;Button&lt;/a&gt;</pre>
+      <pre class="css">.topcoat-button,
+.topcoat-button--quiet,
+.topcoat-button--large,
+.topcoat-button--large--quiet,
+.topcoat-button--cta,
+.topcoat-button--large--cta {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding;
+  -moz-background-clip: padding;
+  background-clip: padding-box;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  padding: 0 1.16rem;
+  font-size: 12px;
+  line-height: 2rem;
+  letter-spacing: 1px;
+  color: #c6c8c8;
+  text-shadow: 0 -1px rgba(0,0,0,0.69);
+  vertical-align: top;
+  background-color: #595b5b;
+  -webkit-box-shadow: inset 0 1px rgba(255,255,255,0.12);
+  box-shadow: inset 0 1px rgba(255,255,255,0.12);
+  border: 1px solid rgba(0,0,0,0.36);
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+}
+.topcoat-button:active,
+.topcoat-button.is-active,
+.topcoat-button--large:active,
+.topcoat-button--large.is-active {
+  background-color: #404141;
+  -webkit-box-shadow: inset 0 1px rgba(0,0,0,0.18);
+  box-shadow: inset 0 1px rgba(0,0,0,0.18);
+}
+.topcoat-button:disabled,
+.topcoat-button.is-disabled {
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}
+</pre>
+    </div>
+    <div class="component">
+      <h2>Quiet Button</h2>
+      <div class="details">:active - Quiet button active state
+.is-active - Simulates active state for a quiet button on touch interfaces
+:disabled - Disabled state
+.is-disabled - Simulates disabled state</div>
+      <pre class="html">&lt;a class=&quot;topcoat-button--quiet&quot;&gt;Button&lt;/a&gt;
+&lt;a class=&quot;topcoat-button--quiet is-active&quot;&gt;Button&lt;/a&gt;
+&lt;a class=&quot;topcoat-button--quiet is-disabled&quot;&gt;Button&lt;/a&gt;</pre>
+      <pre class="css">.topcoat-button--quiet {
+  background: transparent;
+  border: 1px solid transparent;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.topcoat-button--quiet:active,
+.topcoat-button--quiet.is-active,
+.topcoat-button--large--quiet:active,
+.topcoat-button--large--quiet.is-active {
+  color: #c6c8c8;
+  text-shadow: 0 -1px rgba(0,0,0,0.69);
+  background-color: #404141;
+  border: 1px solid rgba(0,0,0,0.36);
+  -webkit-box-shadow: inset 0 1px rgba(0,0,0,0.18);
+  box-shadow: inset 0 1px rgba(0,0,0,0.18);
+}
+.topcoat-button--quiet:disabled,
+.topcoat-button--quiet.is-disabled {
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}
+</pre>
+    </div>
+  </body>
+</html>
