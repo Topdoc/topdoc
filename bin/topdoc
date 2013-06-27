@@ -39,4 +39,5 @@ if(!fs.existsSync(source)){
 } else {
 	var topdoc = new Topdoc(source, destination);
 	topdoc.generate();
+	console.log('Generated documentation in ./' + destination);
 }
