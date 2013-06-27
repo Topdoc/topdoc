@@ -34,5 +34,9 @@ var source = program.source || 'src';
 var destination = program.destination || 'docs';
 var template = program.template || path.resolve(__dirname, '..', 'lib', 'template.jade');
 
-var topdoc = new Topdoc(source, destination);
-topdoc.generate();
+if(!fs.existsSync(source)){
+	console.log('\nCouldn\'t seem to find a source\nSpecify a source with -s, --source <directory>\n');
+} else {
+	var topdoc = new Topdoc(source, destination);
+	topdoc.generate();
+}
