@@ -19,3 +19,7 @@ topdoc -s release/css/
 ```
 
 Specify a destination with `-d` or `--destination`.  Defaults to `docs/`.
+
+```bash
+topdoc -d topdocs/
+```
