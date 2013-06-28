@@ -70,6 +70,11 @@
       topdoc = new Topdoc(this.srcDir, this.outputDir);
       return topdoc.destination.should.equal(this.outputDir);
     });
+    it('should accept a project title', function() {
+      var topdoc;
+      topdoc = new Topdoc(this.srcDir, this.outputDir, null, 'awesomeness');
+      return topdoc.projectTitle.should.equal('Awesomeness');
+    });
     it('should find all the css files in a directory', function() {
       var topdoc;
       topdoc = new Topdoc(this.srcDir, this.outputDir);
