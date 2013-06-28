@@ -24,20 +24,22 @@ var lib  = path.join(path.dirname(fs.realpathSync(__filename)), '../lib');
 var Topdoc = require(lib + '/topdoc');
 
 program
-	.option('-s, --source <directory>', 'The css source directory')
-	.option('-d, --destination <directory>', 'The destination directory where the usage guides will be written')
-	.option('-t --template <jade file>', 'The path to the jade template file')
+	.option('-s, --source <directory>', 'The css source directory.')
+	.option('-d, --destination <directory>', 'The destination directory where the usage guides will be written.')
+	.option('-t, --template <jade file or directory>', 'The path to the jade template file.  If it is a directory it will import all the sub files.')
+	.option('-p. --project <title>', 'The title for your project.  Defaults to the directory name.')
 	.version(JSON.parse(fs.readFileSync(__dirname + '/../package.json', 'utf8')).version)
 	.parse(process.argv);
 
 var source = program.source || 'src';
 var destination = program.destination || 'docs';
 var template = program.template || path.resolve(__dirname, '..', 'lib', 'template.jade');
+var projectTitle = program.project || path.basename(process.cwd());
 
 if(!fs.existsSync(source)){
 	console.log('\nCouldn\'t seem to find a source\nSpecify a source with -s, --source <directory>\n');
 } else {
-	var topdoc = new Topdoc(source, destination);
+	var topdoc = new Topdoc(source, destination, template, projectTitle);
 	topdoc.generate();
 	console.log('Generated documentation in ./' + destination);
 }
