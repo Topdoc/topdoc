@@ -17,32 +17,10 @@
  */
 (function() {
   var Topdoc, deleteFolderRecursive, fs, path, read;
-
   Topdoc = require('../lib/topdoc');
-
   path = require('path');
-
-  fs = require('fs');
-
+  fs = require('fs-extra');
   read = fs.readFileSync;
-
-  deleteFolderRecursive = function(path) {
-    var curPath, file, files, _i, _len;
-    files = [];
-    if (fs.existsSync(path)) {
-      files = fs.readdirSync(path);
-      for (_i = 0, _len = files.length; _i < _len; _i++) {
-        file = files[_i];
-        curPath = path + "/" + file;
-        if (fs.statSync(curPath).isDirectory()) {
-          deleteFolderRecursive(curPath);
-        } else {
-          fs.unlinkSync(curPath);
-        }
-      }
-      return fs.rmdirSync(path);
-    }
-  };
 
   describe('Topdoc', function() {
     before(function() {
@@ -51,50 +29,120 @@
     });
     after(function() {
       if (fs.existsSync(this.outputDir)) {
-        return deleteFolderRecursive(this.outputDir);
+        return fs.removeSync(this.outputDir);
       }
     });
     it('exists', function() {
       var topdoc;
       Topdoc.should.be.ok;
-      topdoc = new Topdoc(this.srcDir);
+      topdoc = new Topdoc({source: this.srcDir});
       return topdoc.should.be.instanceOf(Topdoc);
     });
     it('should accept a source in the constructor', function() {
       var topdoc;
-      topdoc = new Topdoc(this.srcDir);
+      topdoc = new Topdoc({
+        source: this.srcDir
+      });
       return topdoc.source.should.equal(this.srcDir);
     });
     it('should accept a destination in the constructor', function() {
       var topdoc;
-      topdoc = new Topdoc(this.srcDir, this.outputDir);
+      topdoc = new Topdoc({
+        source: this.srcDir,
+        destination: this.outputDir
+      });
       return topdoc.destination.should.equal(this.outputDir);
     });
     it('should accept a project title', function() {
       var topdoc;
-      topdoc = new Topdoc(this.srcDir, this.outputDir, null, 'awesomeness');
+      topdoc = new Topdoc({
+        source: this.srcDir, 
+        destination: this.outputDir,
+        templateData: {
+          title: 'awesomeness'
+        }
+      });
       return topdoc.projectTitle.should.equal('Awesomeness');
+    });
+    it('should pass data through to the template', function() {
+      var topdoc;
+      topdoc = new Topdoc({
+        source: this.srcDir, 
+        destination: this.outputDir,
+        templateData: {
+          title: 'awesomeness'
+        }
+      });
+      return JSON.stringify(topdoc.templateData, null, 2).should.equal(JSON.stringify({title: 'awesomeness'}, null, 2));
     });
     it('should find all the css files in a directory', function() {
       var topdoc;
-      topdoc = new Topdoc(this.srcDir, this.outputDir);
+      topdoc = new Topdoc({
+        source: this.srcDir,
+        destination: this.outputDir
+      });
       return topdoc.files[0].should.equal('test/cases/button.css');
     });
     it('should ignore .min.css files in directory', function() {
       var topdoc;
-      topdoc = new Topdoc(this.srcDir, this.outputDir);
+      topdoc = new Topdoc({
+        source: this.srcDir,
+        destination: this.outputDir
+      });
       return topdoc.files.length.should.equal(2);
     });
     it('should generate an index.html', function() {
       var generatedDoc, topdoc;
-      topdoc = new Topdoc(this.srcDir, this.outputDir);
-      topdoc.generate();
-      generatedDoc = read(path.join(this.outputDir, 'index.html'), 'utf8');
-      return generatedDoc.should.be.ok;
+      topdoc = new Topdoc({
+        source: this.srcDir,
+        destination: this.outputDir
+      });
+      topdoc.generate(function(destination){
+        generatedDoc = read(path.join(destination, 'index.html'), 'utf8');
+        return generatedDoc.should.be.ok;
+      });
+    });
+    it('should download the template if it is a github url', function() {
+      var generatedDoc, topdoc;
+      topdoc = new Topdoc({
+        source: this.srcDir,
+        destination: 'fulldocs/',
+        template: "https://github.com/topcoat/usage-guide-theme",
+        templateData: {
+          title: "Topcoat",
+          subtitle: "CSS for clean and fast web apps",
+          download: {
+            url: "#",
+            label: "Download version 0.4"
+            },
+          homeURL: "http://topcoat.io",
+          siteNav: [
+            {
+              url: "http://www.garthdb.com", 
+              text: "Usage Guidelines"
+            },
+            {
+              url: "http://bench.topcoat.io/",
+              text: "Benchmarks"
+            },
+            {
+              url: "http://topcoat.io/blog",
+              text: "Blog"
+            }
+          ]
+        }
+      });
+      topdoc.generate(function(destination){
+        generatedDoc = read(path.join(destination, 'index.jade'), 'utf8');
+        generatedDoc.should.be.ok;
+      });
     });
     return it('should find all the css documents', function() {
       var topdoc;
-      topdoc = new Topdoc(this.srcDir, this.outputDir);
+      topdoc = new Topdoc({
+        source: this.srcDir,
+        destination: this.outputDir
+      });
       return topdoc.files.should.be.ok;
     });
   });

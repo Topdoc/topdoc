@@ -36,10 +36,39 @@ var destination = program.destination || 'docs';
 var template = program.template || path.resolve(__dirname, '..', 'lib', 'template.jade');
 var projectTitle = program.project || path.basename(process.cwd());
 
+if(fs.existsSync('./package.json')) {
+	var packageJSON = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
+	if(packageJSON.topdoc != null){
+		topdocData = packageJSON.topdoc
+		
+		source = program.source || topdocData.source || 'src';
+		destination = program.destination || topdocData.destination || 'docs';
+		template = program.template || topdocData.template || path.resolve(__dirname, '..', 'lib', 'template.jade');
+		templateData = null;
+		if(topdocData.templateData != null){
+			templateData = topdocData.templateData
+		} else {
+			var projectTitle = program.project || path.basename(process.cwd());
+			templateData = {title: projectTitle}
+		}
+		
+	}
+}
+
+
 if(!fs.existsSync(source)){
 	console.log('\nCouldn\'t seem to find a source\nSpecify a source with -s, --source <directory>\n');
 } else {
-	var topdoc = new Topdoc(source, destination, template, projectTitle);
-	topdoc.generate();
-	console.log('Generated documentation in ./' + destination);
+
+	var options = {
+		source: source,
+		destination: destination,
+		template: template,
+		templateData: templateData
+	};
+
+	var topdoc = new Topdoc(options);
+	topdoc.generate((function(){
+		console.log('Generated documentation in ./' + destination);
+	}).bind(destination));
 }
