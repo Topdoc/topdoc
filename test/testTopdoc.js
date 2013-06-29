@@ -102,7 +102,7 @@
         return generatedDoc.should.be.ok;
       });
     });
-    it('should download the template if it is a github url', function() {
+    it('should download the template if it is a github url', function(done) {
       var generatedDoc, topdoc;
       topdoc = new Topdoc({
         source: this.srcDir,
@@ -135,6 +135,7 @@
       topdoc.generate(function(destination){
         generatedDoc = read(path.join(destination, 'index.jade'), 'utf8');
         generatedDoc.should.be.ok;
+        done();
       });
     });
     return it('should find all the css documents', function() {
