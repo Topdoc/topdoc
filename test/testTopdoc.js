@@ -91,16 +91,17 @@
       });
       return topdoc.files.length.should.equal(2);
     });
-    it('should generate an index.html', function() {
+    it('should generate an index.html', function(done) {
       var generatedDoc, topdoc;
       topdoc = new Topdoc({
         source: this.srcDir,
         destination: this.outputDir
       });
-      topdoc.generate(function(destination){
-        generatedDoc = read(path.join(destination, 'index.html'), 'utf8');
-        return generatedDoc.should.be.ok;
-      });
+      topdoc.generate((function(){
+        generatedDoc = read(path.join('test', 'docs', 'index.html'), 'utf8');
+        generatedDoc.should.be.ok;
+        done();
+      }).bind(done));
     });
     it('should download the template if it is a github url', function(done) {
       var generatedDoc, topdoc;
@@ -132,9 +133,12 @@
           ]
         }
       });
-      topdoc.generate(function(destination){
-        generatedDoc = read(path.join(destination, 'index.jade'), 'utf8');
+      topdoc.generate(function(){
+        generatedDoc = read(path.join('fulldocs', 'index.html'), 'utf8');
         generatedDoc.should.be.ok;
+        if(fs.existsSync('fulldocs')){
+          fs.removeSync('fulldocs');
+        }
         done();
       });
     });
