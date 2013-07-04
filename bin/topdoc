@@ -69,6 +69,6 @@ if(!fs.existsSync(source)){
 
 	var topdoc = new Topdoc(options);
 	topdoc.generate((function(){
-		console.log('Generated documentation in ./' + destination);
+		console.log('Generated documentation in ' + destination);
 	}).bind(destination));
 }
