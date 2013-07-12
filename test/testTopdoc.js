@@ -16,6 +16,7 @@
  *
  */
 (function() {
+  "use strict";
   var Topdoc, deleteFolderRecursive, fs, path, read;
   Topdoc = require('../lib/topdoc');
   path = require('path');
@@ -25,7 +26,7 @@
   describe('Topdoc', function() {
     before(function() {
       this.srcDir = path.join('test', 'cases');
-      return this.outputDir = path.join('test', 'docs');
+      this.outputDir = path.join('test', 'docs');
     });
     after(function() {
       if (fs.existsSync(this.outputDir)) {
@@ -36,14 +37,14 @@
       var topdoc;
       Topdoc.should.be.ok;
       topdoc = new Topdoc({source: this.srcDir});
-      return topdoc.should.be.instanceOf(Topdoc);
+      topdoc.should.be.instanceOf(Topdoc);
     });
     it('should accept a source in the constructor', function() {
       var topdoc;
       topdoc = new Topdoc({
         source: this.srcDir
       });
-      return topdoc.source.should.equal(this.srcDir);
+      topdoc.source.should.equal(this.srcDir);
     });
     it('should accept a destination in the constructor', function() {
       var topdoc;
@@ -51,7 +52,7 @@
         source: this.srcDir,
         destination: this.outputDir
       });
-      return topdoc.destination.should.equal(this.outputDir);
+      topdoc.destination.should.equal(this.outputDir);
     });
     it('should accept a project title', function() {
       var topdoc;
@@ -62,18 +63,18 @@
           title: 'awesomeness'
         }
       });
-      return topdoc.projectTitle.should.equal('Awesomeness');
+      topdoc.projectTitle.should.equal('Awesomeness');
     });
     it('should pass data through to the template', function() {
       var topdoc;
       topdoc = new Topdoc({
-        source: this.srcDir, 
+        source: this.srcDir,
         destination: this.outputDir,
         templateData: {
           title: 'awesomeness'
         }
       });
-      return JSON.stringify(topdoc.templateData, null, 2).should.equal(JSON.stringify({title: 'awesomeness'}, null, 2));
+      JSON.stringify(topdoc.templateData, null, 2).should.equal(JSON.stringify({title: 'awesomeness'}, null, 2));
     });
     it('should find all the css files in a directory', function() {
       var topdoc;
@@ -81,7 +82,7 @@
         source: this.srcDir,
         destination: this.outputDir
       });
-      return topdoc.files[0].should.equal('test/cases/button.css');
+      topdoc.files[0].should.equal('test/cases/button.css');
     });
     it('should ignore .min.css files in directory', function() {
       var topdoc;
@@ -89,7 +90,7 @@
         source: this.srcDir,
         destination: this.outputDir
       });
-      return topdoc.files.length.should.equal(2);
+      topdoc.files.length.should.equal(2);
     });
     it('should generate an index.html', function(done) {
       var generatedDoc, topdoc;
@@ -119,7 +120,7 @@
           homeURL: "http://topcoat.io",
           siteNav: [
             {
-              url: "http://www.garthdb.com", 
+              url: "http://www.garthdb.com",
               text: "Usage Guidelines"
             },
             {
@@ -136,6 +137,50 @@
       topdoc.generate(function(){
         generatedDoc = read(path.join('fulldocs', 'index.html'), 'utf8');
         generatedDoc.should.be.ok;
+        if(fs.existsSync('fulldocs')){
+          fs.removeSync('fulldocs');
+        }
+        done();
+      });
+    });
+    it('should no overwrite an existing README.md file', function(done) {
+      var generatedDoc, topdoc;
+      fs.createFileSync(path.join('fulldocs','README.md'));
+      fs.writeFileSync(path.join('fulldocs','README.md'), 'original readme');
+      // read(path.join('test', 'docs', 'index.html'), 'utf8');
+      topdoc = new Topdoc({
+        source: this.srcDir,
+        destination: 'fulldocs/',
+        template: "https://github.com/topcoat/usage-guide-theme",
+        templateData: {
+          title: "Topcoat",
+          subtitle: "CSS for clean and fast web apps",
+          download: {
+            url: "#",
+            label: "Download version 0.4"
+            },
+          homeURL: "http://topcoat.io",
+          siteNav: [
+            {
+              url: "http://www.garthdb.com",
+              text: "Usage Guidelines"
+            },
+            {
+              url: "http://bench.topcoat.io/",
+              text: "Benchmarks"
+            },
+            {
+              url: "http://topcoat.io/blog",
+              text: "Blog"
+            }
+          ]
+        }
+      });
+      topdoc.generate(function(){
+
+        var expectedReadme = read(path.join('fulldocs','README.md'), 'utf8');
+        expectedReadme.should.equal('original readme');
+
         if(fs.existsSync('fulldocs')){
           fs.removeSync('fulldocs');
         }

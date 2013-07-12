@@ -2,7 +2,7 @@
   "author": "Garth Braithwaite <garthdb@gmail.com> (http://www.garthdb.com)",
   "name": "topdoc",
   "description": "Generate usage guides for css",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "repository": "git@github.com:topcoat/topdoc.git",
   "keywords": [
     "css",
@@ -30,7 +30,8 @@
     "jade": "~0.31.2",
     "fs-extra": "~0.6.1",
     "github-download": "~0.2.0",
-    "async": "~0.2.9"
+    "async": "~0.2.9",
+    "ncp": "~0.4.2"
   },
   "devDependencies": {
     "mocha": "~1.11.0",
