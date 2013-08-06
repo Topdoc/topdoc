@@ -15,6 +15,7 @@
  * limitations under the License.
  *
  */
+/*jshint expr: true*/
 (function() {
   "use strict";
 
@@ -66,10 +67,10 @@
       this.topdocument.results.components[0].slug.should.equal('button');
     });
     it('should parse component details for template', function() {
-      this.topdocument.results.components[0].details.should.equal(':active - Active state\n.is-active - Simulates an active state on mobile devices\n:disabled - Disabled state\n.is-disabled - Simulates a disabled state on mobile devices');
+      this.topdocument.results.components[0].modifiers[':active'].should.equal('Active state');
     });
     it('should parse example html for template', function() {
-      this.topdocument.results.components[0].html.should.equal('<a class="topcoat-button">Button</a>\n<a class="topcoat-button is-active">Button</a>\n<a class="topcoat-button is-disabled">Button</a>');
+      this.topdocument.results.components[0].markup.should.equal("<a class=\"topcoat-button\">Button</a> <a class=\"topcoat-button is-active\">Button</a> <a class=\"topcoat-button is-disabled\">Button</a>");
     });
     it('should generate two word slugs for template', function() {
       this.topdocument.results.components[1].slug.should.equal('quiet-button');
