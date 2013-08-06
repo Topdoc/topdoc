@@ -23,13 +23,13 @@
   exec = require('child_process').exec;
   path = require('path');
   describe('Topdoc CLI', function() {
-    it("should validate a Topdoc css file", function(done){
-      exec("topdoc validate -s " + path.join('test', 'cases'), function (error, stdout, stderr){
-        sys.puts(stdout);
-        sys.puts(error);
-        done();
-      });
-    });
+    // it("should validate a Topdoc css file", function(done){
+    //   exec("topdoc validate -s " + path.join('test', 'cases'), function (error, stdout, stderr){
+    //     sys.puts(stdout);
+    //     sys.puts(error);
+    //     done();
+    //   });
+    // });
   });
 
 }).call(this);
