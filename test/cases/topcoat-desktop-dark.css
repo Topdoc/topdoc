@@ -101,21 +101,24 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-/*
- Button
- ------
-
- :active - Active state
-
- .is-active - Simulates an active state on mobile devices
-
- :disabled - Disabled state
-
- .is-disabled - Simulates a disabled state on mobile devices
-
+/* topdoc
+  name: Button
+  description: A simple button
+  modifiers:
+    :active: Active state
+    .is-active: Simulates an active state on mobile devices
+    :disabled: Disabled state
+    .is-disabled: Simulates a disabled state on mobile devices
+  markup:
     <a class="topcoat-button">Button</a>
     <a class="topcoat-button is-active">Button</a>
     <a class="topcoat-button is-disabled">Button</a>
+  tags:
+    - desktop
+    - light
+    - mobile
+    - button
+    - quiet
 */
 .topcoat-button,
 .topcoat-button--quiet,
@@ -175,21 +178,24 @@ limitations under the License.
   cursor: default;
   pointer-events: none;
 }
-/*
- Quiet Button
- ------------
-
- :active - Quiet button active state
-
- .is-active - Simulates active state for a quiet button on touch interfaces
-
- :disabled - Disabled state
-
- .is-disabled - Simulates disabled state
-
+/* topdoc
+  name: Quiet Button
+  description: A simple button
+  modifiers:
+    :active: Quiet button active state
+    .is-active: Simulates active state for a quiet button on touch interfaces
+    :disabled: Disabled state
+    .is-disabled: Simulates disabled state
+  markup:
     <a class="topcoat-button--quiet">Button</a>
     <a class="topcoat-button--quiet is-active">Button</a>
     <a class="topcoat-button--quiet is-disabled">Button</a>
+  tags:
+    - desktop
+    - light
+    - mobile
+    - button
+    - quiet
 */
 .topcoat-button--quiet {
   background: transparent;
@@ -214,21 +220,24 @@ limitations under the License.
   cursor: default;
   pointer-events: none;
 }
-/*
- Large Button
- ------------
-
- :active - Active state
-
- .is-active - Simulates active state touch interfaces
-
- :disabled - Disabled state
-
- .is-disabled - Simulates disabled state
-
+/* topdoc
+  name: Large Button
+  description: A stupid big button
+  modifiers:
+    :active: Active state
+    .is-active: Simulates active state touch interfaces
+    :disabled: Disabled state
+    .is-disabled: Simulates disabled state
+  markup:
     <a class="topcoat-button--large" >Button</a>
     <a class="topcoat-button--large is-active" >Button</a>
     <a class="topcoat-button--large is-disabled" >Button</a>
+  tags:
+    - desktop
+    - light
+    - mobile
+    - button
+    - large
 */
 .topcoat-button--large,
 .topcoat-button--large--quiet {
@@ -241,22 +250,25 @@ limitations under the License.
   cursor: default;
   pointer-events: none;
 }
-/*
- Large Quiet Button
- ------------------
-
- :active - Active state
-
- .is-pressed - Simulates active state on touch interfaces
-
- :disabled - Disabled state
-
- .is-disabled - Simulates disabled state
-
-
+/* topdoc
+  name: Large Quiet Button
+  description: A large, yet quiet button
+  modifiers:
+    :active: Active state
+    .is-active: Simulates active state touch interfaces
+    :disabled: Disabled state
+    .is-disabled: Simulates disabled state
+  markup:
     <a class="topcoat-button--large--quiet" >Button</a>
     <a class="topcoat-button--large--quiet is-active" >Button</a>
     <a class="topcoat-button--large--quiet is-disabled" >Button</a>
+  tags:
+    - desktop
+    - light
+    - mobile
+    - button
+    - large
+    - quiet
 */
 .topcoat-button--large--quiet {
   background: transparent;
@@ -270,23 +282,24 @@ limitations under the License.
   cursor: default;
   pointer-events: none;
 }
-/*
- Call To Action Button
- ---------------------
-
- :active - Active state
-
- .is-pressed - Simulates active state on touch interfaces
-
- :disabled - Disabled state
-
- .is-disabled - Simulates disabled state
-
-
+/* topdoc
+  name: Call To Action Button
+  description: A CALL TO ARMS, er, ACTION!
+  modifiers:
+    :active: Active state
+    .is-active: Simulates active state touch interfaces
+    :disabled: Disabled state
+    .is-disabled: Simulates disabled state
+  markup:
     <a class="topcoat-button--cta" >Button</a>
     <a class="topcoat-button--cta is-active" >Button</a>
     <a class="topcoat-button--cta is-disabled" >Button</a>
-
+  tags:
+    - desktop
+    - light
+    - mobile
+    - button
+    - call to action
 */
 .topcoat-button--cta,
 .topcoat-button--large--cta {
@@ -312,21 +325,24 @@ limitations under the License.
   cursor: default;
   pointer-events: none;
 }
-/*
- Large Call To Action Button
- ---------------------------
-
- :active - Active state
-
- .is-active - Simulates active state touch interfaces
-
- :disabled - Disabled state
-
- .is-disabled - Simulates disabled state
-
+/* topdoc
+  name: Large Call To Action Button
+  description: Like call to action, but bigger
+  modifiers:
+    :active: Active state
+    .is-active: Simulates active state touch interfaces
+    :disabled: Disabled state
+    .is-disabled: Simulates disabled state
+  markup:
     <a class="topcoat-button--large--cta" >Button</a>
     <a class="topcoat-button--large--cta is-active" >Button</a>
     <a class="topcoat-button--large--cta is-disabled" >Button</a>
+  tags:
+    - desktop
+    - light
+    - mobile
+    - button
+    - call to action
 */
 .topcoat-button--large--cta {
   font-size: 1.167rem;
@@ -353,30 +369,30 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-
-/*
- Icon Button
- -----------
-
- :active - Active state
-
- .is-active - Simulates an active state on mobile devices
-
- :disabled - Disabled state
-
- .is-disabled - Simulates a disabled state on mobile devices
-
+/* topdoc
+  name: Icon Button
+  description: Buttons, now with icons
+  modifiers:
+    :active: Active state
+    .is-active: Simulates active state touch interfaces
+    :disabled: Disabled state
+    .is-disabled: Simulates disabled state
+  markup:
     <a class="topcoat-icon-button">
         <span class="topcoat-icon topcoat-icon--menu-stack"></span>
     </a>
-
     <a class="topcoat-icon-button is-active">
       <span class="topcoat-icon topcoat-icon--menu-stack"></span>
     </a>
-
     <a class="topcoat-icon-button is-disabled">
       <span class="topcoat-icon topcoat-icon--menu-stack"></span>
     </a>
+  tags:
+    - desktop
+    - light
+    - mobile
+    - button
+    - icon
 */
 .topcoat-icon-button,
 .topcoat-icon-button--quiet,
@@ -431,29 +447,31 @@ limitations under the License.
   cursor: default;
   pointer-events: none;
 }
-/*
- Quiet Icon Button
- -----------------
-
- :active - Button active state
-
- .is-active - Simulates active state for a button on touch interfaces
-
- :disabled - Disabled state
-
- .is-disabled - Simulates disabled state
-
+/* topdoc
+  name: Quiet Icon Button
+  description: Quiet buttons, now with icons
+  modifiers:
+    :active: Active state
+    .is-active: Simulates active state touch interfaces
+    :disabled: Disabled state
+    .is-disabled: Simulates disabled state
+  markup:
     <a class="topcoat-icon-button--quiet">
         <span class="topcoat-icon topcoat-icon--menu-stack"></span>
     </a>
-
     <a class="topcoat-icon-button--quiet is-active">
       <span class="topcoat-icon topcoat-icon--menu-stack"></span>
     </a>
-
     <a class="topcoat-icon-button--quiet is-disabled">
       <span class="topcoat-icon topcoat-icon--menu-stack"></span>
     </a>
+  tags:
+    - desktop
+    - light
+    - mobile
+    - button
+    - icon
+    - quiet
 */
 .topcoat-icon-button--quiet {
   background: transparent;
@@ -478,29 +496,31 @@ limitations under the License.
   cursor: default;
   pointer-events: none;
 }
-/*
- Large Icon Button
- -----------------
-
- :active - Active state
-
- .is-active - Simulates an active state on mobile devices
-
- :disabled - Disabled state
-
- .is-disabled - Simulates a disabled state on mobile devices
-
+/* topdoc
+  name: Large Icon Button
+  description: Large buttons, now with icons
+  modifiers:
+    :active: Active state
+    .is-active: Simulates active state touch interfaces
+    :disabled: Disabled state
+    .is-disabled: Simulates disabled state
+  markup:
     <a class="topcoat-icon-button--large">
         <span class="topcoat-icon--large topcoat-icon--menu-stack"></span>
     </a>
-
     <a class="topcoat-icon-button--large is-active">
       <span class="topcoat-icon--large topcoat-icon--menu-stack"></span>
     </a>
-
     <a class="topcoat-icon-button--large is-disabled">
       <span class="topcoat-icon--large topcoat-icon--menu-stack"></span>
     </a>
+  tags:
+    - desktop
+    - light
+    - mobile
+    - button
+    - icon
+    - large
 */
 .topcoat-icon-button--large,
 .topcoat-icon-button--large--quiet {
@@ -520,29 +540,32 @@ limitations under the License.
   cursor: default;
   pointer-events: none;
 }
-/*
- Large Quiet Icon Button
- -----------------------
-
- :active - Active state
-
- .is-active - Simulates an active state on mobile devices
-
- :disabled - Disabled state
-
- .is-disabled - Simulates a disabled state on mobile devices
-
+/* topdoc
+  name: Large Quiet Icon Button
+  description: Large buttons, now with icons, and quiet.... shhh.
+  modifiers:
+    :active: Active state
+    .is-active: Simulates active state touch interfaces
+    :disabled: Disabled state
+    .is-disabled: Simulates disabled state
+  markup:
     <a class="topcoat-icon-button--large--quiet">
         <span class="topcoat-icon--large topcoat-icon--menu-stack"></span>
     </a>
-
     <a class="topcoat-icon-button--large--quiet is-active">
       <span class="topcoat-icon--large topcoat-icon--menu-stack"></span>
     </a>
-
     <a class="topcoat-icon-button--large--quiet is-disabled">
       <span class="topcoat-icon--large topcoat-icon--menu-stack"></span>
     </a>
+  tags:
+    - desktop
+    - light
+    - mobile
+    - button
+    - icon
+    - large
+    - quiet
 */
 .topcoat-icon-button--large--quiet {
   background: transparent;
@@ -585,26 +608,30 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-
-/*
- List
- ------------
-
-    <div class="topcoat-list__container">
-      <h3 class="topcoat-list__header">Category</h3>
-      <ul class="topcoat-list">
-        <li class="topcoat-list__item">
-          Item
-        </li>
-        <li class="topcoat-list__item">
-          Item
-        </li>
-        <li class="topcoat-list__item">
-          Item
-        </li>
-      </ul>
-    </div>
-
+/* topdoc
+  name: List
+  description: Scroll it, hard
+  markup:
+    mobile:
+      <div class="topcoat-list__container">
+        <h3 class="topcoat-list__header">Category</h3>
+        <ul class="topcoat-list">
+          <li class="topcoat-list__item">
+            Item
+          </li>
+          <li class="topcoat-list__item">
+            Item
+          </li>
+          <li class="topcoat-list__item">
+            Item
+          </li>
+        </ul>
+      </div>
+  tags:
+    - desktop
+    - light
+    - mobile
+    - list
 */
 .topcoat-list__container {
   padding: 0;
@@ -667,26 +694,31 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-
-/*
-Navigation Bar
---------------
-
+/* topdoc
+  name: Navigation Bar
+  description: A bar, but with navigation instead of alcohol.
+  markup:
     <div class="topcoat-navigation-bar">
-        <div class="topcoat-navigation-bar__item left quarter">
-            <a class="topcoat-icon-button--quiet">
-              <span class="topcoat-icon topcoat-icon--menu-stack"></span>
-            </a>
-        </div>
-        <div class="topcoat-navigation-bar__item center half">
-            <h1 class="topcoat-navigation-bar__title">Header</h1>
-        </div>
-        <div class="topcoat-navigation-bar__item right quarter">
-            <a class="topcoat-icon-button--quiet">
-              <span class="topcoat-icon topcoat-icon--edit"></span>
-            </a>
-        </div>
+      <div class="topcoat-navigation-bar__item left quarter">
+          <a class="topcoat-icon-button--quiet">
+            <span class="topcoat-icon topcoat-icon--menu-stack"></span>
+          </a>
+      </div>
+      <div class="topcoat-navigation-bar__item center half">
+          <h1 class="topcoat-navigation-bar__title">Header</h1>
+      </div>
+      <div class="topcoat-navigation-bar__item right quarter">
+          <a class="topcoat-icon-button--quiet">
+            <span class="topcoat-icon topcoat-icon--edit"></span>
+          </a>
+      </div>
     </div>
+  tags:
+    - desktop
+    - light
+    - mobile
+    - desktop
+    - navigation
 */
 .topcoat-navigation-bar {
   -webkit-box-sizing: border-box;
@@ -767,19 +799,24 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-
-/*
- Search Input
- ------------
-
- :disabled - Disabled state
-
- .is-disabled - Simulates a disabled state
-
+/* topdoc
+  name: Search Input
+  description: Need... input...
+  modifiers:
+    :disabled: Disabled state
+    .is-disabled: Simulates a disabled state
+  markup:
     <input type="search" value="" placeholder="search" class="topcoat-search-input">
     <input type="search is-disabled" value="" placeholder="search" class="topcoat-search-input">
-
- */
+  tags:
+    - desktop
+    - light
+    - mobile
+    - desktop
+    - search
+    - input
+    - form
+*/
 .topcoat-search-input,
 .topcoat-search-input--large {
   vertical-align: top;
@@ -829,17 +866,24 @@ limitations under the License.
   cursor: default;
   pointer-events: none;
 }
-/*
- Large Search Input
- ------------------
-
- :disabled - Disabled state
-
- .is-disabled - Simulates a disabled state
-
+/* topdoc
+  name: Embiggened Search Input
+  description: Embiggened Search Input
+  modifiers:
+    :disabled: Disabled state
+    .is-disabled: Simulates a disabled state
+  markup:
     <input type="search"  value="" placeholder="search" class="topcoat-search-input--large">
     <input type="search"  value="" placeholder="search" class="topcoat-search-input--large .is-disabled">
-
+  tags:
+    - desktop
+    - light
+    - mobile
+    - desktop
+    - search
+    - input
+    - form
+    - large
 */
 .topcoat-search-input--large {
   height: 2.6rem;
@@ -875,16 +919,24 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-/*
- Text Input
- ----------
-
-:disabled - Disabled state
-.is-disabled - Simulates a disabled state on mobile devices
-
+/* topdoc
+  name: Text Input
+  description: Input, for text
+  modifiers:
+    :disabled: Disabled state
+    .is-disabled: Simulates a disabled state
+  markup:
     <input type="text" class="topcoat-text-input" value="" placeholder="text">
     <input type="text" class="topcoat-text-input is-disabled" value="" placeholder="text">
-
+  tags:
+    - desktop
+    - light
+    - mobile
+    - desktop
+    - search
+    - input
+    - form
+    - large
 */
 .topcoat-text-input,
 .topcoat-text-input--large {
@@ -916,15 +968,24 @@ limitations under the License.
   cursor: default;
   pointer-events: none;
 }
-/*
- Large Text Input
- ----------------
-
-:disabled - Disabled state
-.is-disabled - Simulates a disabled state on mobile devices
-
+/* topdoc
+  name: Large Text Input
+  description: Input, for text and large
+  modifiers:
+    :disabled: Disabled state
+    .is-disabled: Simulates a disabled state
+  markup:
     <input type="text" class="topcoat-text-input--large" value="" placeholder="text">
     <input type="text" class="topcoat-text-input--large is-disabled" value="" placeholder="text">
+  tags:
+    - desktop
+    - light
+    - mobile
+    - desktop
+    - search
+    - input
+    - form
+    - large
 */
 .topcoat-text-input--large {
   height: 2.6rem;
