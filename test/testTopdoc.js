@@ -104,12 +104,12 @@
         done();
       }).bind(done));
     });
-    it('should download the template if it is a github url', function(done) {
+    it('should use npm installed template', function(done) {
       var generatedDoc, topdoc;
       topdoc = new Topdoc({
         source: this.srcDir,
         destination: 'fulldocs/',
-        template: "https://github.com/topcoat/usage-guide-theme",
+        template: path.join("node_modules", "topdoc-theme"),
         templateData: {
           title: "Topcoat",
           subtitle: "CSS for clean and fast web apps",
@@ -143,7 +143,7 @@
         done();
       });
     });
-    it('should no overwrite an existing README.md file', function(done) {
+    it('should not overwrite an existing README.md file', function(done) {
       var generatedDoc, topdoc;
       fs.createFileSync(path.join('fulldocs','README.md'));
       fs.writeFileSync(path.join('fulldocs','README.md'), 'original readme');
@@ -151,7 +151,7 @@
       topdoc = new Topdoc({
         source: this.srcDir,
         destination: 'fulldocs/',
-        template: "https://github.com/topcoat/usage-guide-theme",
+        template: path.join("node_modules", "topdoc-theme"),
         templateData: {
           title: "Topcoat",
           subtitle: "CSS for clean and fast web apps",
@@ -187,7 +187,45 @@
         done();
       });
     });
-    return it('should find all the css documents', function() {
+    it('should duplicate all the contents of the template folder', function(done) {
+      var topdoc;
+      topdoc = new Topdoc({
+        source: this.srcDir,
+        destination: 'fulldocs/',
+        template: path.join("node_modules", "topdoc-theme"),
+        templateData: {
+          title: "Topcoat",
+          subtitle: "CSS for clean and fast web apps",
+          download: {
+            url: "#",
+            label: "Download version 0.4"
+            },
+          homeURL: "http://topcoat.io",
+          siteNav: [
+            {
+              url: "http://www.garthdb.com",
+              text: "Usage Guidelines"
+            },
+            {
+              url: "http://bench.topcoat.io/",
+              text: "Benchmarks"
+            },
+            {
+              url: "http://topcoat.io/blog",
+              text: "Blog"
+            }
+          ]
+        }
+       });
+      topdoc.generate(function(){
+        fs.existsSync(path.join('fulldocs','css')).should.equal(true);
+        if(fs.existsSync('fulldocs')){
+          fs.removeSync('fulldocs');
+        }
+        done();
+      });
+    });
+    it('should find all the css documents', function() {
       var topdoc;
       topdoc = new Topdoc({
         source: this.srcDir,

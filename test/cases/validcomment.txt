@@ -1,0 +1,16 @@
+ topdoc
+  name: Button
+  description: A simple button
+  modifiers:
+    :active - Active state
+    .is-active - Simulates an active state on mobile devices
+    :disabled - Disabled state
+    .is-disabled - Simulates a disabled state on mobile devices
+  examples:
+    <a class="topcoat-button">Button</a>
+    <a class="topcoat-button is-active">Button</a>
+    <a class="topcoat-button is-disabled">Button</a>
+  tags:
+    - desktop
+    - light
+    - mobile
