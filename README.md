@@ -1,6 +1,5 @@
-#Topdoc
+#Topdoc [![Build Status](https://travis-ci.org/topcoat/topdoc.png)](https://travis-ci.org/topcoat/topdoc)
 
-[![Build Status](https://travis-ci.org/topcoat/topdoc.png)](https://travis-ci.org/topcoat/topdoc)
 [![NPM](https://nodei.co/npm/topdoc.png)](https://nodei.co/npm/topdoc)
 
 A tool for generating usage guides for css.
