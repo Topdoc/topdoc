@@ -29,14 +29,14 @@
     "css-parse": "~1.4.0",
     "jade": "~0.31.2",
     "fs-extra": "~0.6.1",
-    "github-download": "~0.2.0",
     "async": "~0.2.9",
     "ncp": "~0.4.2",
     "js-yaml": "~2.1.0"
   },
   "devDependencies": {
     "mocha": "~1.11.0",
-    "should": "~1.2.2"
+    "should": "~1.2.2",
+    "topdoc-theme": "~0.2.1"
   },
   "engines": {
     "node": "*"
