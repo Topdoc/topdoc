@@ -1,8 +1,63 @@
-#Topdoc [![Build Status](https://travis-ci.org/topcoat/topdoc.png)](https://travis-ci.org/topcoat/topdoc)
+#Topdoc
 
+[![Build Status](https://travis-ci.org/topcoat/topdoc.png)](https://travis-ci.org/topcoat/topdoc)
 [![NPM](https://nodei.co/npm/topdoc.png)](https://nodei.co/npm/topdoc)
 
 A tool for generating usage guides for css.
+
+##Topdoc Comment Specification
+
+Topdoc uses css-parse to divide asunder your css document and find all the relevant Topdoc comments.
+
+Below is an example of a Topdoc comment, take a look, and then read the explanation under it.
+
+```css
+/* topdoc
+  name: Button
+  description: A simple button
+  modifiers:
+    :active: Active state
+    .is-active: Simulates an active state on mobile devices
+    :disabled: Disabled state
+    .is-disabled: Simulates a disabled state on mobile devices
+  markup:
+    <a class="topcoat-button">Button</a>
+    <a class="topcoat-button is-active">Button</a>
+    <a class="topcoat-button is-disabled">Button</a>
+  example: http://codepen.io/
+  tags:
+    - desktop
+    - light
+    - mobile
+    - button
+    - quiet
+  blarg: very true
+*/
+.topcoat-button,
+.topcoat-button--quiet,
+.topcoat-button--large,
+.topcoat-button--large--quiet,
+.topcoat-button--cta,
+.topcoat-button--large--cta {
+/* all your css junk here */
+```
+
+Topdoc comments must start with `topdoc` on the first comment line, it makes it quick and easy to identify from other comments.
+
+The rest of the data uses a [YAML](http://www.yaml.org/) friendly syntax.
+
+The fields can be in any order, but this is a good example for consistency sake.
+
+The following are recommend and/or required fields:
+
+* `name` (required): The full name of the component.  Feel free to use spaces, punctuation, etc (name: Sir Button III, esq.)
+* `description`: Something more descriptive then the title alone.
+* `modifiers`: These can be psuedo classes, or addition rules applied to the component. This must be a [YAML mapping](http://yaml4r.sourceforge.net/doc/page/collections_in_yaml.htm) (`*modifier*:*description*`) which becomes a js hash
+* `markup` (required): This is the magic; it's the html that will be used to display the component in the docs.
+* `tags`: Just some obligitory metadata.
+* `blarg`: Since Topdoc uses a flexible YAML syntax, feel free to add any additional custom data you might need for your template.
+
+Topdoc assumes everything between two Topdoc comments, and everything after the last Topdoc comment, is a component.  Put anything that isn't a component (general styles) above the first Topdoc comment.
 
 ##Installation
 
