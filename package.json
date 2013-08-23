@@ -31,8 +31,7 @@
     "fs-extra": "~0.6.1",
     "async": "~0.2.9",
     "ncp": "~0.4.2",
-    "js-yaml": "~2.1.0",
-    "htmltidy": "0.0.6"
+    "js-yaml": "~2.1.0"
   },
   "devDependencies": {
     "mocha": "~1.11.0",
