@@ -31,12 +31,13 @@
     "fs-extra": "~0.6.1",
     "async": "~0.2.9",
     "ncp": "~0.4.2",
-    "js-yaml": "~2.1.0"
+    "js-yaml": "~2.1.0",
+    "htmltidy": "0.0.6"
   },
   "devDependencies": {
     "mocha": "~1.11.0",
     "should": "~1.2.2",
-    "topdoc-theme": "~0.2.1"
+    "topdoc-theme": "~0.2.4"
   },
   "engines": {
     "node": "*"
