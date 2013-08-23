@@ -70,7 +70,7 @@
       this.topdocument.results.components[0].modifiers[':active'].should.equal('Active state');
     });
     it('should parse example html for template', function() {
-      this.topdocument.results.components[0].markup.should.equal("<a class=\"topcoat-button\">Button</a> <a class=\"topcoat-button is-active\">Button</a> <a class=\"topcoat-button is-disabled\">Button</a>");
+      this.topdocument.results.components[0].markup.should.equal("    <a class=\"topcoat-button\">Button</a>\r    <a class=\"topcoat-button is-active\">Button</a>\r    <a class=\"topcoat-button is-disabled\">Button</a>");
     });
     it('should generate two word slugs for template', function() {
       this.topdocument.results.components[1].slug.should.equal('quiet-button');
