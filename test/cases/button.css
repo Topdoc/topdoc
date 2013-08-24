@@ -98,16 +98,18 @@ limitations under the License.
     .is-active: Simulates active state for a quiet button on touch interfaces
     :disabled: Disabled state
     .is-disabled: Simulates disabled state
-  markup:
-    <a class="topcoat-button--quiet">Button</a>
-    <a class="topcoat-button--quiet is-active">Button</a>
-    <a class="topcoat-button--quiet is-disabled">Button</a>
   tags:
     - desktop
     - light
     - mobile
     - button
     - quiet
+  markup:
+    <div class="test-wrapper">
+      <a class="topcoat-button--quiet">Button</a>
+      <a class="topcoat-button--quiet is-active">Button</a>
+      <a class="topcoat-button--quiet is-disabled">Button</a>
+    </div>
 */
 .topcoat-button--quiet {
   background: transparent;
