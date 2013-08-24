@@ -113,6 +113,8 @@ limitations under the License.
     <a class="topcoat-button">Button</a>
     <a class="topcoat-button is-active">Button</a>
     <a class="topcoat-button is-disabled">Button</a>
+  examples:
+    mobile button: http://codepen.io/Topcoat/pen/DpKtf
   tags:
     - desktop
     - light
