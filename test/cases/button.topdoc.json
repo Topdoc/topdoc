@@ -27,6 +27,7 @@
     {
       "name": "Quiet Button",
       "description": "A simple button",
+      "iframe": true,
       "modifiers": {
         ":active": "Quiet button active state",
         ".is-active": "Simulates active state for a quiet button on touch interfaces",
