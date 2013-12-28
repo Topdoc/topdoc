@@ -2,7 +2,7 @@
   "author": "Garth Braithwaite <garthdb@gmail.com> (http://www.garthdb.com)",
   "name": "topdoc",
   "description": "Generate usage guides for css",
-  "version": "0.3.1",
+  "version": "0.3.0",
   "repository": "git@github.com:topcoat/topdoc.git",
   "keywords": [
     "css",
