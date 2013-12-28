@@ -740,7 +740,7 @@
       },
       {
         "type": "comment",
-        "comment": "\n  name: Quiet Button\n  description: A simple button\n  modifiers:\n    :active: Quiet button active state\n    .is-active: Simulates active state for a quiet button on touch interfaces\n    :disabled: Disabled state\n    .is-disabled: Simulates disabled state\n  markup:\n    <a class=\"topcoat-button--quiet\">Button</a>\n    <a class=\"topcoat-button--quiet is-active\">Button</a>\n    <a class=\"topcoat-button--quiet is-disabled\">Button</a>\n  tags:\n    - desktop\n    - light\n    - mobile\n    - button\n    - quiet\n",
+        "comment": "\n  name: Topdoc Quiet Button Component\n  description: A simple button\n  modifiers:\n    :active: Quiet button active state\n    .is-active: Simulates active state for a quiet button on touch interfaces\n    :disabled: Disabled state\n    .is-disabled: Simulates disabled state\n  markup:\n    <a class=\"topcoat-button--quiet\">Button</a>\n    <a class=\"topcoat-button--quiet is-active\">Button</a>\n    <a class=\"topcoat-button--quiet is-disabled\">Button</a>\n  tags:\n    - desktop\n    - light\n    - mobile\n    - button\n    - quiet\n",
         "position": {
           "start": {
             "line": 93,
