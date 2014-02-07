@@ -1,7 +1,7 @@
 {
   "title": "Button",
   "filename": "button.css",
-  "source": "test/cases/button.css",
+  "source": "test/cases/simple/button.css",
   "template": "lib/template.jade",
   "minified": ".topcoat-button,.topcoat-button--cta,.topcoat-button--large,.topcoat-button--large--cta,.topcoat-button--large--quiet,.topcoat-button--quiet{position:relative;display:inline-block;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;-webkit-background-clip:padding;-moz-background-clip:padding;margin:0;font:inherit;background:0 0;cursor:default;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;-o-text-overflow:ellipsis;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;padding:0 1.16rem;font-size:12px;line-height:2rem;letter-spacing:1px;color:#c6c8c8;text-shadow:0 -1px rgba(0,0,0,.69);vertical-align:top;background-color:#595b5b;-webkit-box-shadow:inset 0 1px rgba(255,255,255,.12);box-shadow:inset 0 1px rgba(255,255,255,.12);border:1px solid rgba(0,0,0,.36);-webkit-border-radius:3px;border-radius:3px}.topcoat-button--large.is-active,.topcoat-button--large:active,.topcoat-button.is-active,.topcoat-button:active{background-color:#404141;-webkit-box-shadow:inset 0 1px rgba(0,0,0,.18);box-shadow:inset 0 1px rgba(0,0,0,.18)}.topcoat-button.is-disabled,.topcoat-button:disabled{opacity:.3;cursor:default;pointer-events:none}.topcoat-button--quiet{background:0 0;border:1px solid transparent;-webkit-box-shadow:none;box-shadow:none}.topcoat-button--large--quiet.is-active,.topcoat-button--large--quiet:active,.topcoat-button--quiet.is-active,.topcoat-button--quiet:active{color:#c6c8c8;text-shadow:0 -1px rgba(0,0,0,.69);background-color:#404141;border:1px solid rgba(0,0,0,.36);-webkit-box-shadow:inset 0 1px rgba(0,0,0,.18);box-shadow:inset 0 1px rgba(0,0,0,.18)}.topcoat-button--quiet.is-disabled,.topcoat-button--quiet:disabled{opacity:.3;cursor:default;pointer-events:none}",
   "components": [
@@ -28,7 +28,6 @@
     {
       "name": "Topdoc Quiet Button Component",
       "description": "A simple button",
-      "iframe": true,
       "modifiers": {
         ":active": "Quiet button active state",
         ".is-active": "Simulates active state for a quiet button on touch interfaces",
