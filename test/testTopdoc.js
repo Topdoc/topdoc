@@ -25,7 +25,7 @@
 
   describe('Topdoc', function() {
     before(function() {
-      this.srcDir = path.join('test', 'cases');
+      this.srcDir = path.join('test', 'cases', 'simple');
       this.outputDir = path.join('test', 'docs');
     });
     after(function() {
@@ -82,7 +82,7 @@
         source: this.srcDir,
         destination: this.outputDir
       });
-      topdoc.files[0].should.equal('test/cases/button.css');
+      topdoc.files[0].should.equal('test/cases/simple/button.css');
     });
     it('should ignore .min.css files in directory', function() {
       var topdoc;
@@ -225,13 +225,63 @@
         done();
       });
     });
+    it('should work with defaults and no stuff', function(done) {
+      var topdoc;
+      topdoc = new Topdoc({
+        source: this.srcDir,
+        destination: 'fulldocs/',
+        template: path.join("node_modules", "topdoc-theme"),
+        templateData: {}
+       });
+      topdoc.generate(function(){
+        fs.existsSync(path.join('fulldocs','css')).should.equal(true);
+        if(fs.existsSync('fulldocs')){
+          fs.removeSync('fulldocs');
+        }
+        done();
+      });
+    });
     it('should find all the css documents', function() {
       var topdoc;
       topdoc = new Topdoc({
         source: this.srcDir,
         destination: this.outputDir
       });
-      return topdoc.files.should.be.ok;
+      topdoc.generate(function(){
+        return topdoc.files.should.be.ok;
+      });
+    });
+    it('should return an error when template is missing', function(done) {
+      var topdoc;
+      topdoc = new Topdoc({
+        source: this.srcDir,
+        destination: this.outputDir,
+        template: './'
+      });
+      try {
+        topdoc.generate(function(){
+        });
+      } catch (err) {
+        done();
+      }
+    });
+    it('should generate iframe html files', function(done){
+      var topdoc;
+      topdoc = new Topdoc({
+        source: path.join('test', 'cases', 'iframe'),
+        destination: 'fulldocs/',
+        template: path.join("node_modules", "topdoc-theme")
+      });
+      topdoc.generate((function(){
+        var caseTopdociFrame, resultiFrame;
+        caseTopdociFrame = read(path.join('test', 'cases', 'iframe', 'overlay.overlay.html'), 'utf8');
+        resultiFrame = read(path.join('fulldocs/', 'overlay.overlay.html'), 'utf8');
+        resultiFrame.should.equal(caseTopdociFrame);
+        if(fs.existsSync('fulldocs')){
+          fs.removeSync('fulldocs');
+        }
+        done();
+      }).bind(done));
     });
   });
 
