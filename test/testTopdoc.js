@@ -277,6 +277,9 @@
         caseTopdociFrame = read(path.join('test', 'cases', 'iframe', 'overlay.overlay.html'), 'utf8');
         resultiFrame = read(path.join('fulldocs/', 'overlay.overlay.html'), 'utf8');
         resultiFrame.should.equal(caseTopdociFrame);
+        if(fs.existsSync('fulldocs')){
+          fs.removeSync('fulldocs');
+        }
         done();
       }).bind(done));
     });
