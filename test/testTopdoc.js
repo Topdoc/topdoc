@@ -225,6 +225,22 @@
         done();
       });
     });
+    it('should work with defaults and no stuff', function(done) {
+      var topdoc;
+      topdoc = new Topdoc({
+        source: this.srcDir,
+        destination: 'fulldocs/',
+        template: path.join("node_modules", "topdoc-theme"),
+        templateData: {}
+       });
+      topdoc.generate(function(){
+        fs.existsSync(path.join('fulldocs','css')).should.equal(true);
+        if(fs.existsSync('fulldocs')){
+          fs.removeSync('fulldocs');
+        }
+        done();
+      });
+    });
     it('should find all the css documents', function() {
       var topdoc;
       topdoc = new Topdoc({
