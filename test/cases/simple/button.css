@@ -93,7 +93,6 @@ limitations under the License.
 /* topdoc
   name: Topdoc Quiet Button Component
   description: A simple button
-  iframe: true
   modifiers:
     :active: Quiet button active state
     .is-active: Simulates active state for a quiet button on touch interfaces

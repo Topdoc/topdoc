@@ -37,7 +37,7 @@
   "devDependencies": {
     "mocha": "~1.11.0",
     "should": "~1.2.2",
-    "topdoc-theme": "git://github.com/topcoat/topdoc-theme.git#defaults"
+    "topdoc-theme": "git://github.com/topcoat/topdoc-theme.git#iframe"
   },
   "engines": {
     "node": "*"

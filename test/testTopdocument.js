@@ -31,7 +31,7 @@
 
   describe('Topdocument', function() {
     before(function() {
-      this.documentSourcePath = path.join('test', 'cases', 'button.css');
+      this.documentSourcePath = path.join('test', 'cases', 'simple', 'button.css');
       this.topdocument = new Topdocument(this.documentSourcePath);
     });
     it('exists', function() {
@@ -43,20 +43,20 @@
     });
     it('should parse the css file', function() {
       var caseCSSJson, parsedJson;
-      caseCSSJson = read(path.join('test', 'cases', 'button.json'), 'utf8');
+      caseCSSJson = read(path.join('test', 'cases', 'simple', 'button.json'), 'utf8');
       parsedJson = JSON.stringify(this.topdocument.cssParseResults, null, 2);
     });
     it('should validate topdoc comments', function () {
       var validComment = {
         'type': 'comment',
-        'comment': read(path.join('test', 'cases', 'validcomment.txt'), 'utf8')
+        'comment': read(path.join('test', 'cases', 'simple', 'validcomment.txt'), 'utf8')
       };
       var validationResult = this.topdocument.isValidComment(validComment);
       validationResult.should.equal(true);
     });
     it('should generate json for template', function() {
       var caseTopdocJson, resultJson;
-      caseTopdocJson = read(path.join('test', 'cases', 'button.topdoc.json'), 'utf8');
+      caseTopdocJson = read(path.join('test', 'cases', 'simple', 'button.topdoc.json'), 'utf8');
       resultJson = JSON.stringify(this.topdocument.results, null, 2);
       resultJson.should.equal(caseTopdocJson);
     });
