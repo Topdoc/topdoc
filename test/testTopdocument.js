@@ -19,13 +19,15 @@
 (function() {
   "use strict";
 
-  var Topdocument, fs, path, read, should;
+  var Topdocument, fs, path, read, should, sinon;
 
   Topdocument = require('../lib/topdocument');
 
   path = require('path');
 
   fs = require('fs');
+
+  sinon = require('sinon');
 
   read = fs.readFileSync;
 
@@ -78,6 +80,36 @@
     it('should parse filename', function() {
       this.topdocument.results.filename.should.equal('button.css');
     });
+    describe('with comment parse error', function() {
+      before(function() {
+        sinon.spy(console, "error");
+        this.documentSourcePath = path.join('test', 'cases', 'fail', 'badcomment.css');
+        this.topdocument = new Topdocument(this.documentSourcePath);
+      });
+      after(function(){
+        console.error.restore();
+      });
+      it ('should not fail silently', function(){
+        console.error.calledOnce.should.be.true;
+        console.error.getCall(0).args[0].name.should.equal('YAMLException');
+      });
+    });
+
+    describe('with missing comment field', function() {
+      before(function() {
+        sinon.spy(console, "error");
+        this.documentSourcePath = path.join('test', 'cases', 'fail', 'commentwithoutname.css');
+        this.topdocument = new Topdocument(this.documentSourcePath);
+      });
+      after(function(){
+        console.error.restore();
+      });
+      it ('should log an error', function(){
+        console.error.calledOnce.should.be.true;
+        console.error.getCall(0).args[0].should.equal('Required topdoc comment field \'name\' is missing!');
+      });
+    });
+
   });
 
 }).call(this);
