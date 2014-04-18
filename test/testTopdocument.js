@@ -25,9 +25,9 @@
 
   path = require('path');
 
-  fs = require('fs');
-
   sinon = require('sinon');
+
+  fs = require('fs');
 
   read = fs.readFileSync;
 
@@ -84,29 +84,39 @@
       before(function() {
         sinon.spy(console, "error");
         this.documentSourcePath = path.join('test', 'cases', 'fail', 'badcomment.css');
-        this.topdocument = new Topdocument(this.documentSourcePath);
       });
       after(function(){
         console.error.restore();
       });
       it ('should not fail silently', function(){
+        var thrownError;
+        try {
+          this.topdocument = new Topdocument(this.documentSourcePath);
+        } catch (parseError) {
+          thrownError = parseError;
+        }
+        thrownError.should.exist;
         console.error.calledOnce.should.be.true;
-        console.error.getCall(0).args[0].name.should.equal('YAMLException');
+        console.error.getCall(0).args[0].name.should.equal('YAMLException')
       });
     });
-
     describe('with missing comment field', function() {
       before(function() {
         sinon.spy(console, "error");
         this.documentSourcePath = path.join('test', 'cases', 'fail', 'commentwithoutname.css');
-        this.topdocument = new Topdocument(this.documentSourcePath);
       });
       after(function(){
         console.error.restore();
       });
-      it ('should log an error', function(){
+      it ('should log an error', function() {
+        var thrownError;
+        try {
+          this.topdocument = new Topdocument(this.documentSourcePath);
+        } catch (err) {
+          thrownError = err;
+        }
+        thrownError.should.exist;
         console.error.calledOnce.should.be.true;
-        console.error.getCall(0).args[0].should.equal('Required topdoc comment field \'name\' is missing!');
       });
     });
 
