@@ -51,9 +51,9 @@ The following are recommend and/or required fields:
 
 * `name` (required): The full name of the component.  Feel free to use spaces, punctuation, etc (name: Sir Button III, esq.)
 * `description`: Something more descriptive then the title alone.
-* `modifiers`: These can be psuedo classes, or addition rules applied to the component. This must be a [YAML mapping](http://yaml4r.sourceforge.net/doc/page/collections_in_yaml.htm) (`*modifier*:*description*`) which becomes a js hash
+* `modifiers`: These can be pseudo classes, or addition rules applied to the component. This must be a [YAML mapping](http://yaml4r.sourceforge.net/doc/page/collections_in_yaml.htm) (`*modifier*:*description*`) which becomes a js hash
 * `markup` (required): This is the magic; it's the html that will be used to display the component in the docs.
-* `tags`: Just some obligitory metadata.
+* `tags`: Just some obligatory metadata.
 * `blarg`: Since Topdoc uses a flexible YAML syntax, feel free to add any additional custom data you might need for your template.
 
 Topdoc assumes everything between two Topdoc comments, and everything after the last Topdoc comment, is a component.  Put anything that isn't a component (general styles) above the first Topdoc comment.
@@ -236,7 +236,7 @@ nav.site: ul
 ```
 
 ####Project Object
-The `project` object contains relevant project information.  Currently it only contains the `title` property. (passed through the command line `-p` option, or thorugh the package.json information).
+The `project` object contains relevant project information.  Currently it only contains the `title` property. (passed through the command line `-p` option, or through the package.json information).
 
 ```jade
 title=project.title
