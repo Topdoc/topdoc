@@ -19,11 +19,13 @@
 (function() {
   "use strict";
 
-  var Topdocument, fs, path, read, should;
+  var Topdocument, fs, path, read, should, sinon;
 
   Topdocument = require('../lib/topdocument');
 
   path = require('path');
+
+  sinon = require('sinon');
 
   fs = require('fs');
 
@@ -78,6 +80,46 @@
     it('should parse filename', function() {
       this.topdocument.results.filename.should.equal('button.css');
     });
+    describe('with comment parse error', function() {
+      before(function() {
+        sinon.spy(console, "error");
+        this.documentSourcePath = path.join('test', 'cases', 'fail', 'badcomment.css');
+      });
+      after(function(){
+        console.error.restore();
+      });
+      it ('should not fail silently', function(){
+        var thrownError;
+        try {
+          this.topdocument = new Topdocument(this.documentSourcePath);
+        } catch (parseError) {
+          thrownError = parseError;
+        }
+        thrownError.should.exist;
+        console.error.calledOnce.should.be.true;
+        console.error.getCall(0).args[0].name.should.equal('YAMLException')
+      });
+    });
+    describe('with missing comment field', function() {
+      before(function() {
+        sinon.spy(console, "error");
+        this.documentSourcePath = path.join('test', 'cases', 'fail', 'commentwithoutname.css');
+      });
+      after(function(){
+        console.error.restore();
+      });
+      it ('should log an error', function() {
+        var thrownError;
+        try {
+          this.topdocument = new Topdocument(this.documentSourcePath);
+        } catch (err) {
+          thrownError = err;
+        }
+        thrownError.should.exist;
+        console.error.calledOnce.should.be.true;
+      });
+    });
+
   });
 
 }).call(this);
