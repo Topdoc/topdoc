@@ -1,0 +1,72 @@
+{
+  "name": "postcss-topdoc",
+  "version": "0.0.0",
+  "description": "Topdoc parser built in PostCSS",
+  "main": "lib/",
+  "scripts": {
+    "test": "nyc ava",
+    "test-watch": "ava -w",
+    "compile": "babel -d lib/ src/",
+    "lint": "eslint .",
+    "validate": "npm run lint && npm run compile && npm run test",
+    "reportCoverage": "nyc report -r lcovonly && codecov",
+    "release": "semantic-release pre && npm publish && semantic-release post"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GarthDB/postcss-topdoc.git"
+  },
+  "keywords": [
+    "topdoc",
+    "css",
+    "documentation",
+    "postcss"
+  ],
+  "author": "Garth Braithwaite <garthdb@gmail.com> (http://garthdb.com)",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/GarthDB/postcss-topdoc/issues"
+  },
+  "homepage": "https://github.com/GarthDB/postcss-topdoc#readme",
+  "ava": {
+    "require": [
+      "babel-register"
+    ],
+    "babel": "inherit"
+  },
+  "nyc": {
+    "include": [
+      "src/*.js"
+    ],
+    "require": [
+      "babel-register"
+    ]
+  },
+  "dependencies": {
+    "postcss": "^5.2.0"
+  },
+  "devDependencies": {
+    "ava": "^0.16.0",
+    "babel-cli": "^6.14.0",
+    "babel-core": "^6.14.0",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-istanbul": "^2.0.1",
+    "babel-preset-es2015": "^6.14.0",
+    "babel-register": "^6.14.0",
+    "codecov": "^1.0.1",
+    "commitizen": "^2.8.6",
+    "cz-customizable": "^4.0.0",
+    "eslint": "^3.5.0",
+    "eslint-config-airbnb": "^11.1.0",
+    "eslint-plugin-import": "^1.14.0",
+    "eslint-plugin-jsx-a11y": "^2.2.2",
+    "eslint-plugin-react": "^6.2.0",
+    "nyc": "^8.1.0",
+    "semantic-release": "^4.3.5"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-customizable"
+    }
+  }
+}
