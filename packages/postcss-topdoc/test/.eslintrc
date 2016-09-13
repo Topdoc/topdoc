@@ -1,0 +1,23 @@
+{
+  "extends": "airbnb",
+  "ecmaFeatures": {
+    "jsx": true,
+    "modules": true,
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true,
+    "mocha": true,
+  },
+  "rules": {
+    "no-param-reassign": [2, {
+      "props": false
+    }],
+    import/no-extraneous-dependencies: ['error', {'devDependencies': true}],
+    "no-console": 0
+  },
+  "plugins": [
+    "import",
+  ],
+}

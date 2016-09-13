@@ -43,6 +43,8 @@
     ]
   },
   "dependencies": {
+    "debug": "^2.2.0",
+    "js-yaml": "^3.6.1",
     "postcss": "^5.2.0"
   },
   "devDependencies": {

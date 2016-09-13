@@ -1,0 +1,49 @@
+{
+  "title": "Button",
+  "filename": "button.css",
+  "source": "test/cases/simple/button.css",
+  "template": "lib/template.jade",
+  "minified": ".topcoat-button,.topcoat-button--cta,.topcoat-button--large,.topcoat-button--large--cta,.topcoat-button--large--quiet,.topcoat-button--quiet{position:relative;display:inline-block;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;-webkit-background-clip:padding;-moz-background-clip:padding;margin:0;font:inherit;background:0 0;cursor:default;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;-o-text-overflow:ellipsis;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;padding:0 1.16rem;font-size:12px;line-height:2rem;letter-spacing:1px;color:#c6c8c8;text-shadow:0 -1px rgba(0,0,0,.69);vertical-align:top;background-color:#595b5b;-webkit-box-shadow:inset 0 1px rgba(255,255,255,.12);box-shadow:inset 0 1px rgba(255,255,255,.12);border:1px solid rgba(0,0,0,.36);-webkit-border-radius:3px;border-radius:3px}.topcoat-button--large.is-active,.topcoat-button--large:active,.topcoat-button.is-active,.topcoat-button:active{background-color:#404141;-webkit-box-shadow:inset 0 1px rgba(0,0,0,.18);box-shadow:inset 0 1px rgba(0,0,0,.18)}.topcoat-button.is-disabled,.topcoat-button:disabled{opacity:.3;cursor:default;pointer-events:none}.topcoat-button--quiet{background:0 0;border:1px solid transparent;-webkit-box-shadow:none;box-shadow:none}.topcoat-button--large--quiet.is-active,.topcoat-button--large--quiet:active,.topcoat-button--quiet.is-active,.topcoat-button--quiet:active{color:#c6c8c8;text-shadow:0 -1px rgba(0,0,0,.69);background-color:#404141;border:1px solid rgba(0,0,0,.36);-webkit-box-shadow:inset 0 1px rgba(0,0,0,.18);box-shadow:inset 0 1px rgba(0,0,0,.18)}.topcoat-button--quiet.is-disabled,.topcoat-button--quiet:disabled{opacity:.3;cursor:default;pointer-events:none}",
+  "components": [
+    {
+      "name": "Button",
+      "description": "A simple button",
+      "modifiers": {
+        ":active": "Active state",
+        ".is-active": "Simulates an active state on mobile devices",
+        ":disabled": "Disabled state",
+        ".is-disabled": "Simulates a disabled state on mobile devices"
+      },
+      "markup": "<a class=\"topcoat-button\">Button</a>\r<a class=\"topcoat-button is-active\">Button</a>\r<a class=\"topcoat-button is-disabled\">Button</a>",
+      "tags": [
+        "desktop",
+        "light",
+        "mobile",
+        "button",
+        "quiet"
+      ],
+      "css": ".topcoat-button,\n.topcoat-button--quiet,\n.topcoat-button--large,\n.topcoat-button--large--quiet,\n.topcoat-button--cta,\n.topcoat-button--large--cta {\n  position: relative;\n  display: inline-block;\n  vertical-align: top;\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box;\n  -webkit-background-clip: padding;\n  -moz-background-clip: padding;\n  background-clip: padding-box;\n  padding: 0;\n  margin: 0;\n  font: inherit;\n  color: inherit;\n  background: transparent;\n  border: none;\n  cursor: default;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n  -o-text-overflow: ellipsis;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n  padding: 0 1.16rem;\n  font-size: 12px;\n  line-height: 2rem;\n  letter-spacing: 1px;\n  color: #c6c8c8;\n  text-shadow: 0 -1px rgba(0,0,0,0.69);\n  vertical-align: top;\n  background-color: #595b5b;\n  -webkit-box-shadow: inset 0 1px rgba(255,255,255,0.12);\n  box-shadow: inset 0 1px rgba(255,255,255,0.12);\n  border: 1px solid rgba(0,0,0,0.36);\n  -webkit-border-radius: 3px;\n  border-radius: 3px;\n}\n.topcoat-button:active,\n.topcoat-button.is-active,\n.topcoat-button--large:active,\n.topcoat-button--large.is-active {\n  background-color: #404141;\n  -webkit-box-shadow: inset 0 1px rgba(0,0,0,0.18);\n  box-shadow: inset 0 1px rgba(0,0,0,0.18);\n}\n.topcoat-button:disabled,\n.topcoat-button.is-disabled {\n  opacity: 0.3;\n  cursor: default;\n  pointer-events: none;\n}",
+      "slug": "button"
+    },
+    {
+      "name": "Topdoc Quiet Button Component",
+      "description": "A simple button",
+      "modifiers": {
+        ":active": "Quiet button active state",
+        ".is-active": "Simulates active state for a quiet button on touch interfaces",
+        ":disabled": "Disabled state",
+        ".is-disabled": "Simulates disabled state"
+      },
+      "tags": [
+        "desktop",
+        "light",
+        "mobile",
+        "button",
+        "quiet"
+      ],
+      "markup": "<div class=\"test-wrapper\">\r  <a class=\"topcoat-button--quiet\">Button</a>\r  <a class=\"topcoat-button--quiet is-active\">Button</a>\r  <a class=\"topcoat-button--quiet is-disabled\">Button</a>\r</div>",
+      "css": ".topcoat-button--quiet {\n  background: transparent;\n  border: 1px solid transparent;\n  -webkit-box-shadow: none;\n  box-shadow: none;\n}\n.topcoat-button--quiet:active,\n.topcoat-button--quiet.is-active,\n.topcoat-button--large--quiet:active,\n.topcoat-button--large--quiet.is-active {\n  color: #c6c8c8;\n  text-shadow: 0 -1px rgba(0,0,0,0.69);\n  background-color: #404141;\n  border: 1px solid rgba(0,0,0,0.36);\n  -webkit-box-shadow: inset 0 1px rgba(0,0,0,0.18);\n  box-shadow: inset 0 1px rgba(0,0,0,0.18);\n}\n.topcoat-button--quiet:disabled,\n.topcoat-button--quiet.is-disabled {\n  opacity: 0.3;\n  cursor: default;\n  pointer-events: none;\n}\n",
+      "slug": "topdoc-quiet-button-component"
+    }
+  ]
+}
