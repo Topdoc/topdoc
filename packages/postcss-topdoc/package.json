@@ -4,12 +4,13 @@
   "description": "Topdoc parser built in PostCSS",
   "main": "lib/",
   "scripts": {
+    "prepublish": "npm run compile",
+    "compile": "babel -d ./ ./src/",
     "test": "nyc ava",
-    "test-watch": "ava -w",
-    "compile": "babel -d lib/ src/",
     "lint": "eslint .",
-    "validate": "npm run lint && npm run compile && npm run test",
-    "reportCoverage": "nyc report -r lcovonly && codecov",
+    "codecov": "nyc report -r lcovonly && codecov",
+    "checkdocs": "atomdoc src",
+    "validate": "npm run lint && npm run test && npm run checkdocs",
     "release": "semantic-release pre && npm publish && semantic-release post"
   },
   "repository": {
@@ -43,9 +44,13 @@
     ]
   },
   "dependencies": {
+    "clean-css": "^3.4.19",
     "debug": "^2.2.0",
     "js-yaml": "^3.6.1",
-    "postcss": "^5.2.0"
+    "path-browserify": "0.0.0",
+    "postcss": "^5.2.0",
+    "taborlin-utils": "^0.2.0",
+    "topdoc-utils": "0.0.4"
   },
   "devDependencies": {
     "ava": "^0.16.0",
