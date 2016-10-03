@@ -3,6 +3,7 @@ import test from 'ava';
 import fs from 'fs';
 import path from 'path';
 import topdoc from '../src/';
+import TopdocParser from '../src/topdoc-parser';
 
 function read(file) {
   return fs.readFileSync(file, 'utf8').trim();
@@ -51,5 +52,21 @@ test('Should work even if no sourcePath is set', (t) => {
     .then((result) => {
       output.sourcePath = path.resolve('fixtures/button.css');
       t.deepEqual(clean(result.topdoc), output);
+    });
+});
+
+test('Should be able to TopdocParser as a non plugin.', (t) => {
+  const input = read('./fixtures/button.css');
+  const output = JSON.parse(read('./expected/button.json'));
+  return postcss()
+    .process(input, { from: 'fixtures/button.css' })
+    .then((result) => {
+      const opts = {
+        fileData: {
+          sourcePath: 'fixtures/button.css',
+          template: 'lib/template.jade',
+        } };
+      const topdocParser = new TopdocParser(result.root, result, opts);
+      t.deepEqual(clean(topdocParser.topdoc), output);
     });
 });

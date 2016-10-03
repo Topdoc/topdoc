@@ -81,6 +81,7 @@ export default class TopdocParser {
    */
   constructor(css, results, opts = {}) {
     this.root = css;
+    this.results = results;
     this.includeNodes = opts.includeNodes || false;
     this.commentRegExp = opts.commentRegExp || /^(?:\s)*(topdoc)/;
     opts.fileData = opts.fileData || {};
@@ -91,5 +92,31 @@ export default class TopdocParser {
     document.minified = new CleanCSS({ restructuring: false }).minify(this.root.toString()).styles;
     document.components = _findTopdocComments(this.root, this.commentRegExp, this.includeNodes);
     results.topdoc = document;
+  }
+  /**
+   *  Public: since topdoc is a dynamically generated property this is a getter
+   *  to make it easier to access it.
+   *
+   *  ## Examples
+   *
+   *  ```js
+   *  const input = read('./fixtures/button.css');
+   *  postcss()
+   *    .process(input, { from: 'fixtures/button.css' })
+   *    .then((result) => {
+   *      const opts = {
+   *        fileData: {
+   *          sourcePath: 'fixtures/button.css',
+   *          template: 'lib/template.jade',
+   *      } };
+   *      const topdocParser = new TopdocParser(result.root, result, opts);
+   *      topdocParser.topdoc; // this is the {TopDocument}
+   *    });
+   *  ```
+   *
+   *  Returns {TopDocument}
+   */
+  get topdoc() {
+    return this.results.topdoc;
   }
 }
