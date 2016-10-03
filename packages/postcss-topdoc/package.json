@@ -46,10 +46,8 @@
     "clean-css": "^3.4.19",
     "debug": "^2.2.0",
     "js-yaml": "^3.6.1",
-    "path-browserify": "0.0.0",
     "postcss": "^5.2.0",
-    "taborlin-utils": "^0.2.0",
-    "topdoc-utils": "0.0.4"
+    "taborlin-utils": "^0.2.0"
   },
   "devDependencies": {
     "atomdoc-cli": "^1.0.1",

@@ -2,7 +2,7 @@ import yaml from 'js-yaml';
 import utils from 'taborlin-utils';
 import CleanCSS from 'clean-css';
 
-import Component from './component';
+import TopComponent from './topcomponent';
 import TopDocument from './topdocument';
 
 const debug = require('debug')('postcss-topdoc');
@@ -18,7 +18,7 @@ const debug = require('debug')('postcss-topdoc');
  */
 function _parseTopdocComment(node, regex, includeNodes) {
   const content = node.text.replace(regex, '');
-  const component = new Component(yaml.safeLoad(content));
+  const component = new TopComponent(yaml.safeLoad(content));
   if (includeNodes) component.nodes = [];
   component.css = '';
   return component;
@@ -57,8 +57,8 @@ export default class TopdocParser {
   /**
    *  Public: really just meant to be used as a part of the plugin.
    *
-   *  * `css` {Object} PostCSS root node object.
-   *  * `results` {Object} PostCSS results object.
+   *  * `css` PostCSS {Root} node object.
+   *  * `results` PostCSS {Result} object.
    *  * `opts` (optional) {Object} plugin options.
    *    * `commentRegExp` (optional) {RegExp} used to identify TopDoc comments;
    *      defaults /^(?:\s)*(topdoc)/
@@ -68,6 +68,8 @@ export default class TopdocParser {
    *        Will be used to create `title` if it is not set.
    *      * `sourcePath` (optional) {String} path to the original css file.
    *        Will be used to create `filename` if it is not set.
+   *      * `includeNodes` {Boolean} If `true` the components in the results will
+   *        include an array of the corresponding PostCSS {Node}s as the `nodes` property.
    *
    *  ## Examples
    *

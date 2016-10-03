@@ -29,7 +29,7 @@ var postcss = require('postcss');
 var topdoc = require('postcss-topdoc');
 
 var input = "some css string";
-var opts = {/* postcss-npm options */}
+var opts = {/* postcss-npm options */};
 
 postcss([topdoc(opts)])
   .process(input, { from: 'fixtures/button.css' })
@@ -47,13 +47,182 @@ var input = read('./fixtures/button.css');
 postcss()
   .process(input, { from: 'fixtures/button.css' })
   .then((result) => {
-    const opts = {
-      fileData: {
-        sourcePath: 'fixtures/button.css',
-        template: 'lib/template.jade',
-      }
-    };
+    var opts = {/* postcss-npm options */};
     const topdocParser = new TopdocParser(result.root, result, opts);
-    topdocParser.topdoc; // this is the {TopDocument}
+    console.log(topdocParser.topdoc); // this is the {TopDocument}
   });
+```
+
+## Options
+
+### `includeNodes`
+
+If set to `true` the Components in the TopDocument object will be returned with an array of the corresponding [PostCSS Nodes](http://api.postcss.org/Node.html) as the `nodes` property.
+
+```js
+var TopdocParser = require('postcss-topdoc/lib/topdoc-parser');
+
+var input = read('./fixtures/button.css');
+postcss()
+  .process(input, { from: 'fixtures/button.css' })
+  .then((result) => {
+    var opts = { includeNodes: true };
+    const topdocParser = new TopdocParser(result.root, result, opts);
+    console.log(topdocParser.topdoc.components[0].nodes); // these are the PostCSS {Node}s that correspond to this component.
+  });
+```
+
+### `commentRegExp`
+
+This regex is used to identify which block comments contain Topdoc data to be parsed. It defaults to `/^(?:\s)*(topdoc)/` which matches comments like this:
+
+```css
+/* topdoc
+  name: Button
+  description: A simple button
+  modifiers:
+    :active: Active state
+    .is-active: Simulates an active state on mobile devices
+    :disabled: Disabled state
+    .is-disabled: Simulates a disabled state on mobile devices
+  markup: |
+    <a class="topcoat-button">Button</a>
+    <a class="topcoat-button is-active">Button</a>
+    <a class="topcoat-button is-disabled">Button</a>
+  tags:
+    - desktop
+    - light
+    - mobile
+    - button
+    - quiet
+*/
+```
+
+But if you prefer to not use the keyword `topdoc` feel free to pass your regex to use as the test.
+
+```js
+var TopdocParser = require('postcss-topdoc/lib/topdoc-parser');
+
+var input = read('./fixtures/button.css');
+postcss()
+  .process(input, { from: 'fixtures/button.css' })
+  .then((result) => {
+    var opts = { commentRegExp: /^(?:\s)*(td)/ };
+    const topdocParser = new TopdocParser(result.root, result, opts);
+    console.log(topdocParser.topdoc);
+  });
+```
+
+The above example would match comments that start with `/* td`.
+
+### `fileData`
+
+There is some data that might be needed by the template that isn't defined in the individual components this can be passed to the parser as `fileData` which will all be added as properties of the resultant {TopDocument}.
+
+It is required that it has at least a `title`, `filename`, or `sourcePath`. If given a `sourcePath` and not provided a specific `files` it will use string after the last path separator to create a `filename`, and the `filename` is used to create a `title` property if not included.
+
+```js
+postcss([topdoc({
+  fileData: {
+    sourcePath: 'fixtures/button.css',
+    template: 'lib/template.jade',
+  },
+})])
+  .process(input, { from: 'fixtures/button.css' })
+  .then((result) => {
+    console.log(result.topdoc);
+  });
+```
+
+In the above example the `result.topdoc` will be:
+
+```js
+TopDocument {
+  sourcePath: 'fixtures/button.css',
+  template: 'lib/template.jade',
+  filename: 'button.css',
+  title: 'Button',
+  components: [] // {TopComponent}s here
+}
+```
+
+## Object Types
+
+### {TopdocParser}
+
+Find the definition on [GitHub](https://github.com/GarthDB/postcss-topdoc/blob/master/src/topdoc-parser.js#L56).
+
+#### Properties
+
+* `css` [PostCSS {Node}](http://api.postcss.org/Node.html) root node object.
+* `results` [PostCSS {Result}](http://api.postcss.org/Result.html) object.
+* `opts` (optional) {Object} plugin options.
+  * `commentRegExp` (optional) {RegExp} used to identify TopDoc comments; defaults `/^(?:\s)*(topdoc)/`
+  * `fileData` (optional) {Object} passed through to the template.
+  * `title` (optional) {String} document title.
+  * `filename` (optional) {String} name of the original css file. Will be used to create `title` if it is not set.
+  * `sourcePath` (optional) {String} path to the original css file. Will be used to create `filename` if it is not set.
+  * `includeNodes` {Bool} If `true` the components in the results will include an array of the corresponding PostCSS {Node}s as the `nodes` property.
+* `topdoc` [{TopDocument}](#topdocument) the result of parsing css content with Topdoc comment blocks.
+
+### {TopDocument}
+
+Find the definition on [GitHub](https://github.com/GarthDB/postcss-topdoc/blob/master/src/topdocument.js#L18).
+
+#### Properties
+
+* `title` {String} Title of the project. Can be provided to the constructor, if not PostCSS Topdoc will generate it from `filename`.
+* `filename` {String} name of the css file that contains the component definition. Can be provided to the constructor, if not PostCSS Topdoc will generate it from `sourcePath`.
+* `sourcePath` {String} path to the source of the css file that contains the component definition. Can be provided to the constructor, if not PostCSS Topdoc will try to generate it from the `from` property in the [processOptions](http://api.postcss.org/global.html#processOptions).
+
+### {TopComponent}
+
+Find the definition on [GitHub](https://github.com/GarthDB/postcss-topdoc/blob/master/src/topcomponent.js#L6).
+
+#### Properties
+
+* `name` {String} (required) Components need at least a `name` property.
+* `markup` {String} (optional) If the component data is being used to to generate html style guides, they should have a `markup` property.
+* Anything else.
+
+TopComponents can have any additional properties needed. They are defined as [YAML](http://www.yaml.org/start.html) in a css block comment that matches the [`commentRegExp`](#commentregexp).
+
+Most YAML syntax is pretty straight forward, just make sure to use the `|` when defining multiline strings like `markup`.
+
+```css
+/* topdoc
+  name: Button
+  description: A simple button
+  modifiers:
+    :active: Active state
+    .is-active: Simulates an active state on mobile devices
+    :disabled: Disabled state
+    .is-disabled: Simulates a disabled state on mobile devices
+  markup: |
+    <a class="topcoat-button">Button</a>
+    <a class="topcoat-button is-active">Button</a>
+    <a class="topcoat-button is-disabled">Button</a>
+  tags:
+    - desktop
+    - light
+    - mobile
+    - button
+    - quiet
+*/
+```
+
+Would produce the following result:
+
+```js
+TopComponent {
+  name: 'Button',
+  description: 'A simple button',
+  modifiers:
+   { ':active': 'Active state',
+     '.is-active': 'Simulates an active state on mobile devices',
+     ':disabled': 'Disabled state',
+     '.is-disabled': 'Simulates a disabled state on mobile devices' },
+  markup: '<a class="topcoat-button">Button</a>\n<a class="topcoat-button is-active">Button</a>\n<a class="topcoat-button is-disabled">Button</a>\n',
+  tags: [ 'desktop', 'light', 'mobile', 'button', 'quiet' ],
+  css: 'css string here'
 ```

@@ -40,9 +40,7 @@ export default class TopDocument {
     if (!utils.hasOwnProperties(['title', 'filename', 'sourcePath'], properties, false)) {
       throw new Error('A topdocument has to at least have a title or filename.');
     }
-    Object.keys(properties).forEach((key) => {
-      this[key] = properties[key];
-    });
+    Object.assign(this, properties);
     this.filename = this.filename || _getFilename(this.sourcePath) || undefined;
     this.title = this.title || utils.titlify(this.filename);
     this.components = [];

@@ -3,7 +3,7 @@ import utils from 'taborlin-utils';
 /**
  *  Component Class
  */
-export default class Component {
+export default class TopComponent {
   /**
    *  Public: populates component instance with properties.
    *
