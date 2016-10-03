@@ -1,11 +1,10 @@
 {
   "name": "postcss-topdoc",
-  "version": "0.0.0",
   "description": "Topdoc parser built in PostCSS",
   "main": "lib/",
   "scripts": {
     "prepublish": "npm run compile",
-    "compile": "babel -d ./ ./src/",
+    "compile": "babel -d ./lib/ ./src/",
     "test": "nyc ava",
     "lint": "eslint .",
     "codecov": "nyc report -r lcovonly && codecov",
@@ -15,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/GarthDB/postcss-topdoc.git"
+    "url": "https://github.com/GarthDB/postcss-topdoc.git"
   },
   "keywords": [
     "topdoc",
@@ -53,6 +52,7 @@
     "topdoc-utils": "0.0.4"
   },
   "devDependencies": {
+    "atomdoc-cli": "^1.0.1",
     "ava": "^0.16.0",
     "babel-cli": "^6.14.0",
     "babel-core": "^6.14.0",
