@@ -4,7 +4,7 @@
   "version": "0.4.0",
   "main": "./lib/topdoc",
   "bin": {
-    "topdoc": "./bin/topdoc"
+    "topdoc": "./bin/"
   },
   "scripts": {
     "prepublish": "npm run compile",
@@ -58,7 +58,9 @@
     "semantic-release": "^4.3.5",
     "topdoc-theme": "^0.7.0"
   },
-  "engines": {
-    "node": "*"
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-customizable"
+    }
   }
 }
