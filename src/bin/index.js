@@ -4,62 +4,70 @@ import fs from 'fs';
 import program from 'commander';
 import pkginfo from 'pkginfo';
 import resolve from 'resolve';
+import loadConfig from 'config-attendant';
+import glob from 'glob';
+import postcss from 'postcss';
+import topdoc from 'postcss-topdoc';
 
 pkginfo(module, 'description');
 
-const lib = path.join(path.dirname(fs.realpathSync(__filename)), '../lib');
-const Topdoc = require(`${lib}/topdoc`);
-
 program
   .description(module.exports.description)
-  .option('-s, --source <directory>', 'The css source directory.')
+  .usage('<file>')
   .option('-d, --destination <directory>',
     'The destination directory where the usage guides will be written.')
-  .option('-t, --template <jade file/directory>',
-    'The path to the jade template file.  If it is a directory it will import all the sub files')
+  .option('-t, --template <template directory/package name>',
+    'The path to the template directory or package name.  Resolved using the `resolve` package.')
   .option('-p, --project <title>', 'The title for your project.  Defaults to the directory name.')
   .option('-c, --commentsoff', 'Remove comments from the css in the demo pages')
   .parse(process.argv);
 
-let source = program.source || 'src';
-let destination = program.destination || 'docs';
-let template = program.template || path.resolve(__dirname, '..', 'lib', 'template.jade');
-let projectTitle = program.project || path.basename(process.cwd());
-let templateData = null;
+const options = loadConfig('topdoc', {
+  source: program.args[0] || 'src',
+  destination: program.destination || path.resolve(process.cwd(), 'docs'),
+  // template: program.template || 'topdoc-default-theme',
+  template: program.template || './default-template',
+  templateData: null,
+});
 
-if (fs.existsSync('./package.json')) {
-  const packageJSON = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
-  if (packageJSON.topdoc !== null) {
-    const topdocData = packageJSON.topdoc;
+const template = require(resolve.sync(options.template, { basedir: process.cwd() }));
 
-    source = program.source || topdocData.source || 'src';
-    destination = program.destination || topdocData.destination || 'docs';
-    template = program.template || topdocData.template ||
-      path.resolve(__dirname, '..', 'lib', 'template.jade');
-    if (topdocData && topdocData.templateData) {
-      templateData = topdocData.templateData;
-    } else {
-      projectTitle = program.project || path.basename(process.cwd());
-      templateData = { title: projectTitle };
-    }
+try {
+  const stats = fs.lstatSync(options.source);
+  if (stats.isDirectory()) options.source = `${options.source}/**/*.css`;
+} catch (err) { /* */ }
+
+const pattern = options.source;
+delete options.source;
+
+glob(pattern, {}, (er, cssFiles) => {
+  if (cssFiles.length === 0) {
+    console.error(new Error(`No files match '${options.source}'`));
+    process.exit(1);
   }
-}
-
-
-if (!fs.existsSync(source)) {
-  console.log(`Couldn\'t seem to find a source
-Specify a source with -s, --source <directory>
-`);
-} else {
-  const options = {
-    source,
-    destination,
-    template,
-    templateData,
-  };
-
-  const topdoc = new Topdoc(options);
-  topdoc.generate((() => {
-    console.log(`Generated documentation in ${destination}`);
-  }));
-}
+  Promise.all(cssFiles.map((filepath, index) => {
+    const first = Boolean(index === 0);
+    const opt = Object.assign({}, options, { first });
+    const content = fs.readFileSync(filepath);
+    opt.source = filepath;
+    return postcss([topdoc({ fileData: opt })]).process(content, { from: filepath });
+  })).then((results) => {
+    const files = results.map((result) =>
+      Object.assign({
+        title: result.topdoc.title,
+        filename: result.topdoc.filename,
+        first: result.topdoc.first,
+        current: false,
+      })
+    );
+    if (template.before) {
+      template.before(options.destination);
+    }
+    results.forEach((result, index) => {
+      files.forEach((file, fileIndex) => {
+        file.current = Boolean(index === fileIndex);
+      });
+      template(Object.assign({}, result.topdoc, { files }));
+    });
+  }).catch(console.log);
+});
