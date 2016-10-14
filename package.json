@@ -4,7 +4,7 @@
   "version": "0.4.0",
   "main": "./lib/topdoc",
   "bin": {
-    "topdoc": "./bin/"
+    "topdoc": "./bin/index.js"
   },
   "scripts": {
     "prepublish": "npm run compile",
@@ -35,10 +35,14 @@
   "preferGlobal": "true",
   "dependencies": {
     "commander": "^2.9.0",
-    "jade": "~0.31.2",
+    "config-attendant": "^0.1.0",
+    "fs-extra": "^0.30.0",
+    "glob": "^7.1.0",
+    "mkdirp": "^0.5.1",
     "pkginfo": "^0.4.0",
     "postcss": "^5.2.4",
-    "postcss-topdoc": "0.0.2",
+    "postcss-topdoc": "^0.0.2",
+    "pug": "^2.0.0-beta6",
     "resolve": "^1.1.7"
   },
   "devDependencies": {
@@ -51,6 +55,7 @@
     "babel-preset-es2015": "^6.16.0",
     "babel-register": "^6.16.3",
     "codecov": "^1.0.1",
+    "cz-customizable": "^4.0.0",
     "eslint": "^3.7.0",
     "eslint-config-garthdb": "^0.1.0",
     "nixt": "^0.5.0",
