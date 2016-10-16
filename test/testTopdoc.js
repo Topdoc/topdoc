@@ -2,18 +2,48 @@ import test from 'ava';
 import path from 'path';
 import fs from 'fs-extra';
 import nixt from 'nixt';
+import randomstring from 'randomstring';
 
-const destination = path.resolve(__dirname, 'docs');
+const baseDestination = path.resolve(__dirname, 'docs');
+let destination;
 
 function read(filepath) {
   return fs.readFileSync(filepath, 'utf-8');
 }
 
-test.afterEach(() => {
-  fs.removeSync(destination);
+test.beforeEach(() => {
+  destination = path.resolve(baseDestination, randomstring.generate());
+});
+
+test.after.always(() => {
+  fs.removeSync(baseDestination);
+});
+
+test.cb('should error out if pattern doesn\'t match', t => {
+  fs.ensureDirSync(destination);
+  nixt()
+  .expect((result) => {
+    t.regex(result.stderr, /Error: No files match 'nothing\.css'/);
+  })
+  .run('topdoc nothing.css')
+  .end(t.end);
 });
 
 test.cb('should write basic docs from single file', t => {
+  const newDestination = baseDestination;
+  console.log(path.resolve(__dirname, 'expected', 'button.index.html'));
+  const source = path.resolve(__dirname, 'fixtures', 'button.css');
+  const expected = read(path.resolve(__dirname, 'expected', 'button.index.html'));
+  nixt()
+  .expect(() => {
+    const docFile = read(path.resolve(newDestination, 'index.html'));
+    t.is(docFile.trim(), expected.trim());
+  })
+  .run(`topdoc ${source}`)
+  .end(t.end);
+});
+
+test.cb('should accept new destination location', t => {
   const source = path.resolve(__dirname, 'fixtures', 'button.css');
   const expected = read(path.resolve(__dirname, 'expected', 'button.index.html'));
   nixt()
@@ -21,16 +51,19 @@ test.cb('should write basic docs from single file', t => {
     const docFile = read(path.resolve(destination, 'index.html'));
     t.is(docFile.trim(), expected.trim());
   })
-  .run(`topdoc ${source}`)
+  .run(`topdoc -d ${destination} ${source}`)
   .end(t.end);
 });
 
-test.cb('Error out if pattern doesn\'t match', t => {
+test.cb('should allow for a project title', t => {
+  const source = path.resolve(__dirname, 'fixtures', 'button.css');
   nixt()
-  .expect((result) => {
-    t.regex(result.stderr, /Error: No files match 'nothing\.css'/);
+  .expect(() => {
+    const docFile = read(path.resolve(destination, 'index.html'));
+    console.log(docFile);
+    // t.is(docFile.trim());
   })
-  .run('topdoc nothing.css')
+  .run(`topdoc -p='lalala' ${source}`)
   .end(t.end);
 });
 

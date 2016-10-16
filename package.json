@@ -1,7 +1,7 @@
 {
   "name": "topdoc",
   "description": "Generate usage guides for css",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "./lib/topdoc",
   "bin": {
     "topdoc": "./bin/index.js"
@@ -60,6 +60,7 @@
     "eslint-config-garthdb": "^0.1.0",
     "nixt": "^0.5.0",
     "nyc": "^8.3.0",
+    "randomstring": "^1.1.5",
     "semantic-release": "^4.3.5",
     "topdoc-theme": "^0.7.0"
   },
