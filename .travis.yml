@@ -6,3 +6,4 @@ script:
   - npm run validate
 after_success:
   - npm run codecov
+  - npm run release
