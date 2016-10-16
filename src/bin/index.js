@@ -26,11 +26,15 @@ const options = loadConfig('topdoc', {
   source: program.args[0] || 'src',
   destination: program.destination || path.resolve(process.cwd(), 'docs'),
   // template: program.template || 'topdoc-default-theme',
-  template: program.template || './default-template',
+  template: program.template || false,
   templateData: null,
 });
 
-const template = require(resolve.sync(options.template, { basedir: process.cwd() }));
+const template = (!options.template) ?
+  require(resolve.sync('./default-template', {
+    basedir: path.resolve(__dirname, '..'),
+  })) :
+  require(resolve.sync(options.template, { basedir: process.cwd() }));
 
 try {
   const stats = fs.lstatSync(options.source);
@@ -42,7 +46,7 @@ delete options.source;
 
 glob(pattern, {}, (er, cssFiles) => {
   if (cssFiles.length === 0) {
-    console.error(new Error(`No files match '${options.source}'`));
+    console.error(new Error(`No files match '${pattern}'`));
     process.exit(1);
   }
   Promise.all(cssFiles.map((filepath, index) => {
