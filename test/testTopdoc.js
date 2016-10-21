@@ -31,7 +31,6 @@ test.cb('should error out if pattern doesn\'t match', t => {
 
 test.cb('should write basic docs from single file', t => {
   const newDestination = baseDestination;
-  console.log(path.resolve(__dirname, 'expected', 'button.index.html'));
   const source = path.resolve(__dirname, 'fixtures', 'button.css');
   const expected = read(path.resolve(__dirname, 'expected', 'button.index.html'));
   nixt()

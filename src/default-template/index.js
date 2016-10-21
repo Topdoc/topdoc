@@ -33,8 +33,8 @@ function _replaceExt(npath, ext) {
  *  Returns {String} with replaced extension
  */
 function _copyDependencies(templateDir, destPath) {
-  var filter = /^(?!(.*index\.js|.*\.pug))/; // todo: could pass regex in options?
-  fs.copySync(templateDir, destPath, filter, function(err) {
+  const filter = /^(?!(.*index\.js|.*\.pug))/; // todo: could pass regex in options?
+  fs.copySync(templateDir, destPath, filter, (err) => {
     console.log('[topdoc] Copy failed;', err);
   });
 }
@@ -69,7 +69,13 @@ function defaultTemplate(topDocument) {
     const newFileName = topDocument.first ?
       'index.html' : _replaceExt(topDocument.filename, '.html');
     fs.writeFileSync(path.resolve(topDocument.destination, newFileName), content);
-    console.log('[topdoc template] generated', path.relative(process.cwd(), path.resolve(topDocument.destination, newFileName)));
+    console.log('[topdoc template] generated',
+      path.relative(process.cwd(),
+        path.resolve(topDocument.destination,
+          newFileName
+        )
+      )
+    );
   } catch (err) {
     console.log(err);
   }
@@ -91,9 +97,9 @@ function defaultTemplate(topDocument) {
  *  ```
  */
 defaultTemplate.before = (options) => {
-  if (options.clobber && options.destination){
+  if (options.clobber && options.destination) {
     console.log('[topdoc template.before] because you said so, clobbering', options.destination);
-    fs.removeSync(options.destination, function (err) {
+    fs.removeSync(options.destination, (err) => {
       console.log('[topdoc template.before] cowardly gave up trying to rm', options.destination);
       console.log('[topdoc template.before] Error:', err);
     });
@@ -116,8 +122,8 @@ defaultTemplate.before = (options) => {
  *  ```
  */
 defaultTemplate.after = (options) => {
-  var destPath = path.resolve(options.destination);
-  var templateDir = path.dirname(options.template);
+  const destPath = path.resolve(options.destination);
+  const templateDir = path.dirname(options.template);
   console.log('[topdoc template.after] trying to copy dependencies');
   console.log('[topdoc template.after] something like cp -r', templateDir);
   console.log('[topdoc template.after] copying mostly everything to', destPath);
