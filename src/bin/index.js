@@ -23,7 +23,8 @@ program
   .option('-c, --commentsoff', 'remove comments from the css in the demo pages.')
   .option('-cl, --clobber <truthy> [default: false]', 'tries to rm destination before running.')
   // .option('-s, --source',
-  // 'WARNING: The switch for source is deprecated. Pass source as the first argument, or use .topdocrc or package.json to configure.')
+  // 'WARNING: The switch for source is deprecated. Pass source as the first argument,
+  // or use .topdocrc or package.json to configure.')
   // .
   .version(module.exports.version)
   .parse(process.argv);
@@ -34,7 +35,7 @@ const options = loadConfig('topdoc', {
   template: program.template || false,
   templateData: null,
   clobber: program.clobber || false,
-  version: module.exports.version
+  version: module.exports.version,
 });
 
 const template = (!options.template) ?
