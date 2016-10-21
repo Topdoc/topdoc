@@ -9,25 +9,32 @@ import glob from 'glob';
 import postcss from 'postcss';
 import topdoc from 'postcss-topdoc';
 
-pkginfo(module, 'description');
+pkginfo(module, 'description', 'version');
 
 program
   .description(module.exports.description)
-  .usage('<file>')
-  .option('-d, --destination <directory>',
-    'The destination directory where the usage guides will be written.')
-  .option('-t, --template <template directory/package name>',
-    'The path to the template directory or package name.  Resolved using the `resolve` package.')
-  .option('-p, --project <title>', 'The title for your project.  Defaults to the directory name.')
-  .option('-c, --commentsoff', 'Remove comments from the css in the demo pages')
+  .usage('[<file> | <path> [default: src]] [options]')
+  .option('-d, --destination <directory> [default: docs]',
+    'directory where the usage guides will be written.')
+  .option('-t, --template <directory>|<package name>',
+    'path to template directory or package name.\n' +
+      '           Note: Template argument is resolved using the `resolve` package.')
+  .option('-p, --project <title> [default: cwd name]', 'title for your project.')
+  .option('-c, --commentsoff', 'remove comments from the css in the demo pages.')
+  .option('-cl, --clobber <truthy> [default: false]', 'tries to rm destination before running.')
+  // .option('-s, --source',
+  // 'WARNING: The switch for source is deprecated. Pass source as the first argument, or use .topdocrc or package.json to configure.')
+  // .
+  .version(module.exports.version)
   .parse(process.argv);
 
 const options = loadConfig('topdoc', {
   source: program.args[0] || 'src',
   destination: program.destination || path.resolve(process.cwd(), 'docs'),
-  // template: program.template || 'topdoc-default-theme',
   template: program.template || false,
   templateData: null,
+  clobber: program.clobber || false,
+  version: module.exports.version
 });
 
 const template = (!options.template) ?
@@ -39,7 +46,7 @@ const template = (!options.template) ?
 try {
   const stats = fs.lstatSync(options.source);
   if (stats.isDirectory()) options.source = `${options.source}/**/*.css`;
-} catch (err) { /* */ }
+} catch (err) { /* oh shzt */ }
 
 const pattern = options.source;
 delete options.source;
@@ -65,7 +72,10 @@ glob(pattern, {}, (er, cssFiles) => {
       })
     );
     if (template.before) {
-      template.before(options.destination);
+      template.before(options);
+    }
+    if (template.after) {
+      template.after(options);
     }
     results.forEach((result, index) => {
       files.forEach((file, fileIndex) => {
