@@ -32,6 +32,23 @@
   "bugs": {
     "url": "https://github.com/topcoat/topdoc/issues"
   },
+  "ava": {
+    "files": [
+      "test/*.js"
+    ],
+    "require": [
+      "babel-register"
+    ],
+    "babel": "inherit"
+  },
+  "nyc": {
+    "include": [
+      "bin/index.js"
+    ],
+    "require": [
+      "babel-register"
+    ]
+  },
   "preferGlobal": "true",
   "dependencies": {
     "commander": "^2.9.0",
@@ -43,10 +60,11 @@
     "postcss": "^5.2.4",
     "postcss-topdoc": "^0.0.2",
     "pug": "^2.0.0-beta6",
-    "resolve": "^1.1.7"
+    "resolve": "^1.1.7",
+    "topdoc-default-template": "^0.1.0"
   },
   "devDependencies": {
-    "atomdoc-cli": "^1.0.1",
+    "atomdoc-cli": "^1.0.3",
     "ava": "^0.16.0",
     "babel-cli": "^6.16.0",
     "babel-core": "^6.17.0",
