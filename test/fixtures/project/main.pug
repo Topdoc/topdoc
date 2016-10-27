@@ -6,6 +6,7 @@ html(lang="en")
   body
     head
       h1=document.title
+      h2 Poop
       nav: ul
         each file in document.files
           if file.current
@@ -23,4 +24,5 @@ html(lang="en")
           .details=component.details
           .component-demo!=component.markup
           pre.html=component.markup
-          pre.css=component.css
+          pre.css
+            code=component.css
