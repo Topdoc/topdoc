@@ -22,3 +22,15 @@ ${path.relative(cwd, destination)}/index.html`);
   .run(`topdoc --destination ${destination}`)
   .end(t.end);
 });
+
+test.cb('should build docs with short name flag overridding rc file', t => {
+  const destination = path.resolve(baseDestination, randomstring.generate());
+  nixt()
+  .cwd(cwd)
+  .expect((result) => {
+    t.is(result.stdout, `because you said so, clobbering ${destination}
+${path.relative(cwd, destination)}/index.html`);
+  })
+  .run(`topdoc -d ${destination}`)
+  .end(t.end);
+});

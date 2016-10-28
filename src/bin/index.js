@@ -5,6 +5,7 @@ import program from 'commander';
 import pkginfo from 'pkginfo';
 import resolve from 'resolve';
 import loadConfig from 'config-attendant';
+import argParser from 'commander-rc-adapter';
 import glob from 'glob';
 import postcss from 'postcss';
 import topdoc from 'postcss-topdoc';
@@ -71,7 +72,7 @@ const options = loadConfig('topdoc', {
   version: module.exports.version,
   ignoreAssets: program.ignoreAssets,
   assetDirectory: program.assetDirectory || false,
-});
+}, argParser(program));
 
 const template = require(resolve.sync(options.template, { basedir: process.cwd() }));
 if (options.assetDirectory && !path.isAbsolute(options.assetDirectory)) {
