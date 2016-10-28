@@ -1,10 +1,10 @@
-#Topdoc [![Build Status](https://travis-ci.org/topcoat/topdoc.png)](https://travis-ci.org/topcoat/topdoc)
+# Topdoc [![Build Status](https://travis-ci.org/topcoat/topdoc.png)](https://travis-ci.org/topcoat/topdoc)
 
 [![NPM](https://nodei.co/npm/topdoc.png)](https://nodei.co/npm/topdoc)
 
 A tool for generating usage guides for css.
 
-##Topdoc Comment Specification
+## Topdoc Comment Specification
 
 Topdoc uses css-parse to divide asunder your css document and find all the relevant Topdoc comments.
 
@@ -58,7 +58,7 @@ The following are recommend and/or required fields:
 
 Topdoc assumes everything between two Topdoc comments, and everything after the last Topdoc comment, is a component.  Put anything that isn't a component (general styles) above the first Topdoc comment.
 
-##Installation
+## Installation
 
 Install with npm.  It's meant to be command line tool, so you probably want to install it globally (with `-g`).
 
@@ -66,7 +66,7 @@ Install with npm.  It's meant to be command line tool, so you probably want to i
 npm install -g topdoc
 ```
 
-##Help
+## Help
 
 The output of the help command.
 
@@ -79,9 +79,9 @@ The output of the help command.
 -V, --version                                    output the version number
 ```
 
-##Command Line Options
+## Command Line Options
 
-###Source
+### Source
 
 Specify a source directory with `-s` or `--source`.  Defaults to `src/`.
 
@@ -89,7 +89,7 @@ Specify a source directory with `-s` or `--source`.  Defaults to `src/`.
 topdoc -s release/css/
 ```
 
-###Destination
+### Destination
 
 Specify a destination with `-d` or `--destination`.  Defaults to `docs/`.
 
@@ -97,7 +97,7 @@ Specify a destination with `-d` or `--destination`.  Defaults to `docs/`.
 topdoc -d topdocs/
 ```
 
-###Template
+### Template
 
 Specify a template with `-t` or `--template`.  A default template is included in Topdoc if one is not provided.
 
@@ -119,7 +119,7 @@ This includes npm installed templates
 topdoc -t node_modules/topdoc-theme
 ```
 
-###Project Title
+### Project Title
 
 The project title will be passed through to the jade template file.
 
@@ -132,12 +132,14 @@ In the jade file it is `project.title`:
 ```jade
 title=project.title
 ```
+
 yeilds:
+
 ```html
 <title>Awesome</title>
 ```
 
-##package.json Configuration
+## `package.json` Configuration
 
 All the options can be configured in the package.json file.  This is super helpful if you are always using the same configuration.  It will look in the package.json file if it exists, but can be overridden by the command line options.
 
@@ -166,7 +168,7 @@ Also, additional data can be passed through to the jade template.  Below is an e
       "homeURL": "http://topcoat.io",
       "siteNav": [
         {
-          "url": "http://www.garthdb.com", 
+          "url": "http://www.garthdb.com",
           "text": "Usage Guidelines"
         },
         {
@@ -182,21 +184,25 @@ Also, additional data can be passed through to the jade template.  Below is an e
   }
 }
 ```
-In the jade template the data is accessible using `tesmplateData`:
+
+In the jade template the data is accessible using `templateData`:
 
 ```jade
 p=templateData.subtitle
 ```
+
 yeilds:
+
 ```html
 <p>CSS for clean and fast web apps</p>
 ```
 
-##Template
+## Template
 
 The jade template has data passed through by default:
 
-####Document Object
+### Document Object
+
 The `document` object contains relevant information about just the current document being generated below is an example:
 
 ```json
@@ -224,23 +230,28 @@ The `document` object contains relevant information about just the current docum
   ]
 }
 ```
-####Nav Object
+
+### Nav Object
+
 The `nav` object contains names and urls to all the generated html files.  In the jade template this can utilized to create a navigation to the other pages.
+
 ```jade
 nav.site: ul
-	- each item in nav
-		- if(item.url == document.url)
-			li.selected: a(href=item.url)=item.text
-		- else
-			li: a(href=item.url)=item.text
+  - each item in nav
+    - if(item.url == document.url)
+      li.selected: a(href=item.url)=item.text
+    - else
+      li: a(href=item.url)=item.text
 ```
 
-####Project Object
+### Project Object
+
 The `project` object contains relevant project information.  Currently it only contains the `title` property. (passed through the command line `-p` option, or through the package.json information).
 
 ```jade
 title=project.title
 ```
 
-####TemplateData Object
+### TemplateData Object
+
 As mentioned above, additional data can be passed through to the template in the package.json file.  This is accessible in the template as the `templateData` object.  See the example above.
