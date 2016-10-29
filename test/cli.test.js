@@ -129,6 +129,21 @@ test.cb('should ignore assets when specified', t => {
   .end(t.end);
 });
 
+test.cb('should ignore absolute assets when specified', t => {
+  const destination = path.resolve(baseDestination, randomstring.generate());
+  const source = path.resolve(__dirname, 'fixtures', 'button.css');
+  const assetDirectory = path.resolve(__dirname, 'fixtures', 'template');
+  const ignore = path.resolve(assetDirectory, 'index.js');
+  nixt()
+  .expect(() => {
+    t.throws(() => {
+      read(path.resolve(destination, 'index.js'));
+    });
+  })
+  .run(`topdoc ${source} -d ${destination} -a ${assetDirectory} -i ${ignore}`)
+  .end(t.end);
+});
+
 test.cb('should ignore all assets when asset directory is false', t => {
   const destination = path.resolve(baseDestination, randomstring.generate());
   const source = path.resolve(__dirname, 'fixtures', 'button.css');
@@ -168,5 +183,17 @@ test.cb('should clobber docs when flag is included', t => {
     });
   })
   .run(`topdoc ${source}  -d ${destination} -c`)
+  .end(t.end);
+});
+
+test.cb('should output json stdout upon request', t => {
+  const source = path.resolve(__dirname, 'fixtures', 'button.css');
+  const expected = JSON.parse(read(path.resolve(__dirname, 'expected', 'button.topdoc.json')));
+  nixt()
+  .expect((results) => {
+    const result = JSON.parse(results.stdout);
+    t.deepEqual(result, expected);
+  })
+  .run(`topdoc ${source} -s`)
   .end(t.end);
 });

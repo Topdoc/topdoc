@@ -41,6 +41,7 @@ program
   .option('-d, --destination <directory> [default: docs]',
     `directory where the usage guides will be written.
     Like all the options, source can be definied in the config or package.json file.`)
+  .option('-s, --stdout', 'outputs the parsed topdoc information as json in the console.', true)
   .option('-t, --template <directory> | <npm-package-name> [default: topdoc-default-template]',
     `path to template directory or package name.
     Note: Template argument is resolved using the 'resolve' package.`, 'topdoc-default-template')
@@ -67,6 +68,7 @@ const options = loadConfig('topdoc', {
   version: module.exports.version,
   ignoreAssets: program.ignoreAssets,
   assetDirectory: program.assetDirectory || false,
+  stdout: program.stdout || false,
 }, argParser(program));
 
 const template = require(resolve.sync(options.template, { basedir: process.cwd() }));
@@ -185,6 +187,23 @@ glob(pattern, {}, (er, cssFiles) => {
         current: false,
       })
     );
+    if (options.stdout) {
+      results.forEach((result) => {
+        delete result.topdoc.ignoreAssets;
+        delete result.topdoc.version;
+        delete result.topdoc.assetDirectory;
+        delete result.topdoc.clobber;
+        delete result.topdoc.stdout;
+        delete result.topdoc._;
+        delete result.topdoc.packageFile;
+        delete result.topdoc.first;
+        delete result.topdoc.sourcePath;
+        delete result.topdoc.destination;
+        if (!result.topdoc.templateData) delete result.topdoc.templateData;
+        console.log(JSON.stringify(result.topdoc, null, 2));
+      });
+      process.exit(1);
+    }
     if (options.clobber) {
       _clobber(options.destination);
     }
