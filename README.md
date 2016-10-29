@@ -2,35 +2,97 @@
 
 [![NPM](https://nodei.co/npm/topdoc.png)](https://nodei.co/npm/topdoc)
 
-A tool for generating usage guides for css.
+A tool for generating usage and styles guides for html components using css block comments.
 
-## Topdoc Comment Specification
+## Quick Intro
 
-Topdoc uses css-parse to divide asunder your css document and find all the relevant Topdoc comments.
+By adding a Topdoc block to your css you can describe an html/css component and that information can be used to generate a styleguide.
 
-Below is an example of a Topdoc comment, take a look, and then read the explanation under it.
+Here's an example component:
 
 ```css
 /* topdoc
-  name: Button
-  description: A simple button
-  modifiers:
-    :active: Active state
-    .is-active: Simulates an active state on mobile devices
-    :disabled: Disabled state
-    .is-disabled: Simulates a disabled state on mobile devices
-  markup:
-    <a class="topcoat-button">Button</a>
-    <a class="topcoat-button is-active">Button</a>
-    <a class="topcoat-button is-disabled">Button</a>
-  example: http://codepen.io/
-  tags:
-    - desktop
-    - light
-    - mobile
-    - button
-    - quiet
-  blarg: very true
+name: Select
+description: a dropdown select
+markup: |
+  <select name="select">
+    <option value="value1">Value 1</option>
+    <option value="value2" selected>Value 2</option>
+    <option value="value3">Value 3</option>
+  </select>
+tags:
+  - desktop
+  - mobile
+  - select
+*/
+.select {
+  /* all your css junk here */
+}
+```
+
+### Why create another css block comment format?
+
+Topdoc was originally created for [Topcoat](http://topcoat.io) and the one feature missing from other generators was support for any and all custom properties. Topdoc is extremely tolerant of custom properties, it just passes them to the template which defines what to do with it.
+
+The only required properties are `name` and `markup`, other than that, use whatever you need.
+
+## Installation
+
+Install with npm.  It's meant to be command line tool, so you probably want to install it globally (with `-g`).
+
+```sh
+npm install -g topdoc
+```
+
+You can also use it as a npm script without install it globally. Super helpful for automating your styleguide building:
+
+```sh
+npm install --save-dev topdoc
+```
+
+In your `package.json` file use a script to call the topdoc cli too:
+
+```json
+"scripts": {
+  "docs": "topdoc css/main.css"
+}
+```
+
+With it setup you can then run it from the command line using:
+
+```sh
+npm run docs
+```
+
+## Usage
+
+### Comment Format
+
+Topdoc uses [PostCSS](http://postcss.org/) to divide asunder your css document and find all the relevant component information.
+
+Below is an example of a Topdoc comment.
+
+```css
+/* topdoc
+name: Button
+description: A simple button
+modifiers:
+  :active: Active state
+  .is-active: Simulates an active state on mobile devices
+  :disabled: Disabled state
+  .is-disabled: Simulates a disabled state on mobile devices
+markup: |
+  <a class="topcoat-button">Button</a>
+  <a class="topcoat-button is-active">Button</a>
+  <a class="topcoat-button is-disabled">Button</a>
+example: http://codepen.io/
+tags:
+  - desktop
+  - light
+  - mobile
+  - button
+  - quiet
+blarg: very true
 */
 .topcoat-button,
 .topcoat-button--quiet,
@@ -38,10 +100,11 @@ Below is an example of a Topdoc comment, take a look, and then read the explanat
 .topcoat-button--large--quiet,
 .topcoat-button--cta,
 .topcoat-button--large--cta {
-/* all your css junk here */
+  /* all your css junk here */
+}
 ```
 
-Topdoc comments must start with `topdoc` on the first comment line, it makes it quick and easy to identify from other comments.
+Topdoc comments are identified by the `topdoc` keyword on the first comment line.
 
 The rest of the data uses a [YAML](http://www.yaml.org/) friendly syntax.
 
@@ -52,19 +115,26 @@ The following are recommend and/or required fields:
 * `name` (required): The full name of the component.  Feel free to use spaces, punctuation, etc (name: Sir Button III, esq.)
 * `description`: Something more descriptive then the title alone.
 * `modifiers`: These can be pseudo classes, or addition rules applied to the component. This must be a [YAML mapping](http://yaml4r.sourceforge.net/doc/page/collections_in_yaml.htm) (`*modifier*:*description*`) which becomes a js hash
-* `markup` (required): This is the magic; it's the html that will be used to display the component in the docs.
+* `markup` (required): This is the magic; it's the html that will be used to display the component in the docs. As most markup fields are long, make sure to use the `|` for multiline values.
+  ```css
+  /* topdoc
+  name: Button
+  markup: |
+    <a class="topcoat-button">Button</a>
+    <a class="topcoat-button is-active">Button</a>
+    <a class="topcoat-button is-disabled">Button</a>
+  */
+  ```
 * `tags`: Just some obligatory metadata.
 * `blarg`: Since Topdoc uses a flexible YAML syntax, feel free to add any additional custom data you might need for your template.
 
+### Components
+
 Topdoc assumes everything between two Topdoc comments, and everything after the last Topdoc comment, is a component.  Put anything that isn't a component (general styles) above the first Topdoc comment.
 
-## Installation
+However, the idea of css components is pretty loose because it is rare to have all the required styles for a component in one place.
 
-Install with npm.  It's meant to be command line tool, so you probably want to install it globally (with `-g`).
-
-```bash
-npm install -g topdoc
-```
+Originally Topdoc was designed to split up the css into components to then use that css in the styleguild to show as a snippet, but honestly that snippet wasn't enough to make the component by itself so it really is only interesting as reference.
 
 ## Help
 
