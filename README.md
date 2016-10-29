@@ -152,6 +152,7 @@ $ topdoc --help
     -h, --help                                                                          output usage information
     -d, --destination <directory> [default: docs]                                       directory where the usage guides will be written.
         Like all the options, source can be definied in the config or package.json file.
+    -s, --stdout                                                                        outputs the parsed topdoc information as json in the console.
     -t, --template <directory> | <npm-package-name> [default: topdoc-default-template]  path to template directory or package name.
         Note: Template argument is resolved using the 'resolve' package.
     -p, --project <title> [default: <cwd name>]                                         title for your project.
