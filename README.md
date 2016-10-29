@@ -1,6 +1,6 @@
-# Topdoc [![Build Status](https://travis-ci.org/topcoat/topdoc.png)](https://travis-ci.org/topcoat/topdoc)
+# Topdoc [![Build Status](https://travis-ci.org/topcoat/topdoc.svg?branch=master)](https://travis-ci.org/topcoat/topdoc) [![codecov](https://codecov.io/gh/topcoat/topdoc/branch/master/graph/badge.svg)](https://codecov.io/gh/topcoat/topdoc) [![Dependency Status](https://david-dm.org/topcoat/topdoc.svg)](https://david-dm.org/topcoat/topdoc) [![npm version](https://badge.fury.io/js/topdoc.svg)](https://badge.fury.io/js/topdoc)
 
-[![NPM](https://nodei.co/npm/topdoc.png)](https://nodei.co/npm/topdoc)
+---
 
 A tool for generating usage and styles guides for html components using css block comments.
 
@@ -140,16 +140,30 @@ Originally Topdoc was designed to split up the css into components to then use t
 
 The output of the help command.
 
-```bash
--h, --help                                       output usage information
--s, --source <directory>                         The css source directory.
--d, --destination <directory>                    The destination directory where the usage guides will be written.
--t, --template <jade file/directory>             The path to the jade template file.  If it is a directory it will import all the sub files.
--p. --project <title>                            The title for your project.  Defaults to the directory name.
--V, --version                                    output the version number
+```sh
+$ topdoc --help
+
+  Usage: topdoc topdoc [<css-file> | <directory> [default: src]] [options]
+
+  Generate usage guides for css
+
+  Options:
+
+    -h, --help                                                                          output usage information
+    -d, --destination <directory> [default: docs]                                       directory where the usage guides will be written.
+        Like all the options, source can be definied in the config or package.json file.
+    -t, --template <directory> | <npm-package-name> [default: topdoc-default-template]  path to template directory or package name.
+        Note: Template argument is resolved using the 'resolve' package.
+    -p, --project <title> [default: <cwd name>]                                         title for your project.
+    -c, --clobber                                                                       Deletes destination directory before running.
+    -i, --ignore-assets [<file> | <list of files>]                                      A file or comma delimeted list of files in the asset directory that should be
+        ignored when copying them over.
+    -a, --asset-directory <path>                                                        Path to directory of assets to copy to destination. Defaults to template directory.
+        Set to false to not copy any assets.
+    -V, --version                                                                       output the version number
 ```
 
-## Command Line Options
+## Command Line
 
 ### Source
 

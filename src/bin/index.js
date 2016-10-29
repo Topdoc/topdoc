@@ -37,26 +37,21 @@ function _valOrFalse(val) {
 
 program
   .description(module.exports.description)
-  .usage('[<file> | <path> [default: src]] [options]')
+  .usage('topdoc [<css-file> | <directory> [default: src]] [options]')
   .option('-d, --destination <directory> [default: docs]',
-    'directory where the usage guides will be written.')
-  .option('-t, --template <directory>|<package name>',
+    `directory where the usage guides will be written.
+    Like all the options, source can be definied in the config or package.json file.`)
+  .option('-t, --template <directory> | <npm-package-name> [default: topdoc-default-template]',
     `path to template directory or package name.
-    Note: Template argument is resolved using the \`resolve\` package.`, 'topdoc-default-template')
-  .option('-p, --project <title> [default: cwd name]', 'title for your project.')
-  // .option('-c, --commentsoff', 'remove comments from the css in the demo pages.')
-  // TODO add this functionality.
-  .option('-c, --clobber', 'tries to rm destination before running.', true)
+    Note: Template argument is resolved using the 'resolve' package.`, 'topdoc-default-template')
+  .option('-p, --project <title> [default: <cwd name>]', 'title for your project.')
+  .option('-c, --clobber', 'Deletes destination directory before running.', true)
   .option('-i, --ignore-assets [<file> | <list of files>]',
     `A file or comma delimeted list of files in the asset directory that should be
     ignored when copying them over.`, _list, [/^\./, /\.pug/, /\.jade/, '/**/*.json'])
   .option('-a, --asset-directory <path>',
     `Path to directory of assets to copy to destination. Defaults to template directory.
     Set to false to not copy any assets.`, _valOrFalse, true)
-  // .option('-s, --source',
-  // 'WARNING: The switch for source is deprecated. Pass source as the first argument,
-  // or use .topdocrc or package.json to configure.')
-  // .
   .version(module.exports.version)
   .parse(process.argv);
 
