@@ -192,6 +192,7 @@ test.cb('should output json stdout upon request', t => {
   nixt()
   .expect((results) => {
     const result = JSON.parse(results.stdout);
+    delete result.source;
     t.deepEqual(result, expected);
   })
   .run(`topdoc ${source} -s`)
