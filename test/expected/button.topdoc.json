@@ -1,7 +1,6 @@
 {
   "title": "Button",
   "template": "topdoc-default-template",
-  "source": "/Users/garthdb/Topcoat/Topdoc/topdoc/test/fixtures/button.css",
   "filename": "button.css",
   "components": [
     {
