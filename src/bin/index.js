@@ -50,9 +50,9 @@ program
   .option('-i, --ignore-assets [<file> | <list of files>]',
     `A file or comma delimeted list of files in the asset directory that should be
     ignored when copying them over.`, _list, [/^\./, /\.pug/, /\.jade/, '/**/*.json'])
-  .option('-a, --asset-directory <path>',
+  .option('-a, --asset-directory [path]',
     `Path to directory of assets to copy to destination. Defaults to template directory.
-    Set to false to not copy any assets.`, _valOrFalse, true)
+    Set to false to not copy any assets.`, _valOrFalse)
   .version(module.exports.version)
   .parse(process.argv);
 

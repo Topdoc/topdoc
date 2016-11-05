@@ -11,7 +11,7 @@ function read(filepath) {
 }
 
 test.after.always(() => {
-  fs.removeSync(baseDestination);
+  // fs.removeSync(baseDestination);
 });
 
 test.cb('should error out if pattern doesn\'t match', t => {
