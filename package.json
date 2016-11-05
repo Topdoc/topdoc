@@ -62,7 +62,7 @@
     "postcss-topdoc": "^0.0.2",
     "pug": "^2.0.0-beta6",
     "resolve": "^1.1.7",
-    "topdoc-default-template": "^0.1.0"
+    "topdoc-default-template": "^0.1.1"
   },
   "devDependencies": {
     "atomdoc-cli": "^1.0.3",
