@@ -169,7 +169,6 @@ delete options.source;
 
 glob(pattern, {}, (er, cssFiles) => {
   if (cssFiles.length === 0) {
-    console.log('no files');
     console.error(new Error(`No files match '${pattern}'`));
     process.exit(1);
   }
