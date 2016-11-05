@@ -46,10 +46,11 @@ program
     `path to template directory or package name.
     Note: Template argument is resolved using the 'resolve' package.`, 'topdoc-default-template')
   .option('-p, --project <title> [default: <cwd name>]', 'title for your project.')
-  .option('-c, --clobber', 'Deletes destination directory before running.', true)
+  .option('-c, --clobber', 'Deletes destination directory before running.')
   .option('-i, --ignore-assets [<file> | <list of files>]',
     `A file or comma delimeted list of files in the asset directory that should be
-    ignored when copying them over.`, _list, [/^\./, /^node_modules/, /\.pug/, /\.jade/, '/**/*.json'])
+    ignored when copying them over.`, _list,
+    [/^\./, /^node_modules/, /\.pug/, /\.jade/, '/**/*.json'])
   .option('-a, --asset-directory [path]',
     `Path to directory of assets to copy to destination. Defaults to template directory.
     Set to false to not copy any assets.`, _valOrFalse)
