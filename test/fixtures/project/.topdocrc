@@ -3,6 +3,7 @@
   "source": "button.css",
   "destination": "demo",
   "ignoreAssets": [".topdocrc", "package.json"],
+  "poop": "yup",
   "assetDirectory": "passets",
   "pugFile": "main.pug",
   "clobber": true
