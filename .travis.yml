@@ -1,3 +1,9 @@
 language: node_js
-node_js:
-  - "0.10"
+node_js: "6"
+before_script:
+  - npm link
+script:
+  - npm run validate
+after_success:
+  - npm run codecov
+  # - npm run release
