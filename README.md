@@ -1,36 +1,98 @@
-#Topdoc [![Build Status](https://travis-ci.org/topcoat/topdoc.png)](https://travis-ci.org/topcoat/topdoc)
+# Topdoc [![Build Status](https://travis-ci.org/topcoat/topdoc.svg?branch=master)](https://travis-ci.org/topcoat/topdoc) [![codecov](https://codecov.io/gh/topcoat/topdoc/branch/master/graph/badge.svg)](https://codecov.io/gh/topcoat/topdoc) [![Dependency Status](https://david-dm.org/topcoat/topdoc.svg)](https://david-dm.org/topcoat/topdoc) [![npm version](https://badge.fury.io/js/topdoc.svg)](https://badge.fury.io/js/topdoc)
 
-[![NPM](https://nodei.co/npm/topdoc.png)](https://nodei.co/npm/topdoc)
+---
 
-A tool for generating usage guides for css.
+A tool for generating usage and styles guides for html components using css block comments.
 
-##Topdoc Comment Specification
+## Quick Intro
 
-Topdoc uses css-parse to divide asunder your css document and find all the relevant Topdoc comments.
+By adding a Topdoc block to your css you can describe an html/css component and that information can be used to generate a styleguide.
 
-Below is an example of a Topdoc comment, take a look, and then read the explanation under it.
+Here's an example component:
 
 ```css
 /* topdoc
-  name: Button
-  description: A simple button
-  modifiers:
-    :active: Active state
-    .is-active: Simulates an active state on mobile devices
-    :disabled: Disabled state
-    .is-disabled: Simulates a disabled state on mobile devices
-  markup:
-    <a class="topcoat-button">Button</a>
-    <a class="topcoat-button is-active">Button</a>
-    <a class="topcoat-button is-disabled">Button</a>
-  example: http://codepen.io/
-  tags:
-    - desktop
-    - light
-    - mobile
-    - button
-    - quiet
-  blarg: very true
+name: Select
+description: a dropdown select
+markup: |
+  <select name="select">
+    <option value="value1">Value 1</option>
+    <option value="value2" selected>Value 2</option>
+    <option value="value3">Value 3</option>
+  </select>
+tags:
+  - desktop
+  - mobile
+  - select
+*/
+.select {
+  /* all your css junk here */
+}
+```
+
+### Why create another css block comment format?
+
+Topdoc was originally created for [Topcoat](http://topcoat.io) and the one feature missing from other generators was support for any and all custom properties. Topdoc is extremely tolerant of custom properties, it just passes them to the template which defines what to do with it.
+
+The only required properties are `name` and `markup`, other than that, use whatever you need.
+
+## Installation
+
+Install with npm.  It's meant to be command line tool, so you probably want to install it globally (with `-g`).
+
+```sh
+npm install -g topdoc
+```
+
+You can also use it as a npm script without install it globally. Super helpful for automating your styleguide building:
+
+```sh
+npm install --save-dev topdoc
+```
+
+In your `package.json` file use a script to call the topdoc cli too:
+
+```json
+"scripts": {
+  "docs": "topdoc css/main.css"
+}
+```
+
+With it setup you can then run it from the command line using:
+
+```sh
+npm run docs
+```
+
+## Usage
+
+### Comment Format
+
+Topdoc uses [PostCSS](http://postcss.org/) to divide asunder your css document and find all the relevant component information.
+
+Below is an example of a Topdoc comment.
+
+```css
+/* topdoc
+name: Button
+description: A simple button
+modifiers:
+  :active: Active state
+  .is-active: Simulates an active state on mobile devices
+  :disabled: Disabled state
+  .is-disabled: Simulates a disabled state on mobile devices
+markup: |
+  <a class="topcoat-button">Button</a>
+  <a class="topcoat-button is-active">Button</a>
+  <a class="topcoat-button is-disabled">Button</a>
+example: http://codepen.io/
+tags:
+  - desktop
+  - light
+  - mobile
+  - button
+  - quiet
+blarg: very true
 */
 .topcoat-button,
 .topcoat-button--quiet,
@@ -38,10 +100,11 @@ Below is an example of a Topdoc comment, take a look, and then read the explanat
 .topcoat-button--large--quiet,
 .topcoat-button--cta,
 .topcoat-button--large--cta {
-/* all your css junk here */
+  /* all your css junk here */
+}
 ```
 
-Topdoc comments must start with `topdoc` on the first comment line, it makes it quick and easy to identify from other comments.
+Topdoc comments are identified by the `topdoc` keyword on the first comment line.
 
 The rest of the data uses a [YAML](http://www.yaml.org/) friendly syntax.
 
@@ -52,36 +115,58 @@ The following are recommend and/or required fields:
 * `name` (required): The full name of the component.  Feel free to use spaces, punctuation, etc (name: Sir Button III, esq.)
 * `description`: Something more descriptive then the title alone.
 * `modifiers`: These can be pseudo classes, or addition rules applied to the component. This must be a [YAML mapping](http://yaml4r.sourceforge.net/doc/page/collections_in_yaml.htm) (`*modifier*:*description*`) which becomes a js hash
-* `markup` (required): This is the magic; it's the html that will be used to display the component in the docs.
+* `markup` (required): This is the magic; it's the html that will be used to display the component in the docs. As most markup fields are long, make sure to use the `|` for multiline values.
+  ```css
+  /* topdoc
+  name: Button
+  markup: |
+    <a class="topcoat-button">Button</a>
+    <a class="topcoat-button is-active">Button</a>
+    <a class="topcoat-button is-disabled">Button</a>
+  */
+  ```
 * `tags`: Just some obligatory metadata.
 * `blarg`: Since Topdoc uses a flexible YAML syntax, feel free to add any additional custom data you might need for your template.
 
+### Components
+
 Topdoc assumes everything between two Topdoc comments, and everything after the last Topdoc comment, is a component.  Put anything that isn't a component (general styles) above the first Topdoc comment.
 
-##Installation
+However, the idea of css components is pretty loose because it is rare to have all the required styles for a component in one place.
 
-Install with npm.  It's meant to be command line tool, so you probably want to install it globally (with `-g`).
+Originally Topdoc was designed to split up the css into components to then use that css in the styleguild to show as a snippet, but honestly that snippet wasn't enough to make the component by itself so it really is only interesting as reference.
 
-```bash
-npm install -g topdoc
-```
-
-##Help
+## Help
 
 The output of the help command.
 
-```bash
--h, --help                                       output usage information
--s, --source <directory>                         The css source directory.
--d, --destination <directory>                    The destination directory where the usage guides will be written.
--t, --template <jade file/directory>             The path to the jade template file.  If it is a directory it will import all the sub files.
--p. --project <title>                            The title for your project.  Defaults to the directory name.
--V, --version                                    output the version number
+```sh
+$ topdoc --help
+
+  Usage: topdoc topdoc [<css-file> | <directory> [default: src]] [options]
+
+  Generate usage guides for css
+
+  Options:
+
+    -h, --help                                                                          output usage information
+    -d, --destination <directory> [default: docs]                                       directory where the usage guides will be written.
+        Like all the options, source can be definied in the config or package.json file.
+    -s, --stdout                                                                        outputs the parsed topdoc information as json in the console.
+    -t, --template <directory> | <npm-package-name> [default: topdoc-default-template]  path to template directory or package name.
+        Note: Template argument is resolved using the 'resolve' package.
+    -p, --project <title> [default: <cwd name>]                                         title for your project.
+    -c, --clobber                                                                       Deletes destination directory before running.
+    -i, --ignore-assets [<file> | <list of files>]                                      A file or comma delimeted list of files in the asset directory that should be
+        ignored when copying them over.
+    -a, --asset-directory <path>                                                        Path to directory of assets to copy to destination. Defaults to template directory.
+        Set to false to not copy any assets.
+    -V, --version                                                                       output the version number
 ```
 
-##Command Line Options
+## Command Line
 
-###Source
+### Source
 
 Specify a source directory with `-s` or `--source`.  Defaults to `src/`.
 
@@ -89,7 +174,7 @@ Specify a source directory with `-s` or `--source`.  Defaults to `src/`.
 topdoc -s release/css/
 ```
 
-###Destination
+### Destination
 
 Specify a destination with `-d` or `--destination`.  Defaults to `docs/`.
 
@@ -97,7 +182,7 @@ Specify a destination with `-d` or `--destination`.  Defaults to `docs/`.
 topdoc -d topdocs/
 ```
 
-###Template
+### Template
 
 Specify a template with `-t` or `--template`.  A default template is included in Topdoc if one is not provided.
 
@@ -119,7 +204,7 @@ This includes npm installed templates
 topdoc -t node_modules/topdoc-theme
 ```
 
-###Project Title
+### Project Title
 
 The project title will be passed through to the jade template file.
 
@@ -132,12 +217,14 @@ In the jade file it is `project.title`:
 ```jade
 title=project.title
 ```
+
 yeilds:
+
 ```html
 <title>Awesome</title>
 ```
 
-##package.json Configuration
+## `package.json` Configuration
 
 All the options can be configured in the package.json file.  This is super helpful if you are always using the same configuration.  It will look in the package.json file if it exists, but can be overridden by the command line options.
 
@@ -166,7 +253,7 @@ Also, additional data can be passed through to the jade template.  Below is an e
       "homeURL": "http://topcoat.io",
       "siteNav": [
         {
-          "url": "http://www.garthdb.com", 
+          "url": "http://www.garthdb.com",
           "text": "Usage Guidelines"
         },
         {
@@ -182,21 +269,25 @@ Also, additional data can be passed through to the jade template.  Below is an e
   }
 }
 ```
-In the jade template the data is accessible using `tesmplateData`:
+
+In the jade template the data is accessible using `templateData`:
 
 ```jade
 p=templateData.subtitle
 ```
+
 yeilds:
+
 ```html
 <p>CSS for clean and fast web apps</p>
 ```
 
-##Template
+## Template
 
 The jade template has data passed through by default:
 
-####Document Object
+### Document Object
+
 The `document` object contains relevant information about just the current document being generated below is an example:
 
 ```json
@@ -224,23 +315,28 @@ The `document` object contains relevant information about just the current docum
   ]
 }
 ```
-####Nav Object
+
+### Nav Object
+
 The `nav` object contains names and urls to all the generated html files.  In the jade template this can utilized to create a navigation to the other pages.
+
 ```jade
 nav.site: ul
-	- each item in nav
-		- if(item.url == document.url)
-			li.selected: a(href=item.url)=item.text
-		- else
-			li: a(href=item.url)=item.text
+  - each item in nav
+    - if(item.url == document.url)
+      li.selected: a(href=item.url)=item.text
+    - else
+      li: a(href=item.url)=item.text
 ```
 
-####Project Object
+### Project Object
+
 The `project` object contains relevant project information.  Currently it only contains the `title` property. (passed through the command line `-p` option, or through the package.json information).
 
 ```jade
 title=project.title
 ```
 
-####TemplateData Object
+### TemplateData Object
+
 As mentioned above, additional data can be passed through to the template in the package.json file.  This is accessible in the template as the `templateData` object.  See the example above.

@@ -1,0 +1,3 @@
+{
+  "extends": "garthdb/cli"
+}

@@ -1,0 +1,13 @@
+# Logs
+logs
+docs.json
+*.log
+npm-debug.log*
+.DS_Store
+/lib
+/bin
+inch.json
+/coverage
+/.nyc_output
+/test/fixtures
+/default-template

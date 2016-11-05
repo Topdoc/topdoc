@@ -86,21 +86,6 @@ body {
   overflow: hidden;
 }
 
-/*
-Copyright 2012 Adobe Systems Inc.;
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
-
 /* topdoc
   name: Button
   description: A simple button
@@ -109,7 +94,7 @@ limitations under the License.
     .is-active: Simulates an active state on mobile devices
     :disabled: Disabled state
     .is-disabled: Simulates a disabled state on mobile devices
-  markup:
+  markup: |
     <a class="topcoat-button">Button</a>
     <a class="topcoat-button is-active">Button</a>
     <a class="topcoat-button is-disabled">Button</a>
@@ -188,7 +173,7 @@ limitations under the License.
     .is-active: Simulates active state for a quiet button on touch interfaces
     :disabled: Disabled state
     .is-disabled: Simulates disabled state
-  markup:
+  markup: |
     <a class="topcoat-button--quiet">Button</a>
     <a class="topcoat-button--quiet is-active">Button</a>
     <a class="topcoat-button--quiet is-disabled">Button</a>
@@ -230,7 +215,7 @@ limitations under the License.
     .is-active: Simulates active state touch interfaces
     :disabled: Disabled state
     .is-disabled: Simulates disabled state
-  markup:
+  markup: |
     <a class="topcoat-button--large" >Button</a>
     <a class="topcoat-button--large is-active" >Button</a>
     <a class="topcoat-button--large is-disabled" >Button</a>
@@ -260,7 +245,7 @@ limitations under the License.
     .is-active: Simulates active state touch interfaces
     :disabled: Disabled state
     .is-disabled: Simulates disabled state
-  markup:
+  markup: |
     <a class="topcoat-button--large--quiet" >Button</a>
     <a class="topcoat-button--large--quiet is-active" >Button</a>
     <a class="topcoat-button--large--quiet is-disabled" >Button</a>
@@ -292,7 +277,7 @@ limitations under the License.
     .is-active: Simulates active state touch interfaces
     :disabled: Disabled state
     .is-disabled: Simulates disabled state
-  markup:
+  markup: |
     <a class="topcoat-button--cta" >Button</a>
     <a class="topcoat-button--cta is-active" >Button</a>
     <a class="topcoat-button--cta is-disabled" >Button</a>
@@ -335,7 +320,7 @@ limitations under the License.
     .is-active: Simulates active state touch interfaces
     :disabled: Disabled state
     .is-disabled: Simulates disabled state
-  markup:
+  markup: |
     <a class="topcoat-button--large--cta" >Button</a>
     <a class="topcoat-button--large--cta is-active" >Button</a>
     <a class="topcoat-button--large--cta is-disabled" >Button</a>
@@ -357,20 +342,6 @@ limitations under the License.
   pointer-events: none;
 }
 
-/*
-Copyright 2012 Adobe Systems Inc.;
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
 /* topdoc
   name: Icon Button
   description: Buttons, now with icons
@@ -379,7 +350,7 @@ limitations under the License.
     .is-active: Simulates active state touch interfaces
     :disabled: Disabled state
     .is-disabled: Simulates disabled state
-  markup:
+  markup: |
     <a class="topcoat-icon-button">
         <span class="topcoat-icon topcoat-icon--menu-stack"></span>
     </a>
@@ -457,7 +428,7 @@ limitations under the License.
     .is-active: Simulates active state touch interfaces
     :disabled: Disabled state
     .is-disabled: Simulates disabled state
-  markup:
+  markup: |
     <a class="topcoat-icon-button--quiet">
         <span class="topcoat-icon topcoat-icon--menu-stack"></span>
     </a>
@@ -506,7 +477,7 @@ limitations under the License.
     .is-active: Simulates active state touch interfaces
     :disabled: Disabled state
     .is-disabled: Simulates disabled state
-  markup:
+  markup: |
     <a class="topcoat-icon-button--large">
         <span class="topcoat-icon--large topcoat-icon--menu-stack"></span>
     </a>
@@ -550,7 +521,7 @@ limitations under the License.
     .is-active: Simulates active state touch interfaces
     :disabled: Disabled state
     .is-disabled: Simulates disabled state
-  markup:
+  markup: |
     <a class="topcoat-icon-button--large--quiet">
         <span class="topcoat-icon--large topcoat-icon--menu-stack"></span>
     </a>
@@ -596,24 +567,10 @@ limitations under the License.
   height: 1.3rem;
 }
 
-/*
-Copyright 2012 Adobe Systems Inc.;
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
 /* topdoc
   name: List
   description: Scroll it, hard
-  markup:
+  markup: |
     mobile:
       <div class="topcoat-list__container">
         <h3 class="topcoat-list__header">Category</h3>
@@ -682,24 +639,10 @@ limitations under the License.
   border-top: 1px solid rgba(0,0,0,0.05);
 }
 
-/*
-Copyright 2012 Adobe Systems Inc.;
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
 /* topdoc
   name: Navigation Bar
   description: A bar, but with navigation instead of alcohol.
-  markup:
+  markup: |
     <div class="topcoat-navigation-bar">
       <div class="topcoat-navigation-bar__item left quarter">
           <a class="topcoat-icon-button--quiet">
@@ -787,27 +730,13 @@ limitations under the License.
   color: #fff;
 }
 
-/*
-Copyright 2012 Adobe Systems Inc.;
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
 /* topdoc
   name: Search Input
   description: Need... input...
   modifiers:
     :disabled: Disabled state
     .is-disabled: Simulates a disabled state
-  markup:
+  markup: |
     <input type="search" value="" placeholder="search" class="topcoat-search-input">
     <input type="search is-disabled" value="" placeholder="search" class="topcoat-search-input">
   tags:
@@ -874,7 +803,7 @@ limitations under the License.
   modifiers:
     :disabled: Disabled state
     .is-disabled: Simulates a disabled state
-  markup:
+  markup: |
     <input type="search"  value="" placeholder="search" class="topcoat-search-input--large">
     <input type="search"  value="" placeholder="search" class="topcoat-search-input--large .is-disabled">
   tags:
@@ -906,28 +835,13 @@ limitations under the License.
   pointer-events: none;
 }
 
-/*
-Copyright 2012 Adobe Systems Inc.;
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
-
 /* topdoc
   name: Text Input
   description: Input, for text
   modifiers:
     :disabled: Disabled state
     .is-disabled: Simulates a disabled state
-  markup:
+  markup: |
     <input type="text" class="topcoat-text-input" value="" placeholder="text">
     <input type="text" class="topcoat-text-input is-disabled" value="" placeholder="text">
   tags:
@@ -976,7 +890,7 @@ limitations under the License.
   modifiers:
     :disabled: Disabled state
     .is-disabled: Simulates a disabled state
-  markup:
+  markup: |
     <input type="text" class="topcoat-text-input--large" value="" placeholder="text">
     <input type="text" class="topcoat-text-input--large is-disabled" value="" placeholder="text">
   tags:
