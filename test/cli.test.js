@@ -37,6 +37,11 @@ test.cb('should write basic docs from single file', t => {
   .end(t.end);
 });
 
+// test.cb('should write docs from directory of css files', t => {
+//   const destination = path.resolve(baseDestination, randomstring.generate());
+//   const source
+// })
+
 test.cb('should accept new destination location', t => {
   const destination = path.resolve(baseDestination, randomstring.generate());
   const source = path.resolve(__dirname, 'fixtures', 'button.css');
