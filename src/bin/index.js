@@ -204,7 +204,7 @@ glob(pattern, {}, (er, cssFiles) => {
       });
       process.exit(1);
     }
-    if (options.clobber) {
+    if (options.clobber && options.clobber !== 'false') {
       _clobber(options.destination);
     }
     results.forEach((result, index) => {
