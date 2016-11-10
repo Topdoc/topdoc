@@ -53,7 +53,7 @@ program
     [/^\./, /^node_modules/, /\.pug/, /\.jade/, '/**/*.json'])
   .option('-a, --asset-directory [path]',
     `Path to directory of assets to copy to destination. Defaults to template directory.
-    Set to false to not copy any assets.`, _valOrFalse)
+    Set to false to not copy any assets.`, _valOrFalse, true)
   .version(module.exports.version)
   .parse(process.argv);
 
@@ -86,7 +86,7 @@ if (options.assetDirectory && !path.isAbsolute(options.assetDirectory)) {
       const mainFile = resolve.sync(options.assetDirectory, {
         basedir: process.cwd(),
         packageFilter: (pkg, resolvePath) => {
-          templateDirectory = resolvePath;
+          templateDirectory = path.resolve(resolvePath, 'lib');
           return pkg;
         },
       });
