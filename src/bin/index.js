@@ -76,10 +76,14 @@ optionDefaults.destination = path.resolve(process.cwd(), 'docs');
 optionDefaults.template = 'topdoc-default-template';
 optionDefaults.templateData = null;
 optionDefaults.clobber = false;
-optionDefaults.assetDirectory = optionDefaults.template;
 optionDefaults.stdout = false;
 
 const options = loadConfig('topdoc', optionDefaults, argParser(program));
+
+// if assets copy is enabled but no directory was defined be sure to use template
+if (!options.assetDirectory && options.assetDirectory !== false) {
+  options.assetDirectory = options.template;
+}
 
 // project is actually used for title by topdoc to template parser
 if (options.project) {
