@@ -19,8 +19,11 @@ pkginfo(module, 'description', 'version');
  *
  *  Returns {Array} of strings
  */
-function _list(val) {
-  return val.split(',');
+function _toList(val) {
+  if (typeof val === 'string') {
+    return val.split(',');
+  }
+  return val;
 }
 /**
  *  Private: Coercion for false string to false boolean
@@ -30,47 +33,74 @@ function _list(val) {
  *  Returns {String} when `val` is not a Boolean.
  *  Returns {Bool} when `val` is Boolean or Boolean String like 'false'.
  */
-function _valOrFalse(val) {
+function _booleanOrValue(val) {
   if (val === 'false' || !val) return false;
+  if (val === 'true') return true;
   return val;
 }
 
+// function _trueOrVal(val) {
+//   console.log('transform', val);
+//   if (val === 'true') return true;
+//   return val;
+// }
+
+// defaults defined here cannot be overridden by rc file
 program
   .description(module.exports.description)
   .usage('topdoc [<css-file> | <directory> [default: src]] [options]')
   .option('-d, --destination <directory> [default: docs]',
     `directory where the usage guides will be written.
     Like all the options, source can be definied in the config or package.json file.`)
-  .option('-s, --stdout', 'outputs the parsed topdoc information as json in the console.', true)
+  .option('-s, --stdout', 'outputs the parsed topdoc information as json in the console.')
   .option('-t, --template <directory> | <npm-package-name> [default: topdoc-default-template]',
     `path to template directory or package name.
-    Note: Template argument is resolved using the 'resolve' package.`, 'topdoc-default-template')
-  .option('-p, --project <title> [default: <cwd name>]', 'title for your project.')
-  .option('-c, --clobber', 'Deletes destination directory before running.')
-  .option('-i, --ignore-assets [<file> | <list of files>]',
+    Note: Template argument is resolved using the 'resolve' package.`)
+  .option('-p, --project <title> | true ', `title for your project.
+    Passing 'true' will set the title to name of cwd`, _booleanOrValue)
+  .option('-c, --clobber', 'Deletes destination directory before running. Optional.')
+  .option('-i, --ignore-assets [<value> | <list of values>]',
     `A file or comma delimeted list of files in the asset directory that should be
-    ignored when copying them over.`, _list,
-    [/^\./, /^node_modules/, /\.pug/, /\.jade/, '/**/*.json'])
-  .option('-a, --asset-directory [path]',
+    ignored when copying them over.`, _toList)
+  .option('-a, --asset-directory [<path> | false]',
     `Path to directory of assets to copy to destination. Defaults to template directory.
-    Set to false to not copy any assets.`, _valOrFalse, true)
+    Set to false to not copy any assets.`, _booleanOrValue)
   .version(module.exports.version)
   .parse(process.argv);
 
-if (program.assetDirectory === true) program.assetDirectory = program.template;
+// defaults set here can be overridden by rc files and command line
+const optionDefaults = {};
+optionDefaults.ignoreAssets = [/^\./, /^node_modules/, /\.pug/, /\.jade/, '/**/*.json'];
+optionDefaults.source = 'src';
+optionDefaults.destination = path.resolve(process.cwd(), 'docs');
+optionDefaults.template = 'topdoc-default-template';
+optionDefaults.templateData = null;
+optionDefaults.clobber = false;
+optionDefaults.assetDirectory = optionDefaults.template;
+optionDefaults.stdout = false;
 
-const options = loadConfig('topdoc', {
-  title: program.project || false,
-  source: program.source || program.args[0] || 'src',
-  destination: program.destination || path.resolve(process.cwd(), 'docs'),
-  template: program.template,
-  templateData: null, // only added via config file (rc or package.json).
-  clobber: program.clobber || false,
-  version: module.exports.version,
-  ignoreAssets: program.ignoreAssets,
-  assetDirectory: program.assetDirectory || false,
-  stdout: program.stdout || false,
-}, argParser(program));
+const options = loadConfig('topdoc', optionDefaults, argParser(program));
+
+// project is actually used for title by topdoc to template parser
+if (options.project) {
+  // if it got passed as boolean in the rc we need to transform it
+  if (_booleanOrValue(options.project) === true) {
+    options.title = process.cwd().match(/([^/]*)\/*$/)[1];
+  } else {
+    options.title = options.project;
+  }
+}
+
+// this is the only way to make the first command line arg override any
+// config that is set elsewhere
+if (program.args[0]) {
+  options.source = program.args[0];
+}
+
+// this hack will fix options that got set by rc
+// and didn't have the transform called on them
+options.assetDirectory = _booleanOrValue(options.assetDirectory);
+options.ignoreAssets = _toList(options.ignoreAssets);
 
 const template = require(resolve.sync(options.template, { basedir: process.cwd() }));
 if (options.assetDirectory && !path.isAbsolute(options.assetDirectory)) {
