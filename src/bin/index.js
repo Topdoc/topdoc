@@ -39,12 +39,6 @@ function _booleanOrValue(val) {
   return val;
 }
 
-// function _trueOrVal(val) {
-//   console.log('transform', val);
-//   if (val === 'true') return true;
-//   return val;
-// }
-
 // defaults defined here cannot be overridden by rc file
 program
   .description(module.exports.description)
