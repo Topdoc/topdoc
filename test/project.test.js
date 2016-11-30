@@ -15,6 +15,17 @@ function read(filepath) {
   return fs.readFileSync(filepath, 'utf-8');
 }
 
+test.cb('should error if pointed at directory with no files', t => {
+  const wrongPath = path.resolve(baseDestination, 'empty');
+  nixt()
+    .cwd(cwd)
+    .expect((result) => {
+      t.is(result.stderr.includes('Error: No files match'), true);
+    })
+    .run(`topdoc ${wrongPath}`)
+    .end(t.end);
+});
+
 
 test.cb('should build docs based on rc file config', t => {
   const destination = path.resolve(baseDestination, randomstring.generate());

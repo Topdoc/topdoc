@@ -55,7 +55,7 @@ test.cb('should accept new destination location', t => {
   .end(t.end);
 });
 
-test.cb('should allow for a project title', t => {
+test.cb('should change project name if passed a string', t => {
   const destination = path.resolve(baseDestination, randomstring.generate());
   const source = path.resolve(__dirname, 'fixtures', 'button.css');
   nixt()
@@ -64,6 +64,19 @@ test.cb('should allow for a project title', t => {
     t.regex(docFile, /<title>lalala<\/title>/);
   })
   .run(`topdoc ${source} -d ${destination} -p 'lalala'`)
+  .end(t.end);
+});
+
+
+test.cb('should use cwd for project name if passed true', t => {
+  const destination = path.resolve(baseDestination, randomstring.generate());
+  const source = path.resolve(__dirname, 'fixtures', 'button.css');
+  nixt()
+  .expect(() => {
+    const docFile = read(path.resolve(destination, 'index.html'));
+    t.regex(docFile, /<title>test<\/title>/);
+  })
+  .run(`topdoc ${source} -d ${destination} -p true`)
   .end(t.end);
 });
 
