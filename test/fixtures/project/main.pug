@@ -21,7 +21,7 @@ html(lang="en")
       each component in document.components
         .component
           h2=component.name
-          .details=component.details
+          .details=component.description
           .component-demo!=component.markup
           pre.html=component.markup
           pre.css
