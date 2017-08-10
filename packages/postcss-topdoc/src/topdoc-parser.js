@@ -20,6 +20,8 @@ function _parseTopdocComment(node, regex, includeNodes) {
   const content = node.text.replace(regex, '');
   const component = new TopComponent(yaml.safeLoad(content));
   if (includeNodes) component.nodes = [];
+  component.commentStart = node.source.start;
+  component.commentEnd = node.source.end;
   component.css = '';
   return component;
 }

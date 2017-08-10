@@ -183,6 +183,13 @@ Find the definition on [GitHub](https://github.com/GarthDB/postcss-topdoc/blob/m
 
 * `name` {String} (required) Components need at least a `name` property.
 * `markup` {String} (optional) If the component data is being used to to generate html style guides, they should have a `markup` property.
+* `commentStart` {Object} The location of the start of the Topdoc comment.
+  * `line` {int} starting line number.
+  * `column` {int} starting column number.
+* `commentEnd` {Object} The location of the end of the Topdoc comment.
+  * `line` {int} ending line number.
+  * `column` {int} ending column number.
+* `css` {String} (optional) If able to get css between topdoc comments it is included as the css property.
 * Anything else.
 
 TopComponents can have any additional properties needed. They are defined as [YAML](http://www.yaml.org/start.html) in a css block comment that matches the [`commentRegExp`](#commentregexp).
