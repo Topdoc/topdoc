@@ -1,6 +1,6 @@
 # PostCSS Topdoc
 
-[![Build Status](https://travis-ci.org/GarthDB/postcss-topdoc.svg?branch=master)](https://travis-ci.org/GarthDB/postcss-topdoc) [![codecov](https://codecov.io/gh/GarthDB/postcss-topdoc/branch/master/graph/badge.svg)](https://codecov.io/gh/GarthDB/postcss-topdoc) [![Dependency Status](https://david-dm.org/GarthDB/postcss-topdoc.svg)](https://david-dm.org/GarthDB/postcss-topdoc) [![npm version](https://badge.fury.io/js/postcss-topdoc.svg)](https://badge.fury.io/js/postcss-topdoc)
+[![Build Status](https://travis-ci.org/Topdoc/postcss-topdoc.svg?branch=master)](https://travis-ci.org/Topdoc/postcss-topdoc) [![codecov](https://codecov.io/gh/Topdoc/postcss-topdoc/branch/master/graph/badge.svg)](https://codecov.io/gh/Topdoc/postcss-topdoc) [![Dependency Status](https://david-dm.org/Topdoc/postcss-topdoc.svg)](https://david-dm.org/Topdoc/postcss-topdoc) [![npm version](https://badge.fury.io/js/postcss-topdoc.svg)](https://badge.fury.io/js/postcss-topdoc)
 
 ---
 
@@ -29,7 +29,7 @@ var postcss = require('postcss');
 var topdoc = require('postcss-topdoc');
 
 var input = "some css string";
-var opts = {/* postcss-npm options */};
+var opts = {/* topdoc-postcss options */};
 
 postcss([topdoc(opts)])
   .process(input, { from: 'fixtures/button.css' })
@@ -150,7 +150,7 @@ TopDocument {
 
 ### {TopdocParser}
 
-Find the definition on [GitHub](https://github.com/GarthDB/postcss-topdoc/blob/master/src/topdoc-parser.js#L56).
+Find the definition on [GitHub](https://github.com/Topdoc/postcss-topdoc/blob/master/src/topdoc-parser.js#L56).
 
 #### Properties
 
@@ -167,7 +167,7 @@ Find the definition on [GitHub](https://github.com/GarthDB/postcss-topdoc/blob/m
 
 ### {TopDocument}
 
-Find the definition on [GitHub](https://github.com/GarthDB/postcss-topdoc/blob/master/src/topdocument.js#L18).
+Find the definition on [GitHub](https://github.com/Topdoc/postcss-topdoc/blob/master/src/topdocument.js#L18).
 
 #### Properties
 
@@ -177,7 +177,7 @@ Find the definition on [GitHub](https://github.com/GarthDB/postcss-topdoc/blob/m
 
 ### {TopComponent}
 
-Find the definition on [GitHub](https://github.com/GarthDB/postcss-topdoc/blob/master/src/topcomponent.js#L6).
+Find the definition on [GitHub](https://github.com/Topdoc/postcss-topdoc/blob/master/src/topcomponent.js#L6).
 
 #### Properties
 
