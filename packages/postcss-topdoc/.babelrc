@@ -1,6 +1,9 @@
 {
   "presets": ["es2015"],
-  "plugins": ["add-module-exports"],
+  "plugins": [
+    "transform-runtime",
+    "add-module-exports"
+  ],
   "env": {
     "test": {
       "plugins": [ "istanbul" ]

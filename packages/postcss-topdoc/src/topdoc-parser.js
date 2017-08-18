@@ -1,7 +1,7 @@
 import yaml from 'js-yaml';
-import utils from 'taborlin-utils';
 import CleanCSS from 'clean-css';
 
+import utils from './utils';
 import TopComponent from './topcomponent';
 import TopDocument from './topdocument';
 

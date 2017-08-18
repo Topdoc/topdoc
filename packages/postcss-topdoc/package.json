@@ -28,12 +28,6 @@
     "url": "https://github.com/GarthDB/postcss-topdoc/issues"
   },
   "homepage": "https://github.com/GarthDB/postcss-topdoc#readme",
-  "ava": {
-    "require": [
-      "babel-register"
-    ],
-    "babel": "inherit"
-  },
   "nyc": {
     "include": [
       "src/*.js"
@@ -42,31 +36,33 @@
       "babel-register"
     ]
   },
+  "ava": {
+    "require": [
+      "babel-register"
+    ]
+  },
   "dependencies": {
-    "clean-css": "^3.4.19",
-    "debug": "^2.2.0",
-    "js-yaml": "^3.6.1",
-    "postcss": "^5.2.0",
-    "taborlin-utils": "^0.2.0"
+    "clean-css": "^4.1.7",
+    "debug": "^3.0.0",
+    "js-yaml": "^3.9.1",
+    "postcss": "^6.0.9"
   },
   "devDependencies": {
-    "atomdoc-cli": "^1.0.1",
-    "ava": "^0.16.0",
-    "babel-cli": "^6.14.0",
-    "babel-core": "^6.14.0",
+    "atomdoc-cli": "^1.1.0",
+    "ava": "^0.21.0",
+    "babel-cli": "^6.24.1",
+    "babel-core": "^6.25.0",
     "babel-plugin-add-module-exports": "^0.2.1",
-    "babel-plugin-istanbul": "^2.0.1",
-    "babel-preset-es2015": "^6.14.0",
-    "babel-register": "^6.14.0",
-    "codecov": "^1.0.1",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-register": "^6.24.1",
+    "codecov": "^2.3.0",
     "commitizen": "^2.8.6",
     "cz-customizable": "^4.0.0",
-    "eslint": "^3.5.0",
-    "eslint-config-airbnb": "^11.1.0",
-    "eslint-plugin-import": "^1.14.0",
-    "eslint-plugin-jsx-a11y": "^2.2.2",
-    "eslint-plugin-react": "^6.2.0",
-    "nyc": "^8.1.0",
+    "eslint": "^4.4.1",
+    "eslint-plugin-async-await": "0.0.0",
+    "nyc": "^11.1.0",
     "semantic-release": "^4.3.5"
   },
   "config": {

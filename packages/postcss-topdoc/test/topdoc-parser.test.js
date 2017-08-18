@@ -13,80 +13,76 @@ function clean(obj) {
 }
 
 test('Should generate Topdoc Object', (t) => {
-  const input = read('./fixtures/button.css');
-  const output = JSON.parse(read('./expected/button.json'));
+  const input = read('./test/fixtures/button.css');
+  const output = JSON.parse(read('./test/expected/button.json'));
   return postcss([topdoc({
     fileData: {
-      sourcePath: 'fixtures/button.css',
+      sourcePath: './test/fixtures/button.css',
       template: 'lib/template.jade',
     },
   })])
-    .process(input, { from: 'fixtures/button.css' })
+    .process(input, { from: './test/fixtures/button.css' })
     .then((result) => {
       t.deepEqual(clean(result.topdoc), output);
     });
 });
 
-test('Should throw an error if `name` is missing', (t) => {
-  const input = read('./fixtures/missing-name.css');
-  t.throws(
+test('Should throw an error if `name` is missing', async t => {
+  const input = read('./test/fixtures/missing-name.css');
+  await t.throws(
     postcss([topdoc({
       fileData: {
-        sourcePath: 'fixtures/missing-name.css',
+        sourcePath: './test/fixtures/missing-name',
         template: 'lib/template.jade',
       },
-    })]).process(input, { from: 'fixtures/missing-name.css' }),
-    /A component has to at least have a name\./
+    })]).process(input, { from: 'fixtures/missing-name.css' })
   );
 });
 
 test('Should work even if no sourcePath is set', (t) => {
-  const input = read('./fixtures/button.css');
-  const output = JSON.parse(read('./expected/button.json'));
+  const input = read('./test/fixtures/button.css');
+  const output = JSON.parse(read('./test/expected/button.json'));
   return postcss([topdoc({
     fileData: {
       template: 'lib/template.jade',
     },
   })])
-    .process(input, { from: 'fixtures/button.css' })
+    .process(input, { from: './test/fixtures/button.css' })
     .then((result) => {
-      output.sourcePath = path.resolve('fixtures/button.css');
+      output.sourcePath = path.resolve('./test/fixtures/button.css');
       t.deepEqual(clean(result.topdoc), output);
     });
 });
 
 test('Should be able to TopdocParser as a non plugin.', (t) => {
-  const input = read('./fixtures/button.css');
+  const input = read('./test/fixtures/button.css');
   return postcss()
-    .process(input, { from: 'fixtures/button.css' })
+    .process(input, { from: './test/fixtures/button.css' })
     .then((result) => {
       const topdocParser = new TopdocParser(result.root, result);
       t.is(topdocParser.topdoc.components.length, 2);
     });
 });
 
-test('Should be able to parse multiple css files in parallel.', (t) => {
-  const button = read('./fixtures/button.css');
-  const select = read('./fixtures/select.css');
-  return Promise.all([
-    postcss([topdoc()]).process(button, { from: 'fixtures/button.css' }),
-    postcss([topdoc()]).process(select, { from: 'fixtures/select.css' }),
-  ]).then((results) => {
-    const result = [
-      results[0].topdoc.filename,
-      results[1].topdoc.filename,
-    ];
-    const expected = [
-      'button.css',
-      'select.css',
-    ];
-    t.deepEqual(result, expected);
-  });
+test('Should be able to parse multiple css files in parallel.', async t => {
+  const button = read('./test/fixtures/button.css');
+  const select = read('./test/fixtures/select.css');
+  const buttonResult = await postcss([topdoc()]).process(button, { from: './test/fixtures/button.css' });
+  const selectResult = await postcss([topdoc()]).process(select, { from: './test/fixtures/select.css' });
+  const result = [
+    buttonResult.topdoc.filename,
+    selectResult.topdoc.filename,
+  ];
+  const expected = [
+    'button.css',
+    'select.css',
+  ];
+  return t.deepEqual(result, expected);
 });
 
 test('Should include nodes with the correct options.', (t) => {
-  const input = read('./fixtures/button.css');
-  return postcss([topdoc({ includeNodes: true })]).process(input, { from: 'fixtures/button.css' })
+  const input = read('./test/fixtures/button.css');
+  return postcss([topdoc({ includeNodes: true })]).process(input, { from: './test/fixtures/button.css' })
   .then((result) => {
     t.is(result.topdoc.components[0].nodes.length, 3);
   });

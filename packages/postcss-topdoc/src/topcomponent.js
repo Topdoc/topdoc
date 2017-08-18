@@ -1,4 +1,4 @@
-import utils from 'taborlin-utils';
+import utils from './utils';
 
 /**
  *  Component Class
