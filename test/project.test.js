@@ -28,24 +28,26 @@ test.cb('should error if pointed at directory with no files', t => {
 
 
 test.cb('should build docs based on rc file config', t => {
-  const destination = path.resolve(baseDestination, randomstring.generate());
+  const randomPath = randomstring.generate();
+  const destination = path.resolve(baseDestination, randomPath);
+  const expected = `${path.relative(cwd, destination)}/index.html\nbecause you said so, clobbering ${destination}`;
   nixt()
   .cwd(cwd)
   .expect((result) => {
-    t.is(result.stdout, `because you said so, clobbering ${destination}
-${path.relative(cwd, destination)}/index.html`);
+    t.is(String(result.stdout).trim(), String(expected).trim());
   })
   .run(`topdoc --destination ${destination}`)
   .end(t.end);
 });
 
 test.cb('should build docs with short name flag overridding rc file', t => {
-  const destination = path.resolve(baseDestination, randomstring.generate());
+  const randomPath = randomstring.generate();
+  const destination = path.resolve(baseDestination, randomPath);
+  const expected = `demo/${randomPath}/index.html\nbecause you said so, clobbering ${destination}`;
   nixt()
   .cwd(cwd)
   .expect((result) => {
-    t.is(result.stdout, `because you said so, clobbering ${destination}
-${path.relative(cwd, destination)}/index.html`);
+    t.is(result.stdout, expected);
   })
   .run(`topdoc -d ${destination}`)
   .end(t.end);
