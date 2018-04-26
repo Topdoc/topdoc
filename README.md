@@ -1,4 +1,4 @@
-# Topdoc [![Build Status](https://travis-ci.org/topcoat/topdoc.svg?branch=master)](https://travis-ci.org/topcoat/topdoc) [![codecov](https://codecov.io/gh/topcoat/topdoc/branch/master/graph/badge.svg)](https://codecov.io/gh/topcoat/topdoc) [![Dependency Status](https://david-dm.org/topcoat/topdoc.svg)](https://david-dm.org/topcoat/topdoc) [![npm version](https://badge.fury.io/js/topdoc.svg)](https://badge.fury.io/js/topdoc)
+# Topdoc [![Build Status](https://travis-ci.org/Topdoc/topdoc.svg?branch=master)](https://travis-ci.org/Topdoc/topdoc) [![codecov](https://codecov.io/gh/Topdoc/topdoc/branch/master/graph/badge.svg)](https://codecov.io/gh/Topdoc/topdoc) [![Dependency Status](https://david-dm.org/Topdoc/topdoc.svg)](https://david-dm.org/Topdoc/topdoc) [![npm version](https://badge.fury.io/js/topdoc.svg)](https://badge.fury.io/js/topdoc)
 
 ---
 
