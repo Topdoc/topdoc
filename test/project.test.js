@@ -30,7 +30,8 @@ test.cb('should error if pointed at directory with no files', t => {
 test.cb('should build docs based on rc file config', t => {
   const randomPath = randomstring.generate();
   const destination = path.resolve(baseDestination, randomPath);
-  const expected = `${path.relative(cwd, destination)}/index.html\nbecause you said so, clobbering ${destination}`;
+  const expected = `${path.relative(cwd, destination)}/index.html
+because you said so, clobbering ${destination}`;
   nixt()
   .cwd(cwd)
   .expect((result) => {

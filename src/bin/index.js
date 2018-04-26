@@ -137,7 +137,7 @@ if (options.assetDirectory && !path.isAbsolute(options.assetDirectory)) {
 function _clobber(destination) {
   fs.remove(destination, (err) => {
     if (err) return console.error(`cowardly gave up trying to rm' ${destination}`);
-    else console.log(`because you said so, clobbering ${destination}`);
+    console.log(`because you said so, clobbering ${destination}`);
     return destination;
   });
 }
@@ -239,7 +239,6 @@ glob(pattern, {}, (er, cssFiles) => {
       files.forEach((file, fileIndex) => {
         file.current = Boolean(index === fileIndex);
       });
-      console.log(result.topdoc)
       template(Object.assign({}, result.topdoc, { files }));
     });
 
