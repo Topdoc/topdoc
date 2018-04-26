@@ -7,7 +7,7 @@
     "topdoc": "./bin/index.js"
   },
   "scripts": {
-    "prepublish": "npm run compile",
+    "prepare": "npm run compile",
     "compile": "babel -d ./ ./src/",
     "test": "ava",
     "coverage": "nyc npm test",
