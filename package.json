@@ -1,7 +1,7 @@
 {
   "name": "topdoc",
   "description": "Generate usage guides for css",
-  "version": "1.0.12",
+  "version": "1.1.0",
   "main": "./lib/topdoc",
   "bin": {
     "topdoc": "./bin/index.js"
