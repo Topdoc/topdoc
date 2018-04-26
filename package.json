@@ -9,7 +9,7 @@
   "scripts": {
     "prepare": "npm run compile",
     "compile": "babel -d ./ ./src/",
-    "test": "ava",
+    "test": "nyc ava",
     "coverage": "nyc npm test",
     "lint": "eslint .",
     "codecov": "nyc report -r lcovonly && codecov",
