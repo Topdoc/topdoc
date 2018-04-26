@@ -42,7 +42,7 @@ export default class TopDocument {
     }
     Object.assign(this, properties);
     this.filename = this.filename || _getFilename(this.sourcePath) || undefined;
-    this.title = (!this.filename) ? this.title : utils.titlify(this.filename);
+    this.title = (this.title) ? this.title : utils.titlify(this.filename);
     this.components = [];
   }
 }

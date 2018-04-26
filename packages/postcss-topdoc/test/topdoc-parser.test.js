@@ -27,6 +27,22 @@ test('Should generate Topdoc Object', (t) => {
     });
 });
 
+test('Should accept title in fileData', (t) => {
+  const input = read('./test/fixtures/button.css');
+  const output = JSON.parse(read('./test/expected/button-title.json'));
+  return postcss([topdoc({
+    fileData: {
+      sourcePath: './test/fixtures/button.css',
+      template: 'lib/template.jade',
+      title: 'lalala',
+    },
+  })])
+    .process(input, { from: './test/fixtures/button.css' })
+    .then((result) => {
+      t.deepEqual(clean(result.topdoc), output);
+    });
+});
+
 test('Should throw an error if `name` is missing', async t => {
   const input = read('./test/fixtures/missing-name.css');
   await t.throws(
