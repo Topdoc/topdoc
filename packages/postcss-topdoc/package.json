@@ -10,8 +10,7 @@
     "lint": "eslint .",
     "report-coverage": "nyc report -r lcovonly && codecov",
     "checkdocs": "atomdoc src",
-    "validate": "npm run lint && npm run test && npm run checkdocs",
-    "release": "semantic-release pre && npm publish && semantic-release post"
+    "validate": "npm run lint && npm run test && npm run checkdocs"
   },
   "repository": {
     "type": "git",
@@ -57,13 +56,10 @@
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.6.0",
     "babel-register": "^6.24.1",
-    "codecov": "^3.0.0",
-    "commitizen": "^2.8.6",
-    "cz-customizable": "^4.0.0",
+    "codecov": "^3.0.2",
     "eslint": "^4.4.1",
     "eslint-plugin-async-await": "0.0.0",
-    "nyc": "^11.1.0",
-    "semantic-release": "^4.3.5"
+    "nyc": "^11.1.0"
   },
   "config": {
     "commitizen": {

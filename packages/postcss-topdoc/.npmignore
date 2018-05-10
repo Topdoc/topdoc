@@ -1,8 +1,13 @@
 src/
 test/
-.*
+.babelrc
+.eslintignore
+.eslintrc
+.travis.yml
 coverage
+.nyc_output
 inch.json
 docs.json
 node_modules/
 npm-debug.log
+.DS_Store
