@@ -14,8 +14,7 @@
     "lint": "eslint .",
     "codecov": "nyc report -r lcovonly && codecov",
     "checkdocs": "atomdoc src",
-    "validate": "npm run lint && npm run test && npm run checkdocs",
-    "release": "semantic-release pre && npm publish && semantic-release post"
+    "validate": "npm run lint && npm run test && npm run checkdocs"
   },
   "repository": {
     "type": "git",
@@ -54,7 +53,7 @@
   "dependencies": {
     "commander": "^2.15.1",
     "commander-rc-adapter": "^0.1.1",
-    "config-attendant": "^0.1.0",
+    "config-attendant": "^0.1.2",
     "fs-extra": "^5.0.0",
     "glob": "^7.1.2",
     "mkdirp": "^0.5.1",
@@ -75,19 +74,12 @@
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-register": "^6.16.3",
-    "codecov": "^1.0.1",
-    "cz-customizable": "^4.0.0",
+    "codecov": "^3.0.2",
     "eslint": "^3.7.0",
     "eslint-config-garthdb": "^0.1.0",
     "nixt": "^0.5.0",
-    "nyc": "^11.7.1",
+    "nyc": "^11.7.3",
     "randomstring": "^1.1.5",
-    "semantic-release": "^4.3.5",
     "topdoc-theme": "^0.7.0"
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-customizable"
-    }
   }
 }
