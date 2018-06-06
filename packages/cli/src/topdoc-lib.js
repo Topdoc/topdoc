@@ -1,6 +1,7 @@
 import path from 'path';
 import fs from 'fs-extra';
 import loadConfig from 'config-attendant';
+import resolve from 'resolve';
 
 /**
  *  Private: Coercion for comma delimited lists
@@ -29,8 +30,8 @@ export function _booleanOrValue(val) {
   return val;
 }
 
-export default function loadOptions (opts = {}, sourceOverride = false) {
-  const optionDefaults = {}
+export default function loadOptions(opts = {}, sourceOverride = false) {
+  const optionDefaults = {};
   // defaults set here can be overridden by rc files and command line
   optionDefaults.ignoreAssets = [/^\./, /^node_modules/, /\.pug/, /\.jade/, '/**/*.json'];
   optionDefaults.source = 'src';
@@ -71,7 +72,8 @@ export default function loadOptions (opts = {}, sourceOverride = false) {
   return options;
 }
 
-export function resolveAssetDirectory(assetDirectory) {
+export function resolveAssetDirectory(dir) {
+  let assetDirectory = dir;
   if (assetDirectory && !path.isAbsolute(assetDirectory)) {
     try {
       if (fs.statSync(assetDirectory).isDirectory()) {
@@ -91,7 +93,7 @@ export function resolveAssetDirectory(assetDirectory) {
         });
         assetDirectory = templateDirectory || path.dirname(mainFile);
       } catch (e) {
-        console.error(new Error(`Can't resolve path to ${assetDirectory}`));
+        return new Error(`Can't resolve path to ${assetDirectory}`);
       }
     }
   } else if (assetDirectory) {

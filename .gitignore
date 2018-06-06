@@ -5,9 +5,7 @@ docs.json
 *.log
 npm-debug.log*
 .DS_Store
-/lib
-/bin
-/topdoc-lib.js
+lerna-debug.log
 
 # Runtime data
 pids

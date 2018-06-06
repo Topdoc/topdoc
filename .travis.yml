@@ -1,8 +1,9 @@
 language: node_js
 node_js: "8"
 before_script:
-  - npm link
+  - lerna bootstrap
+  - npm link packages/cli/
 script:
-  - npm run validate
+  - lerna run validate
 after_success:
-  - npm run codecov
+  - lerna run codecov
