@@ -22,7 +22,7 @@ test.cb('should error if pointed at directory with no files', t => {
     .expect((result) => {
       t.is(result.stderr.includes('Error: No files match'), true);
     })
-    .run(`topdoc ${wrongPath}`)
+    .run(`node ../../../bin/index.js ${wrongPath}`)
     .end(t.end);
 });
 
@@ -37,7 +37,7 @@ because you said so, clobbering ${destination}`;
   .expect((result) => {
     t.is(String(result.stdout).trim(), String(expected).trim());
   })
-  .run(`topdoc --destination ${destination}`)
+  .run(`node ../../../bin/index.js --destination ${destination}`)
   .end(t.end);
 });
 
@@ -50,7 +50,7 @@ test.cb('should build docs with short name flag overridding rc file', t => {
   .expect((result) => {
     t.is(result.stdout, expected);
   })
-  .run(`topdoc -d ${destination}`)
+  .run(`node ../../../bin/index.js -d ${destination}`)
   .end(t.end);
 });
 
@@ -64,6 +64,6 @@ test.cb('should include assets from asset directory in rc file', t => {
     const anotherFile = read(path.resolve(destination, 'css', 'pass.css'));
     t.is(expected, anotherFile);
   })
-  .run(`topdoc -d ${destination}`)
+  .run(`node ../../../bin/index.js -d ${destination}`)
   .end(t.end);
 });
