@@ -37,8 +37,9 @@ export default class TopDocument {
    *  ```
    */
   constructor(properties) {
+    if(!properties.sourcePath) delete properties.sourcePath;
     if (!utils.hasOwnProperties(['title', 'filename', 'sourcePath'], properties, false)) {
-      throw new Error('A topdocument has to at least have a title or filename.');
+      properties.title = utils.titlify('unnamed');
     }
     Object.assign(this, properties);
     this.filename = this.filename || _getFilename(this.sourcePath) || undefined;

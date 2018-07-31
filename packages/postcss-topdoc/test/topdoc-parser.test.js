@@ -43,16 +43,16 @@ test('Should accept title in fileData', (t) => {
     });
 });
 
-test('Should throw an error if `name` is missing', async t => {
+test('Should throw an error if `name` is missing', t => {
   const input = read('./test/fixtures/missing-name.css');
-  await t.throws(
-    postcss([topdoc({
-      fileData: {
-        sourcePath: './test/fixtures/missing-name',
-        template: 'lib/template.jade',
-      },
-    })]).process(input, { from: 'fixtures/missing-name.css' })
-  );
+  return postcss([topdoc({
+    fileData: {
+      template: 'lib/template.jade',
+    },
+  })]).process(input, { from: undefined })
+  .then((result) => {
+    t.is(result.topdoc.title, 'Unnamed');
+  })
 });
 
 test('Should work even if no sourcePath is set', (t) => {

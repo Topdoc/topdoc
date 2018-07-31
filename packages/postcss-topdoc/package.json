@@ -45,7 +45,7 @@
     "clean-css": "^4.1.7",
     "debug": "^3.1.0",
     "js-yaml": "^3.9.1",
-    "postcss": "^6.0.9"
+    "postcss": "^7.0.1"
   },
   "devDependencies": {
     "atomdoc-cli": "^1.1.0",

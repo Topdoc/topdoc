@@ -17,9 +17,6 @@ export default class TopComponent {
    *  ```
    */
   constructor(properties) {
-    if (!Object.hasOwnProperty.call(properties, 'name')) {
-      throw new Error('A component has to at least have a name.');
-    }
     Object.keys(properties).forEach((key) => {
       this[key] = properties[key];
     });
