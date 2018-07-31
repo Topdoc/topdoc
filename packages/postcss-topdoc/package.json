@@ -4,7 +4,7 @@
   "description": "Topdoc parser built in PostCSS",
   "main": "lib/",
   "scripts": {
-    "prepublish": "npm run compile",
+    "prepare": "npm run compile",
     "compile": "babel -d ./lib/ ./src/",
     "test": "nyc ava",
     "lint": "eslint .",
@@ -43,15 +43,14 @@
   },
   "dependencies": {
     "clean-css": "^4.1.7",
-    "debug": "^3.0.0",
+    "debug": "^3.1.0",
     "js-yaml": "^3.9.1",
     "postcss": "^6.0.9"
   },
   "devDependencies": {
     "atomdoc-cli": "^1.1.0",
     "ava": "^0.21.0",
-    "babel-cli": "^6.24.1",
-    "babel-core": "^6.25.0",
+    "babel-cli": "^6.26.0",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.6.0",
