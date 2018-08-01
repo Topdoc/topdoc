@@ -1,6 +1,6 @@
 {
   "name": "postcss-topdoc",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Topdoc parser built in PostCSS",
   "main": "lib/",
   "scripts": {
