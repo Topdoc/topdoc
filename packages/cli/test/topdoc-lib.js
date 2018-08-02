@@ -102,24 +102,24 @@ test('load Topdoc config with assetDirectory set to String', t => {
   t.deepEqual(options, expected);
 });
 
-test('_toList converts string to list', t => {
+test('_toList converts string to array', t => {
   const result = topdocLib._toList('this,is,a,list');
   t.deepEqual(result, ['this', 'is', 'a', 'list']);
 });
 
-test('_toList converts string to list', t => {
+test('_toList converts string to false boolean', t => {
   t.false(topdocLib._booleanOrValue('false'));
 });
 
-test('_toList converts string to list', t => {
+test('_toList converts null to false boolean', t => {
   t.false(topdocLib._booleanOrValue(null));
 });
 
-test('_toList converts string to list', t => {
+test('_toList converts string to true boolean', t => {
   t.true(topdocLib._booleanOrValue('true'));
 });
 
-test('_toList converts string to list', t => {
+test('_toList returns string', t => {
   const expected = 'A String';
   t.is(topdocLib._booleanOrValue(expected), expected);
 });
