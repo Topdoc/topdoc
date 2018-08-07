@@ -41,7 +41,6 @@
     "eslint-config-garthdb": "^0.1.0",
     "eslint-plugin-async-await": "0.0.0",
     "lerna": "^3.0.0-rc.0",
-    "nixt": "^0.5.0",
     "nyc": "^12.0.2",
     "randomstring": "^1.1.5",
     "topdoc-theme": "^0.7.0"

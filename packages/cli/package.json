@@ -58,7 +58,8 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0-beta.55",
-    "ava": "1.0.0-beta.6"
+    "ava": "1.0.0-beta.6",
+    "nixt": "^0.5.0"
   },
   "gitHead": "bd615c2be5e42174c8f68dc3f1e52b84e5e4c5da"
 }
