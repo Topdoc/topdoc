@@ -3,6 +3,6 @@ node_js: "8"
 before_script:
   - lerna bootstrap
 script:
-  - lerna run validate
+  - npm run coverage
 after_success:
   - lerna run codecov

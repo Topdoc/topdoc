@@ -1,12 +1,28 @@
 {
+  "description": "The Monorepo for Topdoc and sub projects",
   "scripts": {
     "test": "lerna run test",
-    "coverage": "nyc lerna run test"
+    "coverage": "lerna run coverage"
   },
   "nyc": {
     "require": [
       "@babel/register"
     ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/topdoc/topdoc.git"
+  },
+  "keywords": [
+    "css",
+    "style",
+    "documentation",
+    "usage"
+  ],
+  "author": "Garth Braithwaite <garthdb@gmail.com> (http://garthdb.com)",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/topdoc/topdoc/issues"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0-beta.55",
