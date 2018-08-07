@@ -51,19 +51,9 @@
     "mkdirp": "^0.5.1",
     "pkginfo": "^0.4.1",
     "postcss": "^6.0.21",
-    "postcss-topdoc": "^0.1.2",
+    "postcss-topdoc": "file:../postcss-topdoc",
     "pug": "^2.0.3",
     "resolve": "^1.1.7",
     "topdoc-default-template": "^0.1.2"
-  },
-  "devDependencies": {
-    "@babel/cli": "^7.0.0-beta.55",
-    "atomdoc-cli": "^1.1.0",
-    "ava": "1.0.0-beta.6",
-    "eslint-config-garthdb": "^0.1.0",
-    "nixt": "^0.5.0",
-    "nyc": "^12.0.2",
-    "randomstring": "^1.1.5",
-    "topdoc-theme": "^0.7.0"
   }
 }
