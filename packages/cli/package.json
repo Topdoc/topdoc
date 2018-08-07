@@ -1,7 +1,7 @@
 {
   "name": "topdoc",
   "description": "Generate usage guides for css",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "main": "./lib/topdoc",
   "bin": {
     "topdoc": "./bin/index.js"
@@ -51,7 +51,7 @@
     "mkdirp": "^0.5.1",
     "pkginfo": "^0.4.1",
     "postcss": "^6.0.21",
-    "postcss-topdoc": "^0.1.5",
+    "postcss-topdoc": "^0.1.6",
     "pug": "^2.0.3",
     "resolve": "^1.1.7",
     "topdoc-default-template": "^0.1.2"
