@@ -2,7 +2,8 @@
   "description": "The Monorepo for Topdoc and sub projects",
   "scripts": {
     "test": "lerna run test",
-    "coverage": "lerna run coverage"
+    "coverage": "lerna run coverage",
+    "prepare": "lerna run prepare"
   },
   "nyc": {
     "require": [
@@ -45,10 +46,5 @@
     "nyc": "^12.0.2",
     "randomstring": "^1.1.5",
     "topdoc-theme": "^0.7.0"
-  },
-  "name": "topdoc",
-  "dependencies": {
-    "postcss-topdoc": "file:packages/postcss-topdoc",
-    "topdoc": "file:packages/cli"
   }
 }

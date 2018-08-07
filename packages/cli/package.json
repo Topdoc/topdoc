@@ -51,9 +51,13 @@
     "mkdirp": "^0.5.1",
     "pkginfo": "^0.4.1",
     "postcss": "^6.0.21",
-    "postcss-topdoc": "file:../postcss-topdoc",
+    "postcss-topdoc": "^0.1.5",
     "pug": "^2.0.3",
     "resolve": "^1.1.7",
     "topdoc-default-template": "^0.1.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.0.0-beta.55",
+    "ava": "1.0.0-beta.6"
   }
 }
