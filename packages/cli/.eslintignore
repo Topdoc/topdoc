@@ -11,3 +11,4 @@ inch.json
 /.nyc_output
 /test/fixtures
 /default-template
+/topdoc-lib.js

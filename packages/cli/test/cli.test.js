@@ -21,7 +21,7 @@ test.cb('should error out if pattern doesn\'t match', t => {
     t.regex(result.stderr, /Error: No files match 'nothing\.css'/);
   })
   .cwd(path.resolve(__dirname, '..'))
-  .run('topdoc nothing.css')
+  .run('node bin/index.js nothing.css')
   .end(t.end);
 });
 
@@ -35,7 +35,7 @@ test.cb('should write basic docs from single file', t => {
     const docFile = read(path.resolve(newDestination, 'index.html'));
     t.is(docFile.trim(), expected.trim());
   })
-  .run(`topdoc ${source}`)
+  .run(`node ../bin/index.js ${source}`)
   .end(t.end);
 });
 
@@ -54,7 +54,7 @@ test.cb('should accept new destination location', t => {
     const docFile = read(path.resolve(destination, 'index.html'));
     t.is(docFile.trim(), expected.trim());
   })
-  .run(`topdoc ${source} -d ${destination}`)
+  .run(`node ../bin/index.js ${source} -d ${destination}`)
   .end(t.end);
 });
 
@@ -67,7 +67,7 @@ test.cb('should change project name if passed a string', t => {
     const docFile = read(path.resolve(destination, 'index.html'));
     t.regex(docFile, /<title>lalala<\/title>/);
   })
-  .run(`topdoc ${source} -d ${destination} -p 'lalala'`)
+  .run(`node ../bin/index.js ${source} -d ${destination} -p 'lalala'`)
   .end(t.end);
 });
 
@@ -81,7 +81,7 @@ test.cb('should use cwd for project name if passed true', t => {
     const docFile = read(path.resolve(destination, 'index.html'));
     t.regex(docFile, /<title>test<\/title>/);
   })
-  .run(`topdoc ${source} -d ${destination} -p true`)
+  .run(`node ../bin/index.js ${source} -d ${destination} -p true`)
   .end(t.end);
 });
 
@@ -95,7 +95,7 @@ test.cb('should copy assets from absolute directory path', t => {
     const anotherFile = read(path.resolve(destination, 'css', 'another.css'));
     t.regex(anotherFile, /content: 'yup';/);
   })
-  .run(`topdoc ${source} -d ${destination} -a ${assetDirectory}`)
+  .run(`node ../bin/index.js ${source} -d ${destination} -a ${assetDirectory}`)
   .end(t.end);
 });
 
@@ -109,7 +109,7 @@ test.cb('should copy assets from relative directory path', t => {
     const anotherFile = read(path.resolve(destination, 'css', 'another.css'));
     t.regex(anotherFile, /content: 'yup';/);
   })
-  .run(`topdoc ${source} -d ${destination} -a ${assetDirectory}`)
+  .run(`node ../bin/index.js ${source} -d ${destination} -a ${assetDirectory}`)
   .end(t.end);
 });
 
@@ -123,7 +123,7 @@ test.cb('should copy assets from absolute package path', t => {
     const anotherFile = read(path.resolve(destination, 'assets', 'css', 'another.css'));
     t.regex(anotherFile, /content: 'yup';/);
   })
-  .run(`topdoc ${source} -d ${destination} -a ${assetDirectory}`)
+  .run(`node ../bin/index.js ${source} -d ${destination} -a ${assetDirectory}`)
   .end(t.end);
 });
 
@@ -138,7 +138,7 @@ test.cb('should copy assets from relative package path', t => {
     const anotherFile = read(path.resolve(destination, 'assets', 'css', 'another.css'));
     t.regex(anotherFile, /content: 'yup';/);
   })
-  .run(`topdoc ${source} -d ${destination} -a ${assetDirectory}`)
+  .run(`node ../bin/index.js ${source} -d ${destination} -a ${assetDirectory}`)
   .end(t.end);
 });
 
@@ -153,7 +153,7 @@ test.cb('should ignore assets when specified', t => {
       read(path.resolve(destination, 'index.js'));
     });
   })
-  .run(`topdoc ${source} -d ${destination} -a ${assetDirectory} -i index.js`)
+  .run(`node ../bin/index.js ${source} -d ${destination} -a ${assetDirectory} -i index.js`)
   .end(t.end);
 });
 
@@ -169,7 +169,7 @@ test.cb('should ignore absolute assets when specified', t => {
       read(path.resolve(destination, 'index.js'));
     });
   })
-  .run(`topdoc ${source} -d ${destination} -a ${assetDirectory} -i ${ignore}`)
+  .run(`node ../bin/index.js ${source} -d ${destination} -a ${assetDirectory} -i ${ignore}`)
   .end(t.end);
 });
 
@@ -184,7 +184,7 @@ test.cb('should ignore all assets when asset directory is false', t => {
       read(path.resolve(destination, 'index.js'));
     });
   })
-  .run(`topdoc ${source} -d ${destination} -a ${assetDirectory} -i index.js`)
+  .run(`node ../bin/index.js ${source} -d ${destination} -a ${assetDirectory} -i index.js`)
   .end(t.end);
 });
 
@@ -198,7 +198,7 @@ test.cb('should not clobber docs when flag is not included', t => {
   .expect(() => {
     t.is(read(newFile), '');
   })
-  .run(`topdoc ${source}  -d ${destination}`)
+  .run(`node ../bin/index.js ${source}  -d ${destination}`)
   .end(t.end);
 });
 
@@ -214,7 +214,7 @@ test.cb('should clobber docs when flag is included', t => {
       read(newFile);
     });
   })
-  .run(`topdoc ${source}  -d ${destination} -c`)
+  .run(`node ../bin/index.js ${source}  -d ${destination} -c`)
   .end(t.end);
 });
 
@@ -228,6 +228,6 @@ test.cb('should output json stdout upon request', t => {
     delete result.source;
     t.deepEqual(result, expected);
   })
-  .run(`topdoc ${source} -s`)
+  .run(`node ../bin/index.js ${source} -s`)
   .end(t.end);
 });

@@ -1,0 +1,63 @@
+{
+  "name": "topdoc",
+  "description": "Generate usage guides for css",
+  "version": "1.1.4",
+  "main": "./lib/topdoc",
+  "bin": {
+    "topdoc": "./bin/index.js"
+  },
+  "scripts": {
+    "prepare": "npm run compile",
+    "compile": "babel -d ./ ./src/",
+    "test": "ava",
+    "coverage": "nyc npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/topcoat/topdoc.git"
+  },
+  "keywords": [
+    "css",
+    "style",
+    "documentation",
+    "usage"
+  ],
+  "author": "Garth Braithwaite <garthdb@gmail.com> (http://garthdb.com)",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/topcoat/topdoc/issues"
+  },
+  "ava": {
+    "require": [
+      "@babel/register",
+      "@babel/polyfill"
+    ]
+  },
+  "nyc": {
+    "include": "./src/bin/index.js",
+    "require": [
+      "@babel/register"
+    ],
+    "sourceMap": false,
+    "instrument": false
+  },
+  "preferGlobal": "true",
+  "dependencies": {
+    "commander": "^2.15.1",
+    "commander-rc-adapter": "^0.1.1",
+    "config-attendant": "^0.1.2",
+    "fs-extra": "^5.0.0",
+    "glob": "^7.1.2",
+    "mkdirp": "^0.5.1",
+    "pkginfo": "^0.4.1",
+    "postcss": "^6.0.21",
+    "postcss-topdoc": "^0.1.5",
+    "pug": "^2.0.3",
+    "resolve": "^1.1.7",
+    "topdoc-default-template": "^0.1.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.0.0-beta.55",
+    "ava": "1.0.0-beta.6"
+  }
+}

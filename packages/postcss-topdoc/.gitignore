@@ -1,11 +1,12 @@
-node_modules/
-tmp
+# Logs
 logs
 docs.json
 *.log
 npm-debug.log*
 .DS_Store
-lerna-debug.log
+
+# Compiled output
+/lib
 
 # Runtime data
 pids
