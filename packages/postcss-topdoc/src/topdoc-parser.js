@@ -1,5 +1,4 @@
 import yaml from 'js-yaml';
-import CleanCSS from 'clean-css';
 
 import utils from './utils';
 import TopComponent from './topcomponent';
@@ -93,7 +92,6 @@ export default class TopdocParser {
       opts.fileData.sourcePath = this.root.source.input.file;
     }
     const document = new TopDocument(opts.fileData);
-    document.minified = new CleanCSS({ restructuring: false }).minify(this.root.toString()).styles;
     document.components = _findTopdocComments(this.root, this.commentRegExp, this.includeNodes);
     results.topdoc = document;
   }
