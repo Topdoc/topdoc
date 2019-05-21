@@ -1,4 +1,4 @@
-import utils from './utils';
+const utils = require('./utils');
 
 /**
  *  Private: gets the filename from a file path.
@@ -15,7 +15,7 @@ function _getFilename(path) {
 /**
  *  TopDocument Class
  */
-export default class TopDocument {
+class TopDocument {
   /**
    *  Public: constructor for TopDocument.
    *
@@ -37,13 +37,20 @@ export default class TopDocument {
    *  ```
    */
   constructor(properties) {
-    if(!properties.sourcePath) delete properties.sourcePath;
-    if (!utils.hasOwnProperties(['title', 'filename', 'sourcePath'], properties, false)) {
+    if (!properties.sourcePath) delete properties.sourcePath;
+    if (
+      !utils.hasOwnProperties(
+        ['title', 'filename', 'sourcePath'],
+        properties,
+        false
+      )
+    ) {
       properties.title = utils.titlify('unnamed');
     }
     Object.assign(this, properties);
     this.filename = this.filename || _getFilename(this.sourcePath) || undefined;
-    this.title = (this.title) ? this.title : utils.titlify(this.filename);
+    this.title = this.title ? this.title : utils.titlify(this.filename);
     this.components = [];
   }
 }
+module.exports = TopDocument;

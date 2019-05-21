@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   /**
    *  Public: turns strings into slug strings
    *
@@ -40,7 +40,10 @@ export default {
     if (title.indexOf('.css') === title.length - 4) {
       title = title.replace('.css', '');
     }
-    title = title.replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
+    title = title.replace(
+      /\w\S*/g,
+      txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
+    );
     return title;
   },
   /**

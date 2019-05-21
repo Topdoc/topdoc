@@ -2,13 +2,11 @@
   "name": "topdoc",
   "description": "Generate usage guides for css",
   "version": "2.0.1",
-  "main": "./lib/topdoc",
+  "main": "./bin/topdoc",
   "bin": {
     "topdoc": "./bin/index.js"
   },
   "scripts": {
-    "prepare": "npm run compile",
-    "compile": "babel -d ./ ./src/",
     "test": "ava",
     "coverage": "nyc npm run test"
   },
@@ -28,18 +26,16 @@
     "url": "https://github.com/topcoat/topdoc/issues"
   },
   "ava": {
-    "require": [
-      "@babel/register",
-      "@babel/polyfill"
+    "babel": false,
+    "files": [
+      "test/**/*"
     ]
   },
   "nyc": {
-    "include": "./src/bin/index.js",
-    "require": [
-      "@babel/register"
-    ],
-    "sourceMap": false,
-    "instrument": false
+    "include": [
+      "bin/*.js",
+      "topdoc-lib.js"
+    ]
   },
   "preferGlobal": "true",
   "dependencies": {
@@ -57,7 +53,9 @@
     "topdoc-default-template": "^0.1.2"
   },
   "devDependencies": {
-    "nixt": "^0.5.1"
+    "nixt": "^0.5.1",
+    "randomstring": "^1.1.5",
+    "topdoc-theme": "^0.7.0"
   },
   "gitHead": "bd615c2be5e42174c8f68dc3f1e52b84e5e4c5da"
 }

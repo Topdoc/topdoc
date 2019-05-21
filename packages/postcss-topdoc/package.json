@@ -2,19 +2,20 @@
   "name": "postcss-topdoc",
   "version": "1.0.2",
   "description": "Topdoc parser built in PostCSS",
-  "main": "lib/",
+  "main": "dist/",
   "scripts": {
     "prepare": "npm run compile",
-    "compile": "babel -d ./lib/ ./src/",
-    "test": "nyc ava",
+    "compile": "parcel build ./src/index.js --no-source-maps",
+    "test": "ava",
     "lint": "eslint .",
     "report-coverage": "nyc report -r lcovonly && codecov",
+    "coverage": "nyc npm run test",
     "checkdocs": "atomdoc src",
     "validate": "npm run lint && npm run test && npm run checkdocs"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/GarthDB/postcss-topdoc.git"
+    "url": "https://github.com/Topdoc/topdoc.git"
   },
   "keywords": [
     "topdoc",
@@ -25,26 +26,21 @@
   "author": "Garth Braithwaite <garthdb@gmail.com> (http://garthdb.com)",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/GarthDB/postcss-topdoc/issues"
+    "url": "https://github.com/Topdoc/topdoc/issues"
   },
-  "homepage": "https://github.com/GarthDB/postcss-topdoc#readme",
+  "homepage": "https://github.com/Topdoc/topdoc#readme",
   "ava": {
-    "require": [
-      "@babel/register",
-      "@babel/polyfill"
-    ]
+    "babel": false
   },
   "nyc": {
-    "require": [
-      "@babel/register"
-    ],
-    "sourceMap": false,
-    "instrument": false
+    "include": [
+      "src/*.js"
+    ]
   },
   "dependencies": {
     "debug": "^4.1.1",
     "js-yaml": "^3.13.1",
-    "postcss": "^7.0.16"
+    "parcel-bundler": "^1.12.3"
   },
   "gitHead": "bd615c2be5e42174c8f68dc3f1e52b84e5e4c5da"
 }

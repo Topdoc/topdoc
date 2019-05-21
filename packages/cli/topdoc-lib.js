@@ -1,7 +1,7 @@
-import path from 'path';
-import fs from 'fs-extra';
-import loadConfig from 'config-attendant';
-import resolve from 'resolve';
+const path = require('path');
+const fs = require('fs-extra');
+const loadConfig = require('config-attendant');
+const resolve = require('resolve');
 
 /**
  *  Private: Coercion for comma delimited lists
@@ -10,7 +10,7 @@ import resolve from 'resolve';
  *
  *  Returns {Array} of strings
  */
-export function _toList(val) {
+function _toList(val) {
   if (typeof val === 'string') {
     return val.split(',');
   }
@@ -24,16 +24,22 @@ export function _toList(val) {
  *  Returns {String} when `val` is not a Boolean.
  *  Returns {Bool} when `val` is Boolean or Boolean String like 'false'.
  */
-export function _booleanOrValue(val) {
+function _booleanOrValue(val) {
   if (val === 'false' || !val) return false;
   if (val === 'true') return true;
   return val;
 }
 
-export default function loadOptions(opts = {}, sourceOverride = false) {
+function loadOptions(opts = {}, sourceOverride = false) {
   const optionDefaults = {};
   // defaults set here can be overridden by rc files and command line
-  optionDefaults.ignoreAssets = [/^\./, /^node_modules/, /\.pug/, /\.jade/, '/**/*.json'];
+  optionDefaults.ignoreAssets = [
+    /^\./,
+    /^node_modules/,
+    /\.pug/,
+    /\.jade/,
+    '/**/*.json',
+  ];
   optionDefaults.source = 'src';
   optionDefaults.destination = path.resolve(process.cwd(), 'docs');
   optionDefaults.template = 'topdoc-default-template';
@@ -72,7 +78,7 @@ export default function loadOptions(opts = {}, sourceOverride = false) {
   return options;
 }
 
-export function resolveAssetDirectory(dir) {
+function resolveAssetDirectory(dir) {
   let assetDirectory = dir;
   if (assetDirectory && !path.isAbsolute(assetDirectory)) {
     try {
@@ -103,3 +109,4 @@ export function resolveAssetDirectory(dir) {
   }
   return assetDirectory;
 }
+module.exports = {_toList, _booleanOrValue, loadOptions, resolveAssetDirectory};

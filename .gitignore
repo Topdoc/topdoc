@@ -6,6 +6,7 @@ docs.json
 npm-debug.log*
 .DS_Store
 lerna-debug.log
+.cache
 
 # Runtime data
 pids
