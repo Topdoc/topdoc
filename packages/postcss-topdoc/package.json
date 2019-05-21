@@ -1,13 +1,16 @@
 {
   "name": "postcss-topdoc",
-  "version": "0.1.7",
+  "version": "1.0.0",
   "description": "Topdoc parser built in PostCSS",
   "main": "lib/",
   "scripts": {
     "prepare": "npm run compile",
     "compile": "babel -d ./lib/ ./src/",
-    "test": "ava",
-    "coverage": "nyc npm run test"
+    "test": "nyc ava",
+    "lint": "eslint .",
+    "report-coverage": "nyc report -r lcovonly && codecov",
+    "checkdocs": "atomdoc src",
+    "validate": "npm run lint && npm run test && npm run checkdocs"
   },
   "repository": {
     "type": "git",
@@ -39,10 +42,9 @@
     "instrument": false
   },
   "dependencies": {
-    "clean-css": "^4.1.7",
-    "debug": "^3.1.0",
-    "js-yaml": "^3.9.1",
-    "postcss": "^7.0.1"
+    "debug": "^4.1.1",
+    "js-yaml": "^3.13.1",
+    "postcss": "^7.0.16"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0-beta.55"
