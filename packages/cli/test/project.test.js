@@ -1,14 +1,17 @@
-import test from 'ava';
-import path from 'path';
-import fs from 'fs-extra';
-import nixt from 'nixt';
-import randomstring from 'randomstring';
+const test = require('ava');
+const path = require('path');
+const fs = require('fs-extra');
+const nixt = require('nixt');
+const randomstring = require('randomstring');
 
 const cwd = path.resolve(__dirname, 'fixtures', 'project');
 const baseDestination = path.resolve(__dirname, 'fixtures', 'project', 'demo');
 
 test.after.always(() => {
   fs.removeSync(baseDestination);
+});
+test.before(t => {
+  process.chdir(path.resolve(__dirname, '../'));
 });
 
 function read(filepath) {
@@ -20,7 +23,7 @@ test.cb('should error if pointed at directory with no files', t => {
   nixt()
     .cwd(cwd)
     .expect((result) => {
-      t.is(result.stderr.includes('Error: No files match'), true);
+      t.true(result.stderr.includes('Error: No files match'));
     })
     .run(`node ../../../bin/index.js ${wrongPath}`)
     .end(t.end);
@@ -54,7 +57,7 @@ test.cb('should build docs with short name flag overridding rc file', t => {
   .end(t.end);
 });
 
-test.cb('should include assets from asset directory in rc file', t => {
+test.cb('should include assets = require(asset directory in rc file', t => {
   const destination = path.resolve(baseDestination, randomstring.generate());
   const expected = read(path.resolve(__dirname,
     'fixtures', 'project', 'passets', 'css', 'pass.css'));

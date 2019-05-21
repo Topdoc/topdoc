@@ -1,8 +1,8 @@
-import yaml from 'js-yaml';
+const yaml = require('js-yaml');
 
-import utils from './utils';
-import TopComponent from './topcomponent';
-import TopDocument from './topdocument';
+const utils = require('./utils');
+const TopComponent = require('./topcomponent');
+const TopDocument = require('./topdocument');
 
 const debug = require('debug')('postcss-topdoc');
 
@@ -54,7 +54,7 @@ function _findTopdocComments(css, regex, includeNodes) {
 /**
  *  TopdocParser Class
  */
-export default class TopdocParser {
+class TopdocParser {
   /**
    *  Public: really just meant to be used as a part of the plugin.
    *
@@ -122,3 +122,5 @@ export default class TopdocParser {
     return this.results.topdoc;
   }
 }
+
+module.exports = TopdocParser;

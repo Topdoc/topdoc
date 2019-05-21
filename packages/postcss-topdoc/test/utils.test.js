@@ -1,5 +1,5 @@
-import test from 'ava';
-import utils from '../src/utils';
+const test = require('ava');
+const utils = require('../src/utils');
 
 test('Check utils hasOwnProperties', (t) => {
   const obj = { ding: true, poop: false, dang: 'yup' };

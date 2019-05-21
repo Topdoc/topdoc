@@ -1,5 +1,5 @@
-import test from 'ava';
-import TopDocument from '../src/topdocument';
+const test = require('ava');
+const TopDocument = require('../src/topdocument');
 
 test('Should use unnamed if `name` is missing', (t) => {
   // eslint-disable-next-line no-unused-vars

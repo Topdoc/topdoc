@@ -1,4 +1,4 @@
-import utils from './utils';
+const utils = require('./utils');
 
 /**
  *  Private: gets the filename from a file path.
@@ -15,7 +15,7 @@ function _getFilename(path) {
 /**
  *  TopDocument Class
  */
-export default class TopDocument {
+class TopDocument {
   /**
    *  Public: constructor for TopDocument.
    *
@@ -47,3 +47,4 @@ export default class TopDocument {
     this.components = [];
   }
 }
+module.exports = TopDocument;

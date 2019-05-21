@@ -1,9 +1,9 @@
-import utils from './utils';
+const utils = require('./utils');
 
 /**
  *  Component Class
  */
-export default class TopComponent {
+class TopComponent {
   /**
    *  Public: populates component instance with properties.
    *
@@ -54,3 +54,5 @@ export default class TopComponent {
     return Object.assign({}, this, { slug: this.slug });
   }
 }
+
+module.exports = TopComponent;

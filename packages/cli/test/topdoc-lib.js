@@ -1,13 +1,17 @@
-import test from 'ava';
-import path from 'path';
-import loadOptions, * as topdocLib from '../src/topdoc-lib';
+const test = require('ava');
+const path = require('path');
+const topdocLib = require('../topdoc-lib');
+
+test.before(t => {
+  process.chdir(path.resolve(__dirname, '../'));
+});
 
 test('load Topdoc config', t => {
-  const options = loadOptions();
+  const options = topdocLib.loadOptions();
   const expected = {
     ignoreAssets: [/^\./, /^node_modules/, /\.pug/, /\.jade/, '/**/*.json'],
     source: 'src',
-    destination: path.resolve(__dirname, '../', 'docs'),
+      destination: path.resolve(__dirname, '../', 'docs'),
     template: 'topdoc-default-template',
     templateData: null,
     clobber: false,
@@ -19,7 +23,7 @@ test('load Topdoc config', t => {
 });
 
 test('load Topdoc config with project String', t => {
-  const options = loadOptions({ project: 'Ding' });
+  const options = topdocLib.loadOptions({ project: 'Ding' });
   const expected = {
     ignoreAssets: [/^\./, /^node_modules/, /\.pug/, /\.jade/, '/**/*.json'],
     source: 'src',
@@ -37,7 +41,7 @@ test('load Topdoc config with project String', t => {
 });
 
 test('load Topdoc config with project Boolean', t => {
-  const options = loadOptions({ project: true });
+  const options = topdocLib.loadOptions({ project: true });
   const expected = {
     ignoreAssets: [/^\./, /^node_modules/, /\.pug/, /\.jade/, '/**/*.json'],
     source: 'src',
@@ -55,7 +59,7 @@ test('load Topdoc config with project Boolean', t => {
 });
 
 test('load Topdoc config with source override', t => {
-  const options = loadOptions({}, 'source-override');
+  const options = topdocLib.loadOptions({}, 'source-override');
   const expected = {
     ignoreAssets: [/^\./, /^node_modules/, /\.pug/, /\.jade/, '/**/*.json'],
     source: 'source-override',
@@ -71,7 +75,7 @@ test('load Topdoc config with source override', t => {
 });
 
 test('load Topdoc config with assetDirectory set to false', t => {
-  const options = loadOptions({ assetDirectory: false });
+  const options = topdocLib.loadOptions({ assetDirectory: false });
   const expected = {
     ignoreAssets: [/^\./, /^node_modules/, /\.pug/, /\.jade/, '/**/*.json'],
     source: 'src',
@@ -87,7 +91,7 @@ test('load Topdoc config with assetDirectory set to false', t => {
 });
 
 test('load Topdoc config with assetDirectory set to String', t => {
-  const options = loadOptions({ assetDirectory: 'assets' });
+  const options = topdocLib.loadOptions({ assetDirectory: 'assets' });
   const expected = {
     ignoreAssets: [/^\./, /^node_modules/, /\.pug/, /\.jade/, '/**/*.json'],
     source: 'src',

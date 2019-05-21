@@ -1,9 +1,9 @@
-import postcss from 'postcss';
-import test from 'ava';
-import fs from 'fs';
-import path from 'path';
-import topdoc from '../src/';
-import TopdocParser from '../src/topdoc-parser';
+const postcss = require('postcss');
+const test = require('ava');
+const fs = require('fs');
+const path = require('path');
+const topdoc = require('../src/');
+const TopdocParser = require('../src/topdoc-parser');
 
 function read(file) {
   return fs.readFileSync(file, 'utf8').trim();

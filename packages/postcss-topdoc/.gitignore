@@ -6,7 +6,7 @@ npm-debug.log*
 .DS_Store
 
 # Compiled output
-/lib
+/dist
 
 # Runtime data
 pids

@@ -1,0 +1,10 @@
+logs
+docs.json
+*.log
+npm-debug.log*
+.DS_Store
+inch.json
+coverage
+.nyc_output
+test/fixtures
+dist

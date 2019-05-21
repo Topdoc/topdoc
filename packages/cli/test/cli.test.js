@@ -1,8 +1,8 @@
-import test from 'ava';
-import path from 'path';
-import fs from 'fs-extra';
-import nixt from 'nixt';
-import randomstring from 'randomstring';
+const test = require('ava');
+const path = require('path');
+const fs = require('fs-extra');
+const nixt = require('nixt');
+const randomstring = require('randomstring');
 
 const baseDestination = path.resolve(__dirname, 'docs');
 
@@ -25,7 +25,7 @@ test.cb('should error out if pattern doesn\'t match', t => {
   .end(t.end);
 });
 
-test.cb('should write basic docs from single file', t => {
+test.cb('should write basic docs import single file', t => {
   const newDestination = baseDestination;
   const source = path.resolve(__dirname, 'fixtures', 'button.css');
   const expected = read(path.resolve(__dirname, 'expected', 'button.index.html'));
@@ -39,7 +39,7 @@ test.cb('should write basic docs from single file', t => {
   .end(t.end);
 });
 
-// test.cb('should write docs from directory of css files', t => {
+// test.cb('should write docs import directory of css files', t => {
 //   const destination = path.resolve(baseDestination, randomstring.generate());
 //   const source
 // })
@@ -85,7 +85,7 @@ test.cb('should use cwd for project name if passed true', t => {
   .end(t.end);
 });
 
-test.cb('should copy assets from absolute directory path', t => {
+test.cb('should copy assets import absolute directory path', t => {
   const destination = path.resolve(baseDestination, randomstring.generate());
   const source = path.resolve(__dirname, 'fixtures', 'button.css');
   const assetDirectory = path.resolve(__dirname, 'fixtures', 'template', 'assets');
@@ -99,7 +99,7 @@ test.cb('should copy assets from absolute directory path', t => {
   .end(t.end);
 });
 
-test.cb('should copy assets from relative directory path', t => {
+test.cb('should copy assets import relative directory path', t => {
   const destination = path.resolve(baseDestination, randomstring.generate());
   const source = path.resolve(__dirname, 'fixtures', 'button.css');
   const assetDirectory = path.resolve(__dirname, 'fixtures', 'template', 'assets');
@@ -113,7 +113,7 @@ test.cb('should copy assets from relative directory path', t => {
   .end(t.end);
 });
 
-test.cb('should copy assets from absolute package path', t => {
+test.cb('should copy assets import absolute package path', t => {
   const destination = path.resolve(baseDestination, randomstring.generate());
   const source = path.resolve(__dirname, 'fixtures', 'button.css');
   const assetDirectory = path.resolve(__dirname, 'fixtures', 'template');
@@ -127,7 +127,7 @@ test.cb('should copy assets from absolute package path', t => {
   .end(t.end);
 });
 
-test.cb('should copy assets from relative package path', t => {
+test.cb('should copy assets import relative package path', t => {
   const destination = path.resolve(baseDestination, randomstring.generate());
   const source = path.resolve(__dirname, 'fixtures', 'button.css');
   const absAssetDirectory = path.resolve(__dirname, 'fixtures', 'template');
