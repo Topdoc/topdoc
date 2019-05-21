@@ -17,7 +17,7 @@ class TopComponent {
    *  ```
    */
   constructor(properties) {
-    Object.keys(properties).forEach((key) => {
+    Object.keys(properties).forEach(key => {
       this[key] = properties[key];
     });
   }
@@ -51,7 +51,7 @@ class TopComponent {
    *  Returns {Object}
    */
   toJSON() {
-    return Object.assign({}, this, { slug: this.slug });
+    return Object.assign({}, this, {slug: this.slug});
   }
 }
 

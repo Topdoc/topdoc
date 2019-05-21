@@ -37,13 +37,19 @@ class TopDocument {
    *  ```
    */
   constructor(properties) {
-    if(!properties.sourcePath) delete properties.sourcePath;
-    if (!utils.hasOwnProperties(['title', 'filename', 'sourcePath'], properties, false)) {
+    if (!properties.sourcePath) delete properties.sourcePath;
+    if (
+      !utils.hasOwnProperties(
+        ['title', 'filename', 'sourcePath'],
+        properties,
+        false
+      )
+    ) {
       properties.title = utils.titlify('unnamed');
     }
     Object.assign(this, properties);
     this.filename = this.filename || _getFilename(this.sourcePath) || undefined;
-    this.title = (this.title) ? this.title : utils.titlify(this.filename);
+    this.title = this.title ? this.title : utils.titlify(this.filename);
     this.components = [];
   }
 }

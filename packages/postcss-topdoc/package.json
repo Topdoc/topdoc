@@ -9,12 +9,13 @@
     "test": "ava",
     "lint": "eslint .",
     "report-coverage": "nyc report -r lcovonly && codecov",
+    "coverage": "nyc npm run test",
     "checkdocs": "atomdoc src",
     "validate": "npm run lint && npm run test && npm run checkdocs"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/GarthDB/postcss-topdoc.git"
+    "url": "https://github.com/Topdoc/topdoc.git"
   },
   "keywords": [
     "topdoc",
@@ -25,9 +26,9 @@
   "author": "Garth Braithwaite <garthdb@gmail.com> (http://garthdb.com)",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/GarthDB/postcss-topdoc/issues"
+    "url": "https://github.com/Topdoc/topdoc/issues"
   },
-  "homepage": "https://github.com/GarthDB/postcss-topdoc#readme",
+  "homepage": "https://github.com/Topdoc/topdoc#readme",
   "ava": {
     "babel": false
   },

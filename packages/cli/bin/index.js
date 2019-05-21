@@ -43,28 +43,54 @@ function _booleanOrValue(val) {
 program
   .description(module.exports.description)
   .usage('topdoc [<css-file> | <directory> [default: src]] [options]')
-  .option('-d, --destination <directory> [default: docs]',
+  .option(
+    '-d, --destination <directory> [default: docs]',
     `directory where the usage guides will be written.
-    Like all the options, source can be definied in the config or package.json file.`)
-  .option('-s, --stdout', 'outputs the parsed topdoc information as json in the console.')
-  .option('-t, --template <directory> | <npm-package-name> [default: topdoc-default-template]',
+    Like all the options, source can be definied in the config or package.json file.`
+  )
+  .option(
+    '-s, --stdout',
+    'outputs the parsed topdoc information as json in the console.'
+  )
+  .option(
+    '-t, --template <directory> | <npm-package-name> [default: topdoc-default-template]',
     `path to template directory or package name.
-    Note: Template argument is resolved using the 'resolve' package.`)
-  .option('-p, --project <title> | true ', `title for your project.
-    Passing 'true' will set the title to name of cwd`, _booleanOrValue)
-  .option('-c, --clobber', 'Deletes destination directory before running. Optional.')
-  .option('-i, --ignore-assets [<value> | <list of values>]',
+    Note: Template argument is resolved using the 'resolve' package.`
+  )
+  .option(
+    '-p, --project <title> | true ',
+    `title for your project.
+    Passing 'true' will set the title to name of cwd`,
+    _booleanOrValue
+  )
+  .option(
+    '-c, --clobber',
+    'Deletes destination directory before running. Optional.'
+  )
+  .option(
+    '-i, --ignore-assets [<value> | <list of values>]',
     `A file or comma delimeted list of files in the asset directory that should be
-    ignored when copying them over.`, _toList)
-  .option('-a, --asset-directory [<path> | false]',
+    ignored when copying them over.`,
+    _toList
+  )
+  .option(
+    '-a, --asset-directory [<path> | false]',
     `Path to directory of assets to copy to destination. Defaults to template directory.
-    Set to false to not copy any assets.`, _booleanOrValue)
+    Set to false to not copy any assets.`,
+    _booleanOrValue
+  )
   .version(module.exports.version)
   .parse(process.argv);
 
 // defaults set here can be overridden by rc files and command line
 const optionDefaults = {};
-optionDefaults.ignoreAssets = [/^\./, /^node_modules/, /\.pug/, /\.jade/, '/**/*.json'];
+optionDefaults.ignoreAssets = [
+  /^\./,
+  /^node_modules/,
+  /\.pug/,
+  /\.jade/,
+  '/**/*.json',
+];
 optionDefaults.source = 'src';
 optionDefaults.destination = path.resolve(process.cwd(), 'docs');
 optionDefaults.template = 'topdoc-default-template';
@@ -100,7 +126,9 @@ if (program.args[0]) {
 options.assetDirectory = _booleanOrValue(options.assetDirectory);
 options.ignoreAssets = _toList(options.ignoreAssets);
 
-const template = require(resolve.sync(options.template, { basedir: process.cwd() }));
+const template = require(resolve.sync(options.template, {
+  basedir: process.cwd(),
+}));
 if (options.assetDirectory && !path.isAbsolute(options.assetDirectory)) {
   try {
     if (fs.statSync(options.assetDirectory).isDirectory()) {
@@ -120,7 +148,9 @@ if (options.assetDirectory && !path.isAbsolute(options.assetDirectory)) {
       });
       options.assetDirectory = templateDirectory || path.dirname(mainFile);
     } catch (e) {
-      console.error(new Error(`Can't resolve path to ${options.assetDirectory}`));
+      console.error(
+        new Error(`Can't resolve path to ${options.assetDirectory}`)
+      );
     }
   }
 } else if (options.assetDirectory) {
@@ -135,8 +165,9 @@ if (options.assetDirectory && !path.isAbsolute(options.assetDirectory)) {
  *  * `destination` {String} to the options hash.
  */
 function _clobber(destination) {
-  fs.remove(destination, (err) => {
-    if (err) return console.error(`cowardly gave up trying to rm' ${destination}`);
+  fs.remove(destination, err => {
+    if (err)
+      return console.error(`cowardly gave up trying to rm' ${destination}`);
     console.log(`because you said so, clobbering ${destination}`);
     return destination;
   });
@@ -153,10 +184,10 @@ function _clobber(destination) {
 function _copyDependencies(assetDirectory, destPath, ignoreAssets) {
   const files = [];
   const regexs = [];
-  ignoreAssets.forEach((val) => {
+  ignoreAssets.forEach(val => {
     if (!(val instanceof RegExp)) {
       if (glob.hasMagic(val)) {
-        const globFiles = glob.sync(val, { root: assetDirectory });
+        const globFiles = glob.sync(val, {root: assetDirectory});
         files.push(...globFiles);
       } else if (path.isAbsolute(val)) {
         files.push(val);
@@ -177,12 +208,12 @@ function _copyDependencies(assetDirectory, destPath, ignoreAssets) {
   function filter(file) {
     if (files.indexOf(file) !== -1) return false;
     let include = true;
-    regexs.forEach((regex) => {
+    regexs.forEach(regex => {
       if (file.search(regex) !== -1) include = false;
     });
     return include;
   }
-  fs.copySync(assetDirectory, destPath, filter, (err) => {
+  fs.copySync(assetDirectory, destPath, filter, err => {
     console.log('[topdoc] Copy failed;', err);
   });
 }
@@ -190,7 +221,9 @@ function _copyDependencies(assetDirectory, destPath, ignoreAssets) {
 try {
   const stats = fs.lstatSync(options.source);
   if (stats.isDirectory()) options.source = `${options.source}/**/*.css`;
-} catch (err) { /* oh shzt */ }
+} catch (err) {
+  /* oh shzt */
+}
 
 const pattern = options.source;
 delete options.source;
@@ -200,51 +233,59 @@ glob(pattern, {}, (er, cssFiles) => {
     console.error(new Error(`No files match '${pattern}'`));
     process.exit(1);
   }
-  Promise.all(cssFiles.map((filepath, index) => {
-    const first = Boolean(index === 0);
-    const opt = Object.assign({}, options, { first });
-    const content = fs.readFileSync(filepath);
-    opt.source = filepath;
-    return postcss([topdoc({ fileData: opt })]).process(content, { from: filepath });
-  })).then((results) => {
-    const files = results.map((result) =>
-      ({
+  Promise.all(
+    cssFiles.map((filepath, index) => {
+      const first = Boolean(index === 0);
+      const opt = Object.assign({}, options, {first});
+      const content = fs.readFileSync(filepath);
+      opt.source = filepath;
+      return postcss([topdoc({fileData: opt})]).process(content, {
+        from: filepath,
+      });
+    })
+  )
+    .then(results => {
+      const files = results.map(result => ({
         title: result.topdoc.title,
         filename: result.topdoc.filename,
         first: result.topdoc.first,
         current: false,
-      })
-    );
-    if (options.stdout) {
-      results.forEach((result) => {
-        delete result.topdoc.ignoreAssets;
-        delete result.topdoc.version;
-        delete result.topdoc.assetDirectory;
-        delete result.topdoc.clobber;
-        delete result.topdoc.stdout;
-        delete result.topdoc._;
-        delete result.topdoc.packageFile;
-        delete result.topdoc.first;
-        delete result.topdoc.sourcePath;
-        delete result.topdoc.destination;
-        if (!result.topdoc.templateData) delete result.topdoc.templateData;
-        console.log(JSON.stringify(result.topdoc, null, 2));
+      }));
+      if (options.stdout) {
+        results.forEach(result => {
+          delete result.topdoc.ignoreAssets;
+          delete result.topdoc.version;
+          delete result.topdoc.assetDirectory;
+          delete result.topdoc.clobber;
+          delete result.topdoc.stdout;
+          delete result.topdoc._;
+          delete result.topdoc.packageFile;
+          delete result.topdoc.first;
+          delete result.topdoc.sourcePath;
+          delete result.topdoc.destination;
+          if (!result.topdoc.templateData) delete result.topdoc.templateData;
+          console.log(JSON.stringify(result.topdoc, null, 2));
+        });
+        process.exit(1);
+      }
+      if (options.clobber) {
+        _clobber(options.destination);
+      }
+      results.forEach((result, index) => {
+        files.forEach((file, fileIndex) => {
+          file.current = Boolean(index === fileIndex);
+        });
+        template(Object.assign({}, result.topdoc, {files}));
       });
-      process.exit(1);
-    }
-    if (options.clobber) {
-      _clobber(options.destination);
-    }
-    results.forEach((result, index) => {
-      files.forEach((file, fileIndex) => {
-        file.current = Boolean(index === fileIndex);
-      });
-      template(Object.assign({}, result.topdoc, { files }));
-    });
 
-    const destPath = path.resolve(options.destination);
-    if (options.assetDirectory) {
-      _copyDependencies(options.assetDirectory, destPath, options.ignoreAssets);
-    }
-  }).catch(console.log);
+      const destPath = path.resolve(options.destination);
+      if (options.assetDirectory) {
+        _copyDependencies(
+          options.assetDirectory,
+          destPath,
+          options.ignoreAssets
+        );
+      }
+    })
+    .catch(console.log);
 });

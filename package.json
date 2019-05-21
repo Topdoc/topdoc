@@ -3,7 +3,9 @@
   "scripts": {
     "test": "lerna run test",
     "coverage": "lerna run coverage",
-    "prepare": "lerna run prepare"
+    "prepare": "lerna run prepare",
+    "prettier": "prettier \"**/*.+(js|jsx|json|yml|yaml|css|less|scss|ts|tsx|md|graphql|mdx)\"",
+    "format": "npm run prettier -- --write"
   },
   "repository": {
     "type": "git",

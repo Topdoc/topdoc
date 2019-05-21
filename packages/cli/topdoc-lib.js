@@ -33,7 +33,13 @@ function _booleanOrValue(val) {
 function loadOptions(opts = {}, sourceOverride = false) {
   const optionDefaults = {};
   // defaults set here can be overridden by rc files and command line
-  optionDefaults.ignoreAssets = [/^\./, /^node_modules/, /\.pug/, /\.jade/, '/**/*.json'];
+  optionDefaults.ignoreAssets = [
+    /^\./,
+    /^node_modules/,
+    /\.pug/,
+    /\.jade/,
+    '/**/*.json',
+  ];
   optionDefaults.source = 'src';
   optionDefaults.destination = path.resolve(process.cwd(), 'docs');
   optionDefaults.template = 'topdoc-default-template';

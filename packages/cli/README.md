@@ -2,11 +2,13 @@
 
 ---
 
-A tool for generating usage and styles guides for html components using css block comments.
+A tool for generating usage and styles guides for html components using css
+block comments.
 
 ## Quick Intro
 
-By adding a Topdoc block to your css you can describe an html/css component and that information can be used to generate a styleguide.
+By adding a Topdoc block to your css you can describe an html/css component and
+that information can be used to generate a styleguide.
 
 Here's an example component:
 
@@ -32,19 +34,25 @@ tags:
 
 ### Why create another css block comment format?
 
-Topdoc was originally created for [Topcoat](http://topcoat.io) and the one feature missing from other generators was support for any and all custom properties. Topdoc is extremely tolerant of custom properties, it just passes them to the template which defines what to do with it.
+Topdoc was originally created for [Topcoat](http://topcoat.io) and the one
+feature missing from other generators was support for any and all custom
+properties. Topdoc is extremely tolerant of custom properties, it just passes
+them to the template which defines what to do with it.
 
-The only required properties are `name` and `markup`, other than that, use whatever you need.
+The only required properties are `name` and `markup`, other than that, use
+whatever you need.
 
 ## Installation
 
-Install with npm.  It's meant to be command line tool, so you probably want to install it globally (with `-g`).
+Install with npm. It's meant to be command line tool, so you probably want to
+install it globally (with `-g`).
 
 ```sh
 npm install -g topdoc
 ```
 
-You can also use it as a npm script without install it globally. Super helpful for automating your styleguide building:
+You can also use it as a npm script without install it globally. Super helpful
+for automating your styleguide building:
 
 ```sh
 npm install --save-dev topdoc
@@ -68,7 +76,8 @@ npm run docs
 
 ### Comment Format
 
-Topdoc uses [PostCSS](http://postcss.org/) to divide asunder your css document and find all the relevant component information.
+Topdoc uses [PostCSS](http://postcss.org/) to divide asunder your css document
+and find all the relevant component information.
 
 Below is an example of a Topdoc comment.
 
@@ -104,7 +113,8 @@ blarg: very true
 }
 ```
 
-Topdoc comments are identified by the `topdoc` keyword on the first comment line.
+Topdoc comments are identified by the `topdoc` keyword on the first comment
+line.
 
 The rest of the data uses a [YAML](http://www.yaml.org/) friendly syntax.
 
@@ -112,10 +122,16 @@ The fields can be in any order, but this is a good example for consistency sake.
 
 The following are recommend and/or required fields:
 
-* `name` (required): The full name of the component.  Feel free to use spaces, punctuation, etc (name: Sir Button III, esq.)
-* `description`: Something more descriptive then the title alone.
-* `modifiers`: These can be pseudo classes, or addition rules applied to the component. This must be a [YAML mapping](http://yaml4r.sourceforge.net/doc/page/collections_in_yaml.htm) (`*modifier*:*description*`) which becomes a js hash
-* `markup` (required): This is the magic; it's the html that will be used to display the component in the docs. As most markup fields are long, make sure to use the `|` for multiline values.
+- `name` (required): The full name of the component. Feel free to use spaces,
+  punctuation, etc (name: Sir Button III, esq.)
+- `description`: Something more descriptive then the title alone.
+- `modifiers`: These can be pseudo classes, or addition rules applied to the
+  component. This must be a
+  [YAML mapping](http://yaml4r.sourceforge.net/doc/page/collections_in_yaml.htm)
+  (`*modifier*:*description*`) which becomes a js hash
+- `markup` (required): This is the magic; it's the html that will be used to
+  display the component in the docs. As most markup fields are long, make sure
+  to use the `|` for multiline values.
   ```css
   /* topdoc
   name: Button
@@ -125,16 +141,23 @@ The following are recommend and/or required fields:
     <a class="topcoat-button is-disabled">Button</a>
   */
   ```
-* `tags`: Just some obligatory metadata.
-* `blarg`: Since Topdoc uses a flexible YAML syntax, feel free to add any additional custom data you might need for your template.
+- `tags`: Just some obligatory metadata.
+- `blarg`: Since Topdoc uses a flexible YAML syntax, feel free to add any
+  additional custom data you might need for your template.
 
 ### Components
 
-Topdoc assumes everything between two Topdoc comments, and everything after the last Topdoc comment, is a component.  Put anything that isn't a component (general styles) above the first Topdoc comment.
+Topdoc assumes everything between two Topdoc comments, and everything after the
+last Topdoc comment, is a component. Put anything that isn't a component
+(general styles) above the first Topdoc comment.
 
-However, the idea of css components is pretty loose because it is rare to have all the required styles for a component in one place.
+However, the idea of css components is pretty loose because it is rare to have
+all the required styles for a component in one place.
 
-Originally Topdoc was designed to split up the css into components to then use that css in the styleguild to show as a snippet, but honestly that snippet wasn't enough to make the component by itself so it really is only interesting as reference.
+Originally Topdoc was designed to split up the css into components to then use
+that css in the styleguild to show as a snippet, but honestly that snippet
+wasn't enough to make the component by itself so it really is only interesting
+as reference.
 
 ## Help
 
@@ -168,7 +191,7 @@ $ topdoc --help
 
 ### Source
 
-Specify a source directory with `-s` or `--source`.  Defaults to `src/`.
+Specify a source directory with `-s` or `--source`. Defaults to `src/`.
 
 ```bash
 topdoc -s release/css/
@@ -176,7 +199,7 @@ topdoc -s release/css/
 
 ### Destination
 
-Specify a destination with `-d` or `--destination`.  Defaults to `docs/`.
+Specify a destination with `-d` or `--destination`. Defaults to `docs/`.
 
 ```bash
 topdoc -d topdocs/
@@ -184,7 +207,8 @@ topdoc -d topdocs/
 
 ### Template
 
-Specify a template with `-t` or `--template`.  A default template is included in Topdoc if one is not provided.
+Specify a template with `-t` or `--template`. A default template is included in
+Topdoc if one is not provided.
 
 The template can be a single [jade](https://github.com/visionmedia/jade) file:
 
@@ -192,7 +216,8 @@ The template can be a single [jade](https://github.com/visionmedia/jade) file:
 topdoc -t template/template.jade
 ```
 
-or a directory (it will duplicate the whole template directory and look for index.jade in the template folder provided):
+or a directory (it will duplicate the whole template directory and look for
+index.jade in the template folder provided):
 
 ```bash
 topdoc -t /template
@@ -226,9 +251,13 @@ yeilds:
 
 ## `package.json` Configuration
 
-All the options can be configured in the package.json file.  This is super helpful if you are always using the same configuration.  It will look in the package.json file if it exists, but can be overridden by the command line options.
+All the options can be configured in the package.json file. This is super
+helpful if you are always using the same configuration. It will look in the
+package.json file if it exists, but can be overridden by the command line
+options.
 
-Also, additional data can be passed through to the jade template.  Below is an example:
+Also, additional data can be passed through to the jade template. Below is an
+example:
 
 ```json
 {
@@ -249,7 +278,7 @@ Also, additional data can be passed through to the jade template.  Below is an e
       "download": {
         "url": "#",
         "label": "Download version 0.4"
-        },
+      },
       "homeURL": "http://topcoat.io",
       "siteNav": [
         {
@@ -288,7 +317,8 @@ The jade template has data passed through by default:
 
 ### Document Object
 
-The `document` object contains relevant information about just the current document being generated below is an example:
+The `document` object contains relevant information about just the current
+document being generated below is an example:
 
 ```json
 {
@@ -318,7 +348,8 @@ The `document` object contains relevant information about just the current docum
 
 ### Nav Object
 
-The `nav` object contains names and urls to all the generated html files.  In the jade template this can utilized to create a navigation to the other pages.
+The `nav` object contains names and urls to all the generated html files. In the
+jade template this can utilized to create a navigation to the other pages.
 
 ```jade
 nav.site: ul
@@ -331,7 +362,9 @@ nav.site: ul
 
 ### Project Object
 
-The `project` object contains relevant project information.  Currently it only contains the `title` property. (passed through the command line `-p` option, or through the package.json information).
+The `project` object contains relevant project information. Currently it only
+contains the `title` property. (passed through the command line `-p` option, or
+through the package.json information).
 
 ```jade
 title=project.title
@@ -339,4 +372,6 @@ title=project.title
 
 ### TemplateData Object
 
-As mentioned above, additional data can be passed through to the template in the package.json file.  This is accessible in the template as the `templateData` object.  See the example above.
+As mentioned above, additional data can be passed through to the template in the
+package.json file. This is accessible in the template as the `templateData`
+object. See the example above.

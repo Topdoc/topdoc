@@ -5,8 +5,7 @@ const TopdocParser = require('./topdoc-parser');
  *
  * Returns a [PostCSS Plugin](http://api.postcss.org/postcss.html#.plugin) {Function}
  */
-module.exports = postcss.plugin('postcss-topdoc',
-  (opts = {}) =>
-    (css, results) =>
-      new TopdocParser(css, results, opts)
+module.exports = postcss.plugin(
+  'postcss-topdoc',
+  (opts = {}) => (css, results) => new TopdocParser(css, results, opts)
 );

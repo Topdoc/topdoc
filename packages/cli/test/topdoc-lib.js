@@ -11,7 +11,7 @@ test('load Topdoc config', t => {
   const expected = {
     ignoreAssets: [/^\./, /^node_modules/, /\.pug/, /\.jade/, '/**/*.json'],
     source: 'src',
-      destination: path.resolve(__dirname, '../', 'docs'),
+    destination: path.resolve(__dirname, '../', 'docs'),
     template: 'topdoc-default-template',
     templateData: null,
     clobber: false,
@@ -23,7 +23,7 @@ test('load Topdoc config', t => {
 });
 
 test('load Topdoc config with project String', t => {
-  const options = topdocLib.loadOptions({ project: 'Ding' });
+  const options = topdocLib.loadOptions({project: 'Ding'});
   const expected = {
     ignoreAssets: [/^\./, /^node_modules/, /\.pug/, /\.jade/, '/**/*.json'],
     source: 'src',
@@ -41,7 +41,7 @@ test('load Topdoc config with project String', t => {
 });
 
 test('load Topdoc config with project Boolean', t => {
-  const options = topdocLib.loadOptions({ project: true });
+  const options = topdocLib.loadOptions({project: true});
   const expected = {
     ignoreAssets: [/^\./, /^node_modules/, /\.pug/, /\.jade/, '/**/*.json'],
     source: 'src',
@@ -75,7 +75,7 @@ test('load Topdoc config with source override', t => {
 });
 
 test('load Topdoc config with assetDirectory set to false', t => {
-  const options = topdocLib.loadOptions({ assetDirectory: false });
+  const options = topdocLib.loadOptions({assetDirectory: false});
   const expected = {
     ignoreAssets: [/^\./, /^node_modules/, /\.pug/, /\.jade/, '/**/*.json'],
     source: 'src',
@@ -91,7 +91,7 @@ test('load Topdoc config with assetDirectory set to false', t => {
 });
 
 test('load Topdoc config with assetDirectory set to String', t => {
-  const options = topdocLib.loadOptions({ assetDirectory: 'assets' });
+  const options = topdocLib.loadOptions({assetDirectory: 'assets'});
   const expected = {
     ignoreAssets: [/^\./, /^node_modules/, /\.pug/, /\.jade/, '/**/*.json'],
     source: 'src',
@@ -129,13 +129,21 @@ test('_toList returns string', t => {
 });
 
 test('resolveAssetDirectory resolves absolute directory', t => {
-  const assetDirectory = path.resolve(__dirname, 'fixtures', 'template', 'assets');
+  const assetDirectory = path.resolve(
+    __dirname,
+    'fixtures',
+    'template',
+    'assets'
+  );
   t.is(topdocLib.resolveAssetDirectory(assetDirectory), assetDirectory);
 });
 
 test('resolveAssetDirectory resolves relative directory', t => {
   const assetDirectory = path.join('test', 'fixtures', 'template', 'assets');
-  t.is(topdocLib.resolveAssetDirectory(assetDirectory), path.resolve(assetDirectory));
+  t.is(
+    topdocLib.resolveAssetDirectory(assetDirectory),
+    path.resolve(assetDirectory)
+  );
 });
 
 test('resolveAssetDirectory resolves absolute package', t => {

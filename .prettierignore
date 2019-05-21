@@ -6,5 +6,6 @@ npm-debug.log*
 inch.json
 coverage
 .nyc_output
-test/fixtures
+/**/test/fixtures
 dist
+.cache

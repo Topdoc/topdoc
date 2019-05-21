@@ -37,7 +37,7 @@ function _parseTopdocComment(node, regex, includeNodes) {
 function _findTopdocComments(css, regex, includeNodes) {
   const components = [];
   let currentComponentIndex;
-  css.walk((node) => {
+  css.walk(node => {
     if (node.type === 'comment' && node.text.match(regex)) {
       components.push(_parseTopdocComment(node, regex, includeNodes));
       currentComponentIndex = components.length - 1;
@@ -88,11 +88,17 @@ class TopdocParser {
     this.includeNodes = opts.includeNodes || false;
     this.commentRegExp = opts.commentRegExp || /^(?:\s)*(topdoc)/;
     opts.fileData = opts.fileData || {};
-    if (!utils.hasOwnProperties(['filename', 'sourcePath'], opts.fileData, false)) {
+    if (
+      !utils.hasOwnProperties(['filename', 'sourcePath'], opts.fileData, false)
+    ) {
       opts.fileData.sourcePath = this.root.source.input.file;
     }
     const document = new TopDocument(opts.fileData);
-    document.components = _findTopdocComments(this.root, this.commentRegExp, this.includeNodes);
+    document.components = _findTopdocComments(
+      this.root,
+      this.commentRegExp,
+      this.includeNodes
+    );
     results.topdoc = document;
   }
   /**

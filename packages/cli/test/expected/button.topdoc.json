@@ -9,13 +9,7 @@
         ":disabled": "Disabled state",
         ".is-disabled": "Simulates disabled state"
       },
-      "tags": [
-        "desktop",
-        "light",
-        "mobile",
-        "button",
-        "quiet"
-      ],
+      "tags": ["desktop", "light", "mobile", "button", "quiet"],
       "markup": "<div class=\"test-wrapper\">\n  <a class=\"topcoat-button--quiet\">Button</a>\n  <a class=\"topcoat-button--quiet is-active\">Button</a>\n  <a class=\"topcoat-button--quiet is-disabled\">Button</a>\n</div>\n",
       "commentStart": {
         "line": 59,
