@@ -46,8 +46,5 @@
     "js-yaml": "^3.13.1",
     "postcss": "^7.0.16"
   },
-  "devDependencies": {
-    "@babel/cli": "^7.0.0-beta.55"
-  },
   "gitHead": "bd615c2be5e42174c8f68dc3f1e52b84e5e4c5da"
 }
