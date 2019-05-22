@@ -7,8 +7,7 @@
     "topdoc": "./bin/index.js"
   },
   "scripts": {
-    "test": "ava",
-    "coverage": "nyc npm run test"
+    "test": "ava"
   },
   "repository": {
     "type": "git",
@@ -25,18 +24,6 @@
   "bugs": {
     "url": "https://github.com/topcoat/topdoc/issues"
   },
-  "ava": {
-    "babel": false,
-    "files": [
-      "test/**/*"
-    ]
-  },
-  "nyc": {
-    "include": [
-      "bin/*.js",
-      "topdoc-lib.js"
-    ]
-  },
   "preferGlobal": "true",
   "dependencies": {
     "commander": "^2.15.1",
@@ -46,7 +33,6 @@
     "glob": "^7.1.2",
     "mkdirp": "^0.5.1",
     "pkginfo": "^0.4.1",
-    "postcss": "^6.0.21",
     "postcss-topdoc": "^1.0.3",
     "pug": "^2.0.3",
     "resolve": "^1.1.7",
