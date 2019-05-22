@@ -1,6 +1,6 @@
 const test = require('ava');
 const path = require('path');
-const topdocLib = require('../topdoc-lib');
+const topdocLib = require('../src/topdoc-lib');
 
 test.before(t => {
   process.chdir(path.resolve(__dirname, '../'));

@@ -3,9 +3,11 @@ node_js: '8'
 before_install:
   - npm install lerna
   - lerna bootstrap
+  - npm install codecov
 before_script:
   - lerna run prepare
 script:
-  - npm run coverage
+  - npm run test
 after_success:
-  - lerna run codecov
+  - npx nyc --reporter=lcov npm test
+  - npx codecov

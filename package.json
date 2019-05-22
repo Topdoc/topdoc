@@ -2,7 +2,7 @@
   "description": "The Monorepo for Topdoc and sub projects",
   "scripts": {
     "test": "lerna run test",
-    "coverage": "lerna run coverage",
+    "coverage": "nyc lerna run test",
     "prepare": "lerna run prepare",
     "prettier": "prettier \"**/*.+(js|jsx|json|yml|yaml|css|less|scss|ts|tsx|md|graphql|mdx)\"",
     "format": "npm run prettier -- --write"
@@ -22,10 +22,23 @@
   "bugs": {
     "url": "https://github.com/topdoc/topdoc/issues"
   },
+  "ava": {
+    "babel": false,
+    "files": [
+      "**/test/**/*",
+      "!**/test/expected/**",
+      "!**/test/fixtures/**"
+    ]
+  },
+  "nyc": {
+    "include": [
+      "**/src/**/*.js",
+      "**/cli/**/*.js"
+    ]
+  },
   "devDependencies": {
     "atomdoc-cli": "^1.1.0",
     "ava": "^1.4.1",
-    "codecov": "^3.5.0",
     "eslint": "^5.16.0",
     "eslint-config-prettier": "^4.3.0",
     "eslint-plugin-prettier": "^3.1.0",
