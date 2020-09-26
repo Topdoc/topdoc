@@ -5,7 +5,7 @@
   "main": "dist/",
   "scripts": {
     "prepare": "npm run compile",
-    "compile": "parcel build ./src/index.js --no-source-maps",
+    "compile": "babel ./src/index.js --out-file ./dist/index.js",
     "test": "ava"
   },
   "repository": {
@@ -25,9 +25,13 @@
   },
   "homepage": "https://github.com/Topdoc/topdoc#readme",
   "dependencies": {
-    "debug": "^4.1.1",
-    "js-yaml": "^3.13.1",
-    "parcel-bundler": "^1.12.3"
+    "debug": "^4.2.0",
+    "js-yaml": "^3.14.0"
   },
-  "gitHead": "bd615c2be5e42174c8f68dc3f1e52b84e5e4c5da"
+  "gitHead": "bd615c2be5e42174c8f68dc3f1e52b84e5e4c5da",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0"
+  }
 }
