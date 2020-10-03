@@ -1,4 +1,5 @@
 {
+  "name": "topdoc-monorepo",
   "description": "The Monorepo for Topdoc and sub projects",
   "scripts": {
     "test": "lerna run test",
@@ -37,16 +38,25 @@
     ]
   },
   "devDependencies": {
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
     "atomdoc-cli": "^1.1.1",
     "ava": "^3.12.1",
     "eslint": "^7.9.0",
     "eslint-config-prettier": "^6.12.0",
     "eslint-plugin-prettier": "^3.1.4",
+    "husky": "^4.3.0",
     "lerna": "^3.22.1",
     "nyc": "^15.1.0",
-    "prettier": "^2.1.2"
-  },
-  "dependencies": {
+    "prettier": "^2.1.2",
     "postcss": "^8.0.9"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
   }
 }
