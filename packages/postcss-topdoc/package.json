@@ -5,7 +5,7 @@
   "main": "dist/",
   "scripts": {
     "prepare": "npm run compile",
-    "compile": "babel ./src/index.js --out-file ./dist/index.js",
+    "compile": "esbuild ./src/index.js --bundle '--define:process.env.NODE_ENV=\"production\"' --platform=node --minify --outfile=./dist/index.js",
     "test": "ava"
   },
   "repository": {
@@ -24,14 +24,16 @@
     "url": "https://github.com/Topdoc/topdoc/issues"
   },
   "homepage": "https://github.com/Topdoc/topdoc#readme",
+  "peerDependencies": {
+    "postcss": "^8.1.1"
+  },
   "dependencies": {
     "debug": "^4.2.0",
     "js-yaml": "^3.14.0"
   },
   "gitHead": "bd615c2be5e42174c8f68dc3f1e52b84e5e4c5da",
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.3",
-    "babel-preset-env": "^1.7.0"
+    "esbuild": "^0.7.8",
+    "postcss": "^8.1.1"
   }
 }
