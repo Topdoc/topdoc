@@ -1,5 +1,13 @@
 {
-  "lerna": "3.0.0-rc.0",
-  "packages": ["packages/*"],
-  "version": "independent"
+  "version": "independent",
+  "npmClient": "yarn",
+  "useWorkspaces": true,
+  "command": {
+    "publish": {
+      "conventionalCommits": true
+    },
+    "version": {
+      "message": "chore(release): release"
+    }
+  }
 }
